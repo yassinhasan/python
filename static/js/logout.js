@@ -21,7 +21,7 @@ function logoutUser() {
       .then(response => response.json())
       .then(data => {
         if (data.success == true) {
-          window.location.href = "http://localhost/";
+          window.location.href = "/";
         
         }
         else {

@@ -62,7 +62,7 @@ function saveUserinDatabase(user) {
         .then(response => response.json())
         .then(data => {
           if (data.success == true) {
-            window.location.href = "http://localhost/upload";
+            window.location.href = "/upload";
           
           }
           else {
@@ -135,7 +135,7 @@ function login() {
           .then(response => response.json())
           .then(data => {
             if (data.success == true) {
-              window.location.href = "http://localhost/upload";
+              window.location.href = "/upload";
             }
             else {
               hideSpinner()
