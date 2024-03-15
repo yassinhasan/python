@@ -1,0 +1,24 @@
+.url-form{
+    width: 100%;
+    height: 200px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.input-wraper {
+    margin: 16px 0;
+}
+.url-input{
+    height: 64px;
+}
+.home-wraper{
+    position: relative;
+    display: block;
+    height: auto;
+
+}
+.profile-wraper{
+    display: block;
+    margin-top: 64px;
+    height: auto;
+}

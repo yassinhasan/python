@@ -1,0 +1,49 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="{{ url_for('static',filename='css/download.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Video Download</a>
+{% endblock %}
+{% block content %}
+      <a class="arrow" href="#footer" aria-label="arrow">
+        <i class="fa-solid fa-angles-down"></i>
+      </a>
+      <!-- after login -->
+      <div class="home-wraper">
+      <div class="profile-wraper">
+        <h3 class="heading-3">
+            Free Online Video Downloader
+        </h3>
+        <form class="url-form">
+                <div class="input-wraper">
+                    <input class="form-control form-control-lg url-input" type="url" placeholder="Enter url of video you want to download" aria-label=".form-control-lg example">
+                </div>
+              <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+          </form>
+      </div>
+    </div>
+      <!-- after login -->
+    </div> <!-- end of center -->
+{% endblock %}
+
+
+{% block modal %}
+    {% include  'layouts/registermodal.html' %}
+    {% include  'layouts/loginmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='js/firbase.js') }}" type="module"></script>
+    <script src="{{ url_for('static',filename='js/helper.js') }}"></script>   
+    <script src="{{ url_for('static',filename='js/validation.js') }}"></script>   
+    <script src="{{ url_for('static',filename='js/user.js') }}" type="module"></script>
+    {%  if session['isLogged'] %}
+        <script src="{{ url_for('static',filename='js/logout.js') }}" type="module"></script>
+    {%  endif %}    
+    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+{%  endblock %}
+
