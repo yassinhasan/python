@@ -2,7 +2,10 @@
 {% extends 'master.html' %}
 
 {% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {{ session['active']== 'download' }}">Video Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {{ session['active']== 'download' }}">Download</a>
+{% endblock %}
+{% block innerlinks %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {{ session['active']== 'download' }}">Download</a>
 {% endblock %}
 {% block content %}
       <div class="home-wraper">
@@ -34,8 +37,8 @@
 
 
 {% block modal %}
-    {% include  'layouts/registermodal.html' %}
-    {% include  'layouts/loginmodal.html' %}
+    {% include  'modals/registermodal.html' %}
+    {% include  'modals/loginmodal.html' %}
 {% endblock %}
 
 

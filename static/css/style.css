@@ -290,7 +290,7 @@ nav .logo h1  span:nth-child(5) {
 nav .links a{
   text-decoration: none;
   color:  var(--primary-color);
-  margin-right: 8px;
+  margin-right: 4px;
 }
 nav .links a.active{
   color: var(--accent-color); 

@@ -2,7 +2,10 @@
 {% extends 'master.html' %}
 
 {% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Video Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
+{% endblock %}
+{% block innerlinks %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
 {% endblock %}
 
 
@@ -39,7 +42,7 @@
 
 
 {% block modal %}
-    {% include  'layouts/filesmodal.html' %}
+    {% include  'modals/filesmodal.html' %}
 {% endblock %}
 
 

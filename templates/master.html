@@ -1,4 +1,4 @@
-{% include "header.html" %}
+{% include "layouts/header.html" %}
 {% block css %}
 {% endblock %}
 </head>
@@ -12,7 +12,8 @@
             </div>
             <div class="right-links">
               <!-- links -->
-              <div class="links">
+              <div class="right-links">
+                <div class="links outer-links">
                 {% block nav %}
                 {% endblock %}
                   {%  if session['isLogged'] %}
@@ -25,11 +26,28 @@
                     data-bs-target="#registerModal">Register</a>
                   {% endif %} 
   
-                <i class="fa-solid fa-moon"></i>
+              </div>
+              <div class="menu-btn">
+                <i class="fa-solid fa-bars burger"></i>
+                <div class="links inner-links">
+                  {% block innerlinks %}
+                  {% endblock %}
+                    {%  if session['isLogged'] %}
+                    <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {% if session['active']== 'upload'  %} {{ 'active' }} {% endif %}">Files</a>
+                    <a href="#" class="heading-nav logout">logout</a>
+                    {%  else %}
+                    <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
+                      data-bs-target="#loginModal">Login</a>
+                    <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
+                      data-bs-target="#registerModal">Register</a>
+                    {% endif %} 
+                </div>
+              </div>
+              <i class="fa-solid fa-moon" style="margin-left: 16px;"></i>
             </div>
 
         </nav>
-        {% include "nav.html" %}
+        {% include "layouts/nav.html" %}
     <div class="home">
         
         {% block content %}
@@ -37,13 +55,13 @@
         <!-- here home or upload page -->
     </div>
 
-    {% include "contact.html" %}
+    {% include "layouts/contact.html" %}
 
     {% block modal %}
     {% endblock %}
 
     {% include "layouts/spinner.html" %}
-    {% include "footer.html" %}
+    {% include "layouts/footer.html" %}
 
     {% block scripts %}
     {%  endblock %}

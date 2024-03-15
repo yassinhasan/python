@@ -4,7 +4,10 @@
 {% endblock %}
 
 {% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Video Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
+{% endblock %}
+{% block innerlinks %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
 {% endblock %}
 {% block content %}
       <a class="arrow" href="#footer" aria-label="arrow">
@@ -30,8 +33,8 @@
 
 
 {% block modal %}
-    {% include  'layouts/registermodal.html' %}
-    {% include  'layouts/loginmodal.html' %}
+    {% include  'modals/registermodal.html' %}
+    {% include  'modals/loginmodal.html' %}
 {% endblock %}
 
 
