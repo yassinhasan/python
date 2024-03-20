@@ -2,22 +2,22 @@
 {% extends 'master.html' %}
 
 {% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {{ session['active']== 'download' }}">Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
 {% endblock %}
 {% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {{ session['active']== 'download' }}">Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
 {% endblock %}
 {% block content %}
       <div class="home-wraper">
         <div class="profile">
-          <img class="profile-img" src="{{ url_for('static',filename='images/profile.png') }}" alt="profile">
+          <img class="profile-img" src="/images/profile.png" alt="profile">
         </div>
         <div class="name-area">
-          <span class="caption-5">Hello, i'm</span>
+          <span class="caption-5">Hello, i'm </span>
           <h2 class="heading-2">Hasan Meady</h2>
           <h3 class="title caption-4">Full stack developer</h3>
           <div class="button-wraper">
-            <a class="left-btn heading-6 btn" href="{{ url_for('static',filename='files/Hassan Meady_CV.pdf') }}"  download target="_blank" 
+            <a class="left-btn heading-6 btn" href="/files/Hassan Meady_CV.pdf"  download target="_blank" 
               aria-label="Download CV">Download CV</a>
             <a class="right-btn heading-6 btn" href="https://github.com/yassinhasan" target="_blank"
               aria-label="GitHub">GitHub</a>
@@ -44,10 +44,10 @@
 
 
 {% block scripts %}
-    <script src="{{ url_for('static',filename='js/firbase.js') }}" type="module"></script>
-    <script src="{{ url_for('static',filename='js/helper.js') }}"></script>   
-    <script src="{{ url_for('static',filename='js/validation.js') }}"></script>   
-    <script src="{{ url_for('static',filename='js/user.js') }}" type="module"></script>
-    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+    <script src="/js/firbase.js" type="module"></script>
+    <script src="/js/helper.js"></script>   
+    <script src="/js/validation.js"></script>   
+    <script src="/js/user.js" type="module"></script>
+    <script src="/js/script.js"></script>
 {%  endblock %}
 

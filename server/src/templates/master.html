@@ -16,8 +16,8 @@
                 <div class="links outer-links">
                 {% block nav %}
                 {% endblock %}
-                  {%  if session['isLogged'] %}
-                  <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {% if session['active']== 'upload'  %} {{ 'active' }} {% endif %}">Files</a>
+                {% if isLogged == True: %}
+                  <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
                   <a href="#" class="heading-nav logout">logout</a>
                   {%  else %}
                   <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
@@ -32,8 +32,8 @@
                 <div class="links inner-links">
                   {% block innerlinks %}
                   {% endblock %}
-                    {%  if session['isLogged'] %}
-                    <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {% if session['active']== 'upload'  %} {{ 'active' }} {% endif %}">Files</a>
+                    {%  if isLogged == True: %}
+                    <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
                     <a href="#" class="heading-nav logout">logout</a>
                     {%  else %}
                     <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"

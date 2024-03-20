@@ -1,21 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-import { getStorage, ref as storageRef, uploadBytes ,uploadBytesResumable ,getDownloadURL  } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+
+import * as firbase from "./firbase.js";
 
 
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebase);
-// Set database variable
-const db = getDatabase(firebase);
-const auth = getAuth();
-const storage = getStorage(firebase);
-
-
-
-const database = getDatabase();
 const dropArea = document.querySelector(".upload-form"),
     dropText = dropArea.querySelector(".drop-text") ,
     fileInput = document.querySelector(".file-input"),
@@ -57,11 +43,11 @@ fileInput.onchange = ({ target }) => {
 
 function uploadFile() {
     
-    onAuthStateChanged(auth, (user) => {
+  firbase.onAuthStateChanged(firbase.auth, (user) => {
         if (user) {
             const uid = user.uid;
-            const usersRef = storageRef(storage, `users/${uid}/${fullFileName}`);
-            const uploadTask = uploadBytesResumable(usersRef, file);
+            const usersRef = firbase.storageRef(firbase.storage, `users/${uid}/${fullFileName}`);
+            const uploadTask = firbase.uploadBytesResumable(usersRef, file);
             uploadTask.on('state_changed',
                 (snapshot) => {
                     // Observe state change events such as progress, pause, and resume
@@ -83,7 +69,7 @@ function uploadFile() {
                 () => {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    firbase.getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         completeDownload(downloadURL)
                        
                     })

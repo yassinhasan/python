@@ -1,24 +1,28 @@
 const staticName = "Dr-nobody"
 const assets = [
   "/",
-  "/index.html",
-  "/css/style.css",
-  "/css/components.css",
-  "/css/upload.css",
-  "/css/files.css",
-  "/js/script.js",
-  "/js/config.js",
-  "/js/files.js",
-  "/js/firebase.js",
-  "/js/helper.js",
-  "/js/upload.js",
-  "/js/validation.js",
+  "/templates/master.html",
+  "/templates/index.html",
+  "/templates/download.html",
+  "/templates/upload.html",
+  "/static/css/style.css",
+  "/static/css/components.css",
+  "/static/css/upload.css",
+  "/static/css/files.css",
+  "/static/js/script.js",
+  "/static/js/config.js",
+  "/static/js/files.js",
+  "/static/js/firebase.js",
+  "/static/js/helper.js",
+  "/static/js/upload.js",
+  "/static/js/validation.js",
+  "/static/js/user.js",
 
-  "/images/icon-192x192.png",
-  "/images/icon-256x256.png",
-  "/images/icon-384x384.png",
-  "/images/icon-512x512.png",
-  "/images/profile.jpg",
+  "/static/images/icon-192x192.png",
+  "/static/images/icon-256x256.png",
+  "/static/images/icon-384x384.png",
+  "/static/images/icon-512x512.png",
+  "/static/images/profile.jpg",
  
 
 ]
@@ -40,7 +44,7 @@ self.addEventListener("fetch", fetchEvent => {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
       navigator.serviceWorker
-        .register("/serviceWorker.js")
+        .register("serviceWorker.js")
         .then(res => console.log("service worker registered"))
         .catch(err => console.log("service worker not registered", err))
     })

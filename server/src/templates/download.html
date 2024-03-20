@@ -1,13 +1,13 @@
 {% extends 'master.html' %}
 {% block css %}
-<link href="{{ url_for('static',filename='css/download.css') }}" rel="stylesheet" type="text/css" />
+<link href="/css/download.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
 {% endblock %}
 {% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download  {% if session['active']== 'download'  %} {{ 'active' }} {% endif %}">Download</a>
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
 {% endblock %}
 {% block content %}
       <a class="arrow" href="#footer" aria-label="arrow">
@@ -40,13 +40,13 @@
 
 
 {% block scripts %}
-    <script src="{{ url_for('static',filename='js/firbase.js') }}" type="module"></script>
-    <script src="{{ url_for('static',filename='js/helper.js') }}"></script>   
-    <script src="{{ url_for('static',filename='js/validation.js') }}"></script>   
-    <script src="{{ url_for('static',filename='js/user.js') }}" type="module"></script>
-    {%  if session['isLogged'] %}
-        <script src="{{ url_for('static',filename='js/logout.js') }}" type="module"></script>
+    <script src="/js/firbase.js" type="module"></script>
+    <script src="/js/helper.js"></script>   
+    <script src="/js/validation.js"></script>   
+    <script src="/js/user.js" type="module"></script>
+    {% if isLogged == True: %}
+        <script src="/js/logout.js" type="module"></script>
     {%  endif %}    
-    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+    <script src="/js/script.js"></script>
 {%  endblock %}
 

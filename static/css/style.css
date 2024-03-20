@@ -287,6 +287,14 @@ nav .logo h1  span:nth-child(5) {
   margin-right: 16px;
   color: var(--primary-color);
 }
+.right-links .fa-moon::before{
+
+    content: "\f186";
+}
+
+.right-links .fa-moon.day::before{
+  content: "\f185";
+}
 nav .links a{
   text-decoration: none;
   color:  var(--primary-color);
@@ -296,7 +304,8 @@ nav .links a.active{
   color: var(--accent-color); 
   transition: all 0.5s ease;
 }
-nav .links a.active:hover{
+
+nav .links a:hover{
   border-bottom: 1px solid var(--primary-color);
 }
 .sign-in i{

@@ -2,13 +2,12 @@ FROM python:3.10-slim
 
 ENV PYTHONUNBUFFERED True
 
-ENV APP_HOME /app
 
-ENV PORT 80
+ENV PORT 8080
 
-WORKDIR $APP_HOME
 
-COPY . ./
+COPY src/ /app
+WORKDIR /app
 RUN apt-get update \
     && apt-get install -qyy -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
     file \

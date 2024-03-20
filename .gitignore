@@ -2,7 +2,6 @@
 /env
 .dockerignore
 key.json
-/static/js/config.js
 # Logs
 logs
 *.log
@@ -11,6 +10,8 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
+/static/js/config.js
+/server/src/config.py 
 
 # Firebase cache
 .firebase/

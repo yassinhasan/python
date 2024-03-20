@@ -1,27 +1,15 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-import { getStorage, ref as storageRef, uploadBytes, uploadBytesResumable, getDownloadURL, listAll, getMetadata , deleteObject} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
-
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebase);
-// Set database variable
-const db = getDatabase(firebase);
-const auth = getAuth();
-const storage = getStorage(firebase);
+import * as firbase from "./firbase.js";
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Octr", "Nov", "Dec"];
 const fileTypes = {
     
-    file:  "<img src='./static/images/file.png' alt='file'>" ,
-    image : "<img src='./static/images/image.png' alt='image'>" ,
-    zip  : "<img src='./static/images/zip.png' alt='zip'>" ,
-    doc  : "<img src='./static/images/doc.png' alt='doc'>" ,
-    excel  : "<img src='./static/images/excel.png' alt='excel'>" ,
-    pdf  : "<img src='/static/images/pdf.png' alt='pdf'>" ,
-    ppt  : "<img src='./static/images/ppt.png' alt='ppt'>" ,
-    video  : "<img src='./static/images/video.png' alt='video'>" ,
+    file:  "<img src='/images/file.png' alt='file'>" ,
+    image : "<img src='/images/image.png' alt='image'>" ,
+    zip  : "<img src='/images/zip.png' alt='zip'>" ,
+    doc  : "<img src='/images/doc.png' alt='doc'>" ,
+    excel  : "<img src='/images/excel.png' alt='excel'>" ,
+    pdf  : "<img src='/images/pdf.png' alt='pdf'>" ,
+    ppt  : "<img src='/images/ppt.png' alt='ppt'>" ,
+    video  : "<img src='/images/mp4.png' alt='video'>" ,
 }
 
 
@@ -41,15 +29,26 @@ filesBtn.addEventListener("click",()=>{
 
 function listFiles() {
 
-    let uid = localStorage.getItem("uid")
-    const listRef = storageRef(storage, `users/${uid}/`);
-    listAll(listRef)
-   .then((res) => {
-        prepraListFilesHtml(uid,res)
-         })
-    .catch((error) => {
-          console.log(error);
+    firbase.onAuthStateChanged(firbase.auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            // Create a reference under which you want to list
+            const listRef = firbase.storageRef(firbase.storage, `users/${uid}/`);
+            // Find all the prefixes and items.
+
+            firbase.listAll(listRef)
+                .then((res) => {
+                  
+                    prepraListFilesHtml(uid,res)
+                }).catch((error) => {
+                    // Uh-oh, an error occurred!
+                    console.log(error);
+                });
+        } else {
+            console.log("user not signed in")
+        }
     });
+
 }
 
 
@@ -72,10 +71,10 @@ function prepraListFilesHtml(uid,res)
         
          let fileName =  files[index].name;
 
-        getMetadata(storageRef(storage, `users/${uid}/${fileName}`))
+         firbase.getMetadata(firbase.storageRef(firbase.storage, `users/${uid}/${fileName}`))
             .then((metadata) => {
             
-                getDownloadURL(storageRef(storage, `users/${uid}/${metadata.name}`))
+                firbase.getDownloadURL(firbase.storageRef(firbase.storage, `users/${uid}/${metadata.name}`))
                 .then((url) => {
                     let fileSize;
                     let fileDate  ;
@@ -128,9 +127,9 @@ function prepraListFilesHtml(uid,res)
                               confirmButtonText: "Yes, delete it!"
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                  const desertRef = storageRef(storage, `users/${uid}/${ fileToDeleted}`);
+                                  const desertRef = firbase.storageRef(firbase.storage, `users/${uid}/${ fileToDeleted}`);
                                   // Delete the file
-                                  deleteObject(desertRef).then(() => {
+                                  firbase.deleteObject(desertRef).then(() => {
                                       Swal.fire({
                                           customClass: 'swal-height',
                                           title: "Deleted!",

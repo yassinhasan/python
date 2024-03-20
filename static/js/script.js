@@ -1,16 +1,20 @@
 
+
+let fa_moon = document.querySelector(".fa-moon");
+let logo = document.querySelector(".logo");
+
 if (localStorage.getItem("light_theme") === null) {
     localStorage.setItem("light_theme","light")
+    fa_moon.classList.remove("day")
 }
 if(localStorage.getItem("light_theme") === "")
 {
     document.body.classList.remove("light")
+    fa_moon.classList.add("day")
 }else{
     document.body.classList.add("light")
 }
 
-let fa_moon = document.querySelector(".fa-moon");
-let logo = document.querySelector(".logo");
 
 fa_moon.addEventListener("click",()=>{
    
@@ -20,6 +24,7 @@ fa_moon.addEventListener("click",()=>{
         localStorage.setItem("light_theme","light")
     }
     document.body.classList.toggle("light");
+    fa_moon.classList.toggle("day")
   
 })
 
