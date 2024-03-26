@@ -1,10 +1,9 @@
-let spinners = document.querySelector(".spinners");
-let overlay = document.querySelector(".overlay");
+let spinners = document.querySelector(".main.spinners");
+let overlay = document.querySelector(".main.overlay");
 
 let filesSpinners = document.querySelector(".files-spinners");
 let filesOverlay = document.querySelector(".files-overlay");
-
-
+hideSpinner()
 function showSpinner()
 {
     overlay.style.display="block"

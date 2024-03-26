@@ -1,0 +1,29 @@
+/* body{
+    min-height: 1200px;
+}
+.container{
+    height: 100%;
+    position: relative;
+}
+.contact{
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color);
+    margin-top: 120px;
+}
+.contact-wraper{
+    height: auto;
+    width: 100%;
+}
+.upper, .footer{
+    height: auto;
+}
+.footer{
+    margin-top: 10px;
+} */

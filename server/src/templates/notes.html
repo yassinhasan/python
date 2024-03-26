@@ -1,0 +1,55 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="/css/lib/footer.css" rel="stylesheet" type="text/css" />
+<link href="/css/notes.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+{% endblock %}
+{% block innerlinks %}
+<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+{% endblock %}
+{% block content %}
+      <div class="home-wraper">
+        <div class="notes-wraper">
+          <h2 class="hello">My Notes</h2>
+          <h6 class="message">You can use many service like upload and download any files</h6>
+          <div class="wrapper">
+            <div class="add-note heading-2"><button>Add Notes</button></div>
+              <textarea class="textarea-note" placeholder="Enter your note here"></textarea>
+                
+              <div class="sticky-notes">
+              
+              </div>
+            </div>
+          </div>
+        </div>
+          <a class="arrow" href="#footer" aria-label="arrow">
+            <i class="fa-solid fa-angles-down"></i>
+          </a>
+     </div>
+      <!-- after login -->
+{% endblock %}
+
+
+{% block modal %}
+    {% include  'modals/registermodal.html' %}
+    {% include  'modals/loginmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script src="/js/firbase.js" type="module"></script>
+    <script src="/js/helper.js"></script>   
+    <script src="/js/validation.js"></script> 
+    {% if isLogged == True: %}
+        <script src="/js/logout.js" type="module"></script>
+    {%  endif %}    
+
+    <script src="/js/user.js" type="module"></script>
+    <script src="/js/notes.js" type="module"></script>
+    <script src="/js/script.js"></script>
+{%  endblock %}
+

@@ -38,6 +38,7 @@ body{
   --error-color: #b52626;
   --theme-color: #030303;
   background: var(--theme-color);
+  --style-color: #fba61b
 }
 body.light{
   /* light-theme */
@@ -124,20 +125,20 @@ body.light{
   font-weight: normal;
 }
 .home{
-  height: calc(100vh - 80px);
   width: 100%;
    position: relative;
+   display: flex;
+   /* align-items: center; */
+   justify-content: center;
+   min-height: 600px;
+   
 }
 
 .home-wraper{
   width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 .home-wraper .profile img{
   padding: 1px;
@@ -404,7 +405,7 @@ body.modal-open .container{
 .arrow{
   position: absolute;
   z-index: 6;
-  bottom: 3vh;
+  bottom: 1vh;
   right: 16px;
   width: fit-content;
   animation-name: arrow;
@@ -413,7 +414,9 @@ body.modal-open .container{
   animation-timing-function: ease-in-out;
   animation-direction: alternate;
   cursor: pointer;
-   color: var(--accent-color);
+  color: var(--accent-color);
+  display: none;
+
 }
 
 @keyframes arrow
@@ -429,15 +432,17 @@ body.modal-open .container{
 
 
 .contact{
-  height: 100vh;
+  margin-top: 80px;
+  position: relative;
+    bottom: -80px;
 
 }
 .contact-wraper{
   position: relative;
-  height: 100vh;
+  
 }
 .upper,.footer{
-  height: 49vh;
+
   display: flex;
   align-items: center;
   justify-content: end;
@@ -569,8 +574,8 @@ body.modal-open .container{
 
   }
   .home .arrow{
-    bottom: 8vh;
-    left: 50%;
+    bottom: 2vh;;
+    right: 24px;
   }
 
 }

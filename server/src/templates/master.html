@@ -17,7 +17,8 @@
                 {% block nav %}
                 {% endblock %}
                 {% if isLogged == True: %}
-                  <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
+                  <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
+                  <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
                   <a href="#" class="heading-nav logout">logout</a>
                   {%  else %}
                   <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
@@ -34,6 +35,7 @@
                   {% endblock %}
                     {%  if isLogged == True: %}
                     <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
+                    <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
                     <a href="#" class="heading-nav logout">logout</a>
                     {%  else %}
                     <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
@@ -66,8 +68,35 @@
     {% block scripts %}
     {%  endblock %}
 
-    
+  {% if messages %}
+        <script>
+                const Toast = Swal.mixin({
+      customClass: 'swal-upload',
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        color: "#b58126",
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "{{ messages['type'] }}",
+        title: "{{  messages['msg'] }}"
+      }); // end of alert
 
+
+      var mustLogin = "{{  messages['mustLogin'] }}"
+      if(mustLogin === "True")
+      {
+        document.querySelector(".sign-in").click()
+      }
+
+        </script>
+    {% endif %}
 </body>
 
 </html>

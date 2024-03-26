@@ -19,7 +19,7 @@
     z-index: 1065;
 
 }
-.spinners ,.files-spinners , .overlay , .files-overlay{
+.main.spinners ,.files-spinners , .main.overlay , .files-overlay{
     display: none;
 }
 .files-spinners ,.files-overlay{

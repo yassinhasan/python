@@ -19,6 +19,7 @@ RUN apt-get update \
     python3-venv 
     
 RUN  pip install --upgrade pip
+RUN  pip install --upgrade yt-dlp
 RUN   pip install  --no-cache -r requirements.txt
 
 
