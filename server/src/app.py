@@ -82,7 +82,7 @@ def notespage():
         isLogged = True
         uid = request.cookies.get('__session') 
         signedUser =  database.child("users").child(uid).get().val()
-        template =   render_template("notes.html",pagetitle="(Upload))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
+        template =   render_template("notes.html",pagetitle="(Notes))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
         return getResponse(template)
     else:
         isLogged = False

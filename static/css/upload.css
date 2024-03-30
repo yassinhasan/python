@@ -1,21 +1,14 @@
 
-.home-wraper{
-  margin: 80px 0;
-  text-align: center;
-  z-index: 5;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-}
 .down{
   font-size: 24px;
   color: #fba61b;
  
 }
+.profile-wraper{
+width: 100%;
+text-align: center;
+}
 .profile-wraper .hello{
-  font-size: 72px;
   color: #fba61b;
   font-weight: bold;
 }
@@ -24,7 +17,7 @@
   color: var(--primary-color);
 }
 .profile-wraper .message{
-  font-size: var(--caption-three);
+ 
   color: var(--caption-color);
 }
 .profile-wraper .wrapper{
@@ -53,7 +46,7 @@
   flex-direction: column;
   border-radius: 5px;
   border: 2px dashed var(--caption-color);
-  width: 100%;
+
 }
 .profile-wraper  form :where(i, p){
   color: var(--caption-color);
@@ -199,3 +192,10 @@ color: var(--theme-color) !important;
 background-color: var(--theme-color);;
 color: var(--primary-color) !important;
 }
+
+
+/* @media only screen and (max-width: 600px)  {
+.profile-wraper .hello{
+  font-size: 56px;
+}
+} */

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import {get, getDatabase, child,update ,remove ,ref, set, onValue ,push, query, orderByChild} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 import { getStorage, ref as storageRef, uploadBytes, uploadBytesResumable, getDownloadURL, listAll, getMetadata , deleteObject} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
@@ -16,4 +16,5 @@ const analytics = getAnalytics(firebase);
 const db = getDatabase(firebase);
 const auth = getAuth();
 const storage = getStorage(firebase);
- export  {auth,db,storage,ref,storageRef,uploadBytes,uploadBytesResumable,getDownloadURL,listAll,getMetadata,deleteObject,set,onValue,createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword}
+
+ export  {get,child,remove ,update , query, orderByChild,push,auth,db,storage,ref,storageRef,uploadBytes,uploadBytesResumable,getDownloadURL,listAll,getMetadata,deleteObject,set,onValue,createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword}

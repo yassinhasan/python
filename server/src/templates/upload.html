@@ -2,8 +2,8 @@
 {% block css %}
 <link href="/css/lib/footer.css" rel="stylesheet" type="text/css" />
 <link href="..//css/upload.css" rel="stylesheet" type="text/css" />
-
 {% endblock %}
+
 {% block nav %}
 <a href="{{ url_for('downloadpage') }}"
   class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
@@ -20,11 +20,11 @@
 <!-- after login -->
 <div class="home-wraper">
   <div class="profile-wraper">
-  <h2 class="hello">Hello!</h2>
+  <h2 class="hello heading-2">Hello!</h2>
   <h2 class="username">
     {{ username }}
   </h2>
-  <h3 class="message">You can use many service like upload and download any files</h3>
+  <h3 class="message heading-6">You can use many service like upload and download any files</h3>
   <span class="down">&darr;</span>
 
   <div class="wrapper">

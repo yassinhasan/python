@@ -48,3 +48,22 @@ function hideSignInmodal()
 }
 
 
+function fireAlert(type,msg){
+    const Toast = Swal.mixin({
+        customClass: 'swal-login',
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        color: "#b52626",
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: type,
+        title: msg
+      }); // end of alert
+}

@@ -130,7 +130,7 @@ body.light{
    display: flex;
    /* align-items: center; */
    justify-content: center;
-   min-height: 600px;
+   min-height: 692px;
    
 }
 
@@ -138,7 +138,7 @@ body.light{
   width: 100%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+  margin-top: 80px;
 }
 .home-wraper .profile img{
   padding: 1px;
@@ -349,9 +349,9 @@ body.modal-open .container{
 
 .profile {
   margin-right: 24px;
-  width: 184px;
-  height: 184px;
-
+  /* width: 184px;
+  height: 184px; */
+  text-align: center;
 }
 .profile img {
   max-width: 100%;
@@ -365,6 +365,7 @@ body.modal-open .container{
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  margin-top: 16px;
 }
 .name-area .heading {
   color:  var(--primary-color);
@@ -375,6 +376,7 @@ body.modal-open .container{
 }
 .button-wraper{
   display: flex;
+  justify-content: center;
 }
 .left-btn,.right-btn {
   padding: 4px 8px;
@@ -391,6 +393,7 @@ body.modal-open .container{
 {
   background-color: transparent;
   border: 1px solid var(--primary-color);
+  margin-right: 8px;
 }
 .right-btn 
 {
@@ -447,6 +450,7 @@ body.modal-open .container{
   align-items: center;
   justify-content: end;
   flex-direction: column;
+  margin-top: 8px;
 }
 
 .email-wraper {
@@ -497,7 +501,7 @@ body.modal-open .container{
 }
 /* media query */
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px)  {
   :root{
     --heading-one: 32px;
     --heading-two: 18px;
@@ -549,16 +553,12 @@ body.modal-open .container{
   .outer-links{
     display: none
   }
+
   .profile{
     margin: 0 0 16px 0;
   }
-  .home-wraper,.button-wraper{
-    display: flex;
-    flex-direction: column;
-    margin-top: 8px;
-  }
   .left-btn, .right-btn {
-    margin: 8px 0 8px 0
+    margin: 8px 8px 8px 0
   }
 
   .button-wrapper button {
@@ -569,7 +569,7 @@ body.modal-open .container{
  
     flex-direction: column;
   }
-  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  {
+  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area ,.wraper-textarea  {
     width: calc(100% - 24px);
 
   }
@@ -583,35 +583,36 @@ body.modal-open .container{
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) and (max-width: 767px) {
 
   .about ,.projects{
     margin-top: 24px
   }
-  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  {
+  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area ,.wraper-textarea {
     width: calc(100% - 24px);
-   
-
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 991px ){
   :root{
     --container-margin: 32px;;
 
+  }
+  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  ,.wraper-textarea {
+    width: 90%;
   }
 
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
   :root{
     --nav-height: 80px;
     --container-margin: 64px;
 
   }
-  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  {
+  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  ,.wraper-textarea {
     width: 80%;
  
   }
@@ -635,7 +636,7 @@ body.modal-open .container{
     --container-margin: 64px;
 
   }
-  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area  {
+  .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area ,.wraper-textarea  {
     width: 50%;
 
   }

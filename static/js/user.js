@@ -24,6 +24,7 @@ function login() {
       user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
         // Send token to your backend via HTTPS
         localStorage.setItem("token",idToken)
+        localStorage.setItem("uid",user.uid)
         window.location.href= "/upload?token="+idToken
         // ...
       }).catch(function(error) {
@@ -88,6 +89,7 @@ function saveUserinDatabase(user) {
           // Send token to your backend via HTTPS
           console.log(idToken);
           localStorage.setItem("token",idToken)
+          localStorage.setItem("uid",user.uid)
           window.location.href= "/upload?token="+idToken
           // ...
         }).catch(function(error) {

@@ -1,5 +1,7 @@
 {% extends 'master.html' %}
-
+{% block css %}
+<link href="/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block nav %}
 <a href="{{ url_for('downloadpage') }}"

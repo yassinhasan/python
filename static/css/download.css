@@ -9,20 +9,23 @@
 
 .home-wraper{
     text-align: center;
+    display: block;
+    margin-top: 80px;
 }
 .head-title{
     color: var(--style-color);
     font-weight: bold;
-    margin-top: 56px;
 }
 .url-form{
     width: 80%;
     margin: 16px  auto;
+    text-align: center;
 }
 .form-wraper{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .input-wraper {
@@ -80,12 +83,7 @@
     font-size: 16px;
     color: var(--caption-color);
 }
-.home-wraper{
-    position: relative;
-    display: block;
-    height: auto;
 
-}
 
 
 .download-btn {
@@ -156,7 +154,7 @@
 .download-box .form-select{
     border: 2px solid var(--accent-color);
 }
-@media only screen and (max-width: 600px)  and (max-width: 599px){
+@media only screen and (max-width: 600px) {
 
     .contact{
         margin-top: 80px;
