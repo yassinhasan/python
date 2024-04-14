@@ -1,0 +1,53 @@
+<nav id="nav">
+  <div class="logo">
+    <h1 class="heading-1">
+      <span class="color-letter">H</span><span>a</span><span>s</span><span>a</span><span>n</span>
+    </h1>
+  </div>
+  <div class="right-links">
+    <!-- links -->
+    <div class="right-links">
+      <div class="links outer-links">
+      {% block nav %}
+      {% endblock %}
+      {% if isLogged == True: %}
+      <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+        <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
+        <a href="#" class="heading-nav logout">logout</a>
+        {%  else %}
+        <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+        <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
+          data-bs-target="#loginModal">Login</a>
+        <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
+          data-bs-target="#registerModal">Register</a>
+        {% endif %} 
+
+    </div>
+    <div class="menu-btn">
+      <i class="fa-solid fa-bars burger"></i>
+      <div class="links inner-links">
+        {% block innerlinks %}
+        {% endblock %}
+          {%  if isLogged == True: %}
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
+          <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
+          <a href="#" class="heading-nav logout">logout</a>
+          {%  else %}
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+          <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
+            data-bs-target="#loginModal">Login</a>
+          <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
+            data-bs-target="#registerModal">Register</a>
+          {% endif %} 
+      </div>
+    </div>
+    <i class="fa-solid fa-moon" style="margin-left: 16px;"></i>
+  </div>
+
+</nav>

@@ -1,6 +1,9 @@
 import datetime
 from functools import wraps
 import json
+from multiprocessing import pool
+import subprocess
+import time
 from uuid import uuid4
 from flask import Flask, flash, jsonify, redirect ,render_template,request,make_response,session, url_for
 from flask_wtf import CSRFProtect
@@ -13,11 +16,15 @@ import os
 import firebase_admin
 from  firebase_admin import auth
 from firebase_admin import credentials ,db 
+from multiprocessing.pool import ThreadPool
 
 from config import config
 from helper import    getResponse, isUserLogged
 import urllib.request
-
+import asyncio
+from search import getDawaresults, getMuthdaresults, getNahdiresults
+import concurrent.futures
+from threading import Thread
 
 cred = credentials.Certificate(config)
 firebase_admin.initialize_app(cred, {
@@ -93,9 +100,51 @@ def notespage():
         }
         template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
         return getResponse(template) 
+    
+@app.route("/search")
+def searchpage():
+    if isUserLogged() == True:
+        global isLogged 
+        isLogged= True
+    template =   render_template("search.html",pagetitle="(Search))✌Dr.Null",isLogged=isLogged) 
+    return getResponse(template)
 
 
+@app.route("/searchItem", methods=['POST']) 
+def searchItem():
+        item = request.form.get('item')
+        items = []
+        
+        # items = getresults(item)
+        # urls = [f'https://unitedpharmacy.sa/ar/catalogsearch/result/?q={item}',f'https://www.nahdionline.com/ar/?q={item}',f'https://www.al-dawaa.com/english/?q={item}' ]
+        # urls = {
+        #     "dawa" :  f'https://www.al-dawaa.com/english/?q={item}',
+           
+        #     "muthda" :  f'https://unitedpharmacy.sa/ar/catalogsearch/result/?q={item}',
+        #      "nahdi" :  f'https://www.nahdionline.com/ar/?q={item}',
+        # }
+        
+        # with concurrent.futures.ThreadPoolExecutor(max_workers=60) as executor:
+        #     # Submit each download task to the thread pool
+        #     futures = [executor.submit(getresults, urls[url],url) for url in urls]
+        #     # Wait for all tasks to complete and retrieve the results
+        #     results = [future.result() for future in concurrent.futures.as_completed(futures)]
+        #     for result in results:
+        #        items.append(result)  
+            
+        results = []
+        pool = ThreadPool(3)
+        results.append(pool.apply_async(getDawaresults,args=[item])) 
+        results.append(pool.apply_async(getNahdiresults,args=[item])) # tuple of args for foo)
+        results.append(pool.apply_async(getMuthdaresults,args=[item])) # tuple of args for foo)
 
+        items = [r.get() for r in results]
+        pool.close()
+        pool.join()  
+        response = make_response()
+        response= jsonify({"success":"ok","result": items})  
+        return response
+    
 @app.route("/downloadvideo", methods=['POST']) 
 def downloadvideo():
 
@@ -110,7 +159,24 @@ def downloadvideo():
         response = make_response()
         response= jsonify({"error":"invaid url!!"})  
         return response
+
     
+@app.route("/contactme", methods=['POST']) 
+def contactme():
+    try:
+        contact_name = request.form.get('contact-name')
+        contact_email = request.form.get('contact-email')
+        contact_phone = request.form.get('contact-phone')
+        contact_subject = request.form.get('contact-subject')
+        contact_msg = request.form.get('contact-msg')
+        print(contact_email,contact_name,contact_msg,contact_phone,contact_subject)
+        response = make_response()
+        response= jsonify({"success":"success"})  
+        return response
+    except Exception as e:
+        response = make_response()
+        response= jsonify({"error":"msg not sent try again later!!"})  
+        return response
 
 
 @app.errorhandler(404)

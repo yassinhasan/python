@@ -10,7 +10,7 @@ let stickyNotes = document.querySelector(".sticky-notes")
 let loader = document.querySelector(".loader");
 let showEditText = document.querySelector(".show-edit-text")
 let showTime = document.querySelector(".show-time")
-
+let selectedStickyNoteValueBeforeEdit = ""
 
 
 showTime.innerHTML = getTime().time
@@ -36,10 +36,25 @@ addNoteBtn.addEventListener("click", ()=>{
   {
     let selectedStickyNote = document.getElementById(selectedStickyNoteId)
     
-   
     if(selectedStickyNote == null ) { 
       loader.classList.remove("show")
       return  fireAlert("error", "somthing error happened")}
+
+    // cancel edit if not edit in value
+    if(textareaNote.value.trim() == selectedStickyNoteValueBeforeEdit )
+    {
+      addNoteBtn.classList.remove("edit")
+      textareaNote.classList.remove("edit")
+      edit = false;
+      showEditText.innerHTML = "New Note";
+      loader.classList.remove("show")
+      textareaNote.value =""
+      textareaNote.focus()
+      let deleteNoteBtn = selectedStickyNote.querySelector(".delete-note");
+      deleteNoteBtn.classList.remove("disabled")
+      return
+    }
+    
     let noteContentDiv = selectedStickyNote.querySelector(".note-content")
     let deleteNoteBtn = selectedStickyNote.querySelector(".delete-note");
     deleteNoteBtn.classList.remove("disabled")
@@ -55,6 +70,7 @@ addNoteBtn.addEventListener("click", ()=>{
     selectedStickyNote.style.order = 1
     notes[indexed]['content'] = content
     notes[indexed]['time'] = time.time
+    notes[indexed]['actualTime'] = time.actualTime
     localStorage.setItem(notesName, JSON.stringify(notes));
     addNoteBtn.classList.remove("edit")
     textareaNote.classList.remove("edit")
@@ -88,6 +104,7 @@ addNoteBtn.addEventListener("click", ()=>{
       "content": content,
       "color": color,
       "time": time.time, 
+      "actualTime" : time.actualTime,
       "id": id
     }
     notes.push(note)
@@ -159,14 +176,13 @@ function createStickyNote(note) {
 }
 
 
-generateNotesFromLocalstorage()
+// generateNotesFromLocalstorage()
 function generateNotesFromLocalstorage()
 {
   
   stickyNotes.innerHTML = ""
-  
   notes = JSON.parse(localStorage.getItem(notesName));
-  let newNotes = sortNotes(notes)
+  let newNotes =sortNotes(notes)
   if (newNotes) {
     newNotes.forEach((note) => {
       const stickyNote = createStickyNote(
@@ -215,7 +231,7 @@ function saveNote(event) {
   let noteContent = stickyNote.querySelector(".note-content")
   let content = noteContent.innerHTML;
    const id = stickyNote.id;
-  saveAs(content,id,"text/plain")
+  saveAs(content,id,"text/plain;charset=UTF-8")
     fireAlert("success","Note has been saved as afile") 
   
 }
@@ -297,6 +313,8 @@ function editNote(stickyNote)
   let deleteNoteBtn = stickyNote.querySelector(".delete-note");
   deleteNoteBtn.classList.add("disabled")
   selectedStickyNoteId = stickyNote.getAttribute("id")
+  let selectedNoteContent = stickyNote.querySelector(".note-content");
+  selectedStickyNoteValueBeforeEdit = selectedNoteContent.innerHTML.trim()
   editColor = stickyNote.style.getPropertyValue("--note-color");
   let noteContent = stickyNote.querySelector(".note-content")
   let content = noteContent.innerHTML;
@@ -331,14 +349,19 @@ function getTime()
 
 let syncBtn = document.querySelector(".sync");
 syncBtn.addEventListener("click",()=>{
-  loader.classList.add("show")
+  syncNotes()   
+})
 
+syncNotes()
+
+function syncNotes()
+{
+  loader.classList.add("show")
   const dbRef = firbase.ref(firbase.db)
   firbase.get(firbase.child(dbRef,`users/${uid}/notes`)).then((snapshot) => {
     if (snapshot.exists()) {
       let notes = snapshot.val();
-      let newNotes = sortNotes(Object.values(notes))
-      localStorage.setItem(notesName,JSON.stringify(newNotes))
+      localStorage.setItem(notesName,JSON.stringify(Object.values(notes)))
       generateNotesFromLocalstorage()
       loader.classList.remove("show")
     } else {
@@ -351,15 +374,13 @@ syncBtn.addEventListener("click",()=>{
     console.error(error);
     loader.classList.remove("show")
   });
-
-   
-})
-
+}
 function sortNotes(notes)
 {
   if(notes != null)
   {
-    let sortedNotes = notes.sort((p1, p2) => (p1.time) < p2.time  ? 1 : (p1.time > p2.time) ? -1 : 0);
+    console.log(notes);
+    let sortedNotes = notes.sort((p1, p2) => (p1.actualTime) < p2.actualTime  ? 1 : (p1.actualTime > p2.actualTime) ? -1 : 0);
     return sortedNotes    
   }else{
     return []

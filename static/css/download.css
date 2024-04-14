@@ -10,7 +10,7 @@
 .home-wraper{
     text-align: center;
     display: block;
-    margin-top: 80px;
+    /* margin-top: 80px; */
 }
 .head-title{
     color: var(--style-color);
@@ -88,20 +88,48 @@
 
 .download-btn {
     transition: all 0.3s ease-in-out;
-    border: 1px solid var(--accent-color) !important;
     margin: 16px;
-    color: var(--theme-color);
+
+    border-color: var(--accent-color) !important;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
 }
+
 .download-btn.disabled{
-    background-color: var(--caption-color) !important;
     user-select: none !important;
     cursor:no-drop !important;
-    border: 1px solid var(--caption-color) !important;
+    opacity: 0.6;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
 }
-.download-btn:hover {
-    background-color: transparent !important;
-    border: 1px solid var(--accent-color) !important;
-    color: var(--primary-color) !important;
+.download-btn:focus-visible,.download-btn:active{
+    border-color: var(--accent-color) !important;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+
+.download-btn:hover{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    border-color: var(--accent-color);
+}
+@keyframes gelatine {
+    0%, 100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+    
 }
 .results {
     width: 90%;
@@ -149,7 +177,10 @@
 .download-box .link .link-download:hover{
     background-color: var(--primary-color) !important;
     color: var(--theme-color) !important;
-    border: 1px solid var(--theme-color) !important;
+    border: 1px solid var(--theme-color) !important;  
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    
 }
 .download-box .form-select{
     border: 2px solid var(--accent-color);

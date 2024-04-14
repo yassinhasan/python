@@ -17,6 +17,22 @@ function saveAs(data, filename, type) {
     }
 }
 
+function saveResultsAsCsv(headers,data)
+{
+    var universalBOM = "\uFEFF";
+    let csvStr  = headers.join(",")+'\r\n';
+    data.forEach(element => {
+
+        csvStr += element.join(",") +"\r\n";
+        })
+
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(universalBOM+csvStr);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'results.csv';
+    hiddenElement.click();
+}
+
 // function forceDownload(blob, filename) {
 // 	var a = document.createElement('a');
 // 	a.download = filename;

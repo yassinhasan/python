@@ -4,12 +4,6 @@
 <link href="/css/notes.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
-{% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
-{% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
 {% block content %}
       <div class="home-wraper">
         <div class="notes-wraper">
@@ -23,7 +17,8 @@
                 </div>
             </div>
               <div class="add-wraper">
-                <i class="fa-solid fa-plus add-note"></i>
+             
+                <i class="fa-solid fa-plus add-note" title="edit note"></i>
                 <i class="fa-solid fa-rotate sync" title="sync data from database"></i>
                 <div class="loader"></div>
                 <small class="" style="margin-left: 8px;color: var(--caption-color)">Double click on notes to edit or save it as file</small>
@@ -34,9 +29,6 @@
             </div>
           </div>
         </div>
-          <a class="arrow" href="#footer" aria-label="arrow">
-            <i class="fa-solid fa-angles-down"></i>
-          </a>
      </div>
       <!-- after login -->
 {% endblock %}

@@ -1,0 +1,640 @@
+
+  
+.results .spinners , .results .overlay{
+    position: absolute !important;
+    display: none;
+}
+.home-wraper{
+    text-align: center;
+    display: block;
+    /* margin-top: 80px; */
+}
+.head-title{
+    color: var(--style-color);
+    font-weight: bold;
+}
+.url-form{
+    width: 80%;
+    margin: 16px  auto;
+    text-align: center;
+}
+.form-wraper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.input-wraper {
+    margin: 16px 0;
+    position: relative;
+    width: 92%;
+}
+.copy-div{
+    font-size: 24px;
+    margin-left: 6px;
+  color: var(--caption-color);
+    cursor: pointer;
+    transition: all .5s ease;
+    display: none;
+    animation: copy 0.5s ease-in-out  1s 6 alternate-reverse ;
+}
+
+@keyframes copy {
+    from {
+        transform: scale(1);
+    }to {
+        transform: scale(1.3);
+    }
+}
+.input-wraper .clear{
+
+    background: var(--caption-color);
+    display: none;
+    color: #fbfbfb;
+    z-index: 100000;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8px;
+}
+ 
+.input-wraper .clear:hover{
+    color: var(--style-color);
+}
+
+.url-input{
+    height: 56px;
+}
+.url-input{
+    font-size: 12px;
+}
+.url-input::placeholder
+{
+    font-size: 16px;
+    color: var(--caption-color);
+}
+
+
+
+.download-btn {
+    transition: all 0.3s ease-in-out;
+    margin: 16px;
+
+    border-color: var(--accent-color) !important;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+
+.download-btn.disabled{
+    user-select: none !important;
+    cursor:no-drop !important;
+    opacity: 0.6;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+.download-btn:focus-visible,.download-btn:active{
+    border-color: var(--accent-color) !important;
+    color: var(--theme-color) !important;
+    border-color: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+}
+
+.download-btn:hover{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    border-color: var(--accent-color);
+}
+@keyframes gelatine {
+    0%, 100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+    
+}
+.results {
+    width: 90%;
+    margin: auto;
+    position: relative;
+    display: none;
+    
+}
+.results .card-wraper{
+    background-color: var(--theme-color);
+    border: 1px solid #99999970;;
+    margin: auto;
+    padding: 0 !important;
+}
+.results .image-box{
+    padding-top: 8px;
+    position: relative;
+    height: 166px;
+}
+
+.results .image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.download-box > div {
+    display: inline-block;
+}
+.download-box .link{
+    margin-bottom: 8px;
+}
+.download-box .link .link-download {
+    border: 1px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    background-color: var(--theme-color) !important;
+}
+.download-box .link .link-download:hover{
+    background-color: var(--primary-color) !important;
+    color: var(--theme-color) !important;
+    border: 1px solid var(--theme-color) !important;
+}
+.download-box .form-select{
+    border: 2px solid var(--accent-color);
+}
+@media only screen and (max-width: 600px) {
+
+    .contact{
+        margin-top: 80px;
+    }
+    .url-form{
+        width: 95%;
+        margin: 16px auto 0 auto;
+    }
+    
+    .input-wraper {
+        margin: 16px 0;
+    }
+    .input-wraper .copy, .input-wraper .clear
+    {
+
+        cursor: pointer;
+        font-size: 16px !important;
+        display: none;
+    }
+ 
+    .url-input{
+        height: 64px;
+    }
+    .url-input::placeholder
+    {
+        font-size: 12px;
+    }
+
+
+
+
+}
+  
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) and (max-width: 767px){
+    .url-form{
+        margin: 24px  auto;
+    }
+    
+    .input-wraper {
+        margin: 16px 0;
+        position: relative;
+        width: 95%;
+    }
+    .input-wraper .copy, .input-wraper .clear
+    {
+        cursor: pointer;
+        font-size: 18px !important;
+    }
+ 
+    .url-input{
+        height: 64px;
+    }
+    .url-input::placeholder
+    {
+        font-size: 12px;
+    }
+
+    
+
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px)  and (max-width: 991px){
+    .url-form{
+        width: 80%;
+        margin: 32px auto;
+    }
+  
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px)  and (max-width: 1199px){
+    .input-wraper .copy, .input-wraper .clear
+    {
+        cursor: pointer;
+        font-size: 20px !important;
+    }
+ 
+    .url-input{
+        height: 64px;
+    }
+    .url-input::placeholder
+    {
+        font-size: 14px;
+    }
+
+    .download-btn{
+        transition: all 0.3s ease-in-out;
+    }
+    .url-form{
+        width: 75%;
+        margin: 32px  auto;
+    }
+
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .url-form{
+       
+        margin: 32px  auto;
+    }
+    .input-wraper{
+        width: 70%;
+    }
+
+  }
+
+.time-div{
+    text-align: start;
+    color: var(--primary-color);
+    padding-left: 8px;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.time-span{
+    color: var(--style-color);
+}
+.time-div.show{
+    display: block;
+}
+.msg{
+    display: none;
+}
+.msg.show{
+    display: block;
+    line-height: 30px;
+    height: 30px;
+    overflow: hidden;
+    font-size: 12px;
+    color: var(--primary-color);
+    
+}
+.msg.show p {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.msg.show .msg-1{
+    animation-name: moveup1;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.msg.show .msg-2{
+    animation-name: moveup2;
+    animation-duration: 10s;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.msg.show .msg-3{
+    animation-name: moveup3;
+    animation-duration: 10s;
+    animation-delay: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.msg.show .msg-4{
+    animation-name: moveup4;
+    animation-duration: 5s;
+    animation-delay: 6s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveup1 {
+    0% {
+        transform: translateY(0);
+    }
+    20%{
+        transform: translateY(0);
+    }
+    60%{
+        transform: translateY(-303px);
+    }
+    100%{
+        transform: translateY(-303px);
+    }
+}
+@keyframes moveup2 {
+    0% {
+        transform: translateY(0);
+    }
+    20%{
+        transform: translateY(-30px);
+    }
+    60%{
+        transform: translateY(-303px);
+    }
+    100%{
+        transform: translateY(-303px);
+    }
+
+}
+@keyframes moveup3 {
+    0% {
+        transform: translateY(0);
+    }
+    20%{
+        transform: translateY(-60px);
+    }
+    60%{
+        transform: translateY(-303px);
+    }
+    100%{
+        transform: translateY(-303px);
+    }
+
+}
+@keyframes moveup4 {
+    0% {
+        transform: translateY(0);
+    }
+    20%{
+        transform: translateY(-89px);
+    }
+    60%{
+        transform: translateY(-90px);
+    }
+    100%{
+        transform: translateY(-90px);
+    }
+
+
+}
+
+.msg1-title{
+    color: #0d1b3f;
+    font-weight: bold;
+}
+.msg2-title{
+    color: #78b745;
+    font-weight: bold;
+
+}
+.msg3-title{
+color: #2778c4;
+font-weight: bold;
+
+}
+.btn-csv-wraper{
+    margin-bottom: 16px;
+    color: #fbfbfb;
+    text-align: start;
+    border-radius: 4px;
+}
+.download-results{
+    color: #fbfbfb;
+    font-size: 12px;
+    border-radius: 8px;
+    background: #2778c4;
+    transition: all 0.3s ease;
+    
+}
+
+.download-results:hover, .download-results:focus,.download-results:focus-visible{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+    color: #fbfbfb !important;
+    background: #2778c4 !important;
+}
+.hint{
+    color: var(--caption-color);
+    font-size: 10px;
+}
+
+.card{
+    background: var(--theme-color);
+    box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075), /* shadow ring 👇 */ 0 0 0 1px hsla(0, 0%, 0%, 0.05), /* multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02), 0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+    padding: 5px;
+    text-align: center;
+    position: relative;
+}
+.hint-name{
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    padding: 2px;
+    border-radius: 4px;
+    z-index: 4px;
+    z-index: 4;
+    font-size: 11px;
+}
+
+.hint-name.dawaa{
+    background-color: #002544 !important;
+    color: #ffeb38; 
+}
+.hint-name.nahdi{
+    background-color: #78b745 !important;
+    color: #fbfbfb;
+}
+.hint-name.muthda{
+    background-color: #2778c4 !important;
+    color: #fbfbfb;
+}
+
+.web-name{
+    text-transform: capitalize;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    margin-bottom: 16px;
+}
+
+.web-name.dawaa{
+    background-color: #002544 !important;
+    color: #ffeb38; 
+    background-image: url(https://www.al-dawaa.com/media/logo/stores/1/Logo.png) !important;
+
+}
+.web-name.nahdi{
+    background-color: #78b745 !important;
+    color: #fbfbfb;
+    background-image: url(https://www.nahdionline.com/static/version1712167040/frontend/Nahdi/theme-nahdi-default/en_US/images/sprite.view.svg#nahdi-mobile) !important;
+}
+.web-name.muthda{
+    background-color: #2778c4 !important;
+    background-image: url(https://unitedpharmacy.sa/media/logo/stores/2/Logo.png) !important;
+
+ }
+ .web-name.muthda .web-name-span{
+    color:  #fbfbfb;;
+ }
+ @media only screen and (max-width: 600px)  {
+    .web-name.muthda .web-name-span{
+        color:  transparent;;
+     }
+ }
+.result-wraper{
+    display: grid;
+    gap: 10px;
+    margin-bottom: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.card-title{
+    color: var(--primary-color) !important;
+    font-size: 12px;
+    font-weight: 600;
+}
+.title-offer{
+    font-size: 12px;
+    font-weight: bold;
+    color: #dc3545 !important;
+}
+
+
+.producut-link{
+    font-size: 12px;
+    padding: 4px 4px;
+}
+
+.results .card-text span:nth-child(1){
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+.before-price{
+    margin-left: 4px;
+    color: var(--caption-color);
+    text-decoration: line-through;
+    font-size: 12px;
+}
+.card-img, .card-img-top, .card-img-bottom {
+
+    width: 70%;
+    margin: auto;
+}
+
+  /* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 40px;
+    height: 20px;
+    --c:no-repeat radial-gradient(farthest-side, var(--bs-orange) 93%, var(--bs-orange));
+    background:
+      var(--c) 0    0,
+      var(--c) 50%  0,
+      var(--c) 100% 0;
+    background-size: 8px 8px;
+    position: relative;
+    animation: l4-0 1s linear infinite alternate;
+    display: none;
+    margin: auto;
+  }
+  .loader.show{
+    display: block;
+  }
+  .loader.show::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background:  var(--bs-orange);
+    left: 0;
+    top: 0;
+    animation: 
+      l4-1 1s  linear infinite alternate,
+      l4-2 0.5s cubic-bezier(0,200,.8,200) infinite;
+  }
+  .loader::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background:  var(--bs-orange);
+    left: 0;
+    top: 0;
+    animation: 
+      l4-1 1s  linear infinite alternate,
+      l4-2 0.5s cubic-bezier(0,200,.8,200) infinite;
+  }
+  @keyframes l4-0 {
+    0%      {background-position: 0  100%,50% 0   ,100% 0}
+    8%,42%  {background-position: 0  0   ,50% 0   ,100% 0}
+    50%     {background-position: 0  0   ,50% 100%,100% 0}
+    58%,92% {background-position: 0  0   ,50% 0   ,100% 0}
+    100%    {background-position: 0  0   ,50% 0   ,100% 100%}
+  }
+  @keyframes l4-1 {
+    100% {left:calc(100% - 8px)}
+  }
+  @keyframes l4-2 {
+    100% {top:-0.1px}
+  }
+
+  .arrow{
+    position: fixed;
+    z-index: 6;
+    right: 16px;
+    bottom: 100px;
+    width: fit-content;
+    animation-name: arrow;
+    animation-duration: .8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    cursor: pointer;
+    color: var(--accent-color);
+    display: none;
+
+  }
+  
+  @keyframes arrow
+  {
+    0%{
+      transform: translateY(4px) ;
+    }
+    100%{
+      transform: translateY(-4px) ;
+    }
+  }
+  

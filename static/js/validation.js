@@ -11,11 +11,13 @@ var username_r = document.getElementById('username-r');
 var email_r = document.getElementById('email-r');
 var password_r = document.getElementById('password-r');
 
+var username_r = document.getElementById('username-r');
+var email_r = document.getElementById('email-r');
+var password_r = document.getElementById('password-r');
+
 
 var email_input = document.getElementById('email');
 var password_input = document.getElementById('password');
-
-
 
 function isEmptyRegisterfields()
 {
@@ -39,6 +41,8 @@ function isEmptyRegisterfields()
 
     return isValid;
 }
+
+
 function isNotvalidUsername()
 {
 
@@ -162,8 +166,6 @@ function showLoginerror(errorCode,errorMessage = "") {
 }
 
 
-
-
 function hideRegistererror() {
 
   invalid_email.style.display = "none";
@@ -189,4 +191,82 @@ function hideLoginerror() {
    
   invalid_password_l.style.display = "none";
   invalid_password_l.innerHTML = ""
+}
+
+
+
+// 
+// contact form
+let ContactName = document.querySelector(".contact-name");
+let ContactEmail = document.querySelector(".contact-email");
+let ContactSubject = document.querySelector(".contact-subject");
+let ContactPhone = document.querySelector(".contact-phone");
+let ContactMsg = document.querySelector(".contact-msg");
+
+let ContactEmailInvalid = document.querySelector(".invalid-email-contact");
+let ContactNameInvalid = document.querySelector(".invalid-username-contact");
+let ContactSubjectInvalid = document.querySelector(".invalid-subject-contact");
+function isEmptyContactfields()
+{
+
+  let isEmpty = false;
+  if(ContactName.value.trim() === "" || ContactName.value.trim() === null)
+  {
+   
+    showContacterror("empty-username","you shoud enter username");
+    isEmpty = true;
+  }
+  if(ContactEmail.value.trim() === "" || ContactEmail.value.trim() ===  null)
+  {
+    showContacterror("empty-email","you shoud enter email");
+    isEmpty = true;
+  }
+  if(ContactSubject.value.trim() === "" || ContactSubject.value.trim() ===null)
+  {
+    showContacterror("empty-subject","you shoud enter subject");
+    isEmpty = true;
+  }
+  if(ContactMsg.value.trim() === "" || ContactMsg.value.trim() ===null)
+  {
+    showContacterror("empty-msg","you shoud enter message");
+    isEmpty = true;
+  }
+
+  return isEmpty;
+}
+function showContacterror(errorCode,errorMessage) {
+
+  
+  switch (errorCode) {
+
+    case "empty-username":
+        ContactNameInvalid.style.display = "block";
+        ContactNameInvalid.innerHTML = errorMessage
+        break;
+    case "empty-email":
+        ContactEmailInvalid.style.display = "block";
+        ContactEmailInvalid.innerHTML = errorMessage
+        break;
+    case "empty-subject":
+        ContactSubjectInvalid.style.display = "block";
+        ContactSubjectInvalid.innerHTML = errorMessage
+        break;
+    case "empty-msg":
+      ContactMsg.classList.add("error")
+        ContactMsg.setAttribute("placeholder",errorMessage)
+        break;
+    default:
+
+        break;
+  }
+
+}
+
+function clearContactEroor()
+{
+  ContactNameInvalid.style.display = "none";
+  ContactEmailInvalid.style.display = "none";
+  ContactSubjectInvalid.style.display = "none";
+  ContactMsg.classList.remove("error")
+  ContactMsg.setAttribute("placeholder","write your message here ..")
 }

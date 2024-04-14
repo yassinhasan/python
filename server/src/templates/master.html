@@ -1,102 +1,44 @@
+<!-- header -->
 {% include "layouts/header.html" %}
+<!-- css -->
 {% block css %}
 {% endblock %}
 </head>
+
+<!-- body -->
 <body class="light">
     <div class="container">
-        <nav id="nav">
-            <div class="logo">
-              <h1 class="heading-1">
-                <span class="color-letter">H</span><span>a</span><span>s</span><span>a</span><span>n</span>
-              </h1>
-            </div>
-            <div class="right-links">
-              <!-- links -->
-              <div class="right-links">
-                <div class="links outer-links">
-                {% block nav %}
-                {% endblock %}
-                {% if isLogged == True: %}
-                  <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
-                  <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
-                  <a href="#" class="heading-nav logout">logout</a>
-                  {%  else %}
-                  <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
-                    data-bs-target="#loginModal">Login</a>
-                  <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
-                    data-bs-target="#registerModal">Register</a>
-                  {% endif %} 
-  
-              </div>
-              <div class="menu-btn">
-                <i class="fa-solid fa-bars burger"></i>
-                <div class="links inner-links">
-                  {% block innerlinks %}
-                  {% endblock %}
-                    {%  if isLogged == True: %}
-                    <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
-                    <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
-                    <a href="#" class="heading-nav logout">logout</a>
-                    {%  else %}
-                    <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
-                      data-bs-target="#loginModal">Login</a>
-                    <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
-                      data-bs-target="#registerModal">Register</a>
-                    {% endif %} 
-                </div>
-              </div>
-              <i class="fa-solid fa-moon" style="margin-left: 16px;"></i>
-            </div>
-
-        </nav>
+      <!-- nav -->
         {% include "layouts/nav.html" %}
     <div class="home">
-        
+        <!-- content -->
         {% block content %}
         {% endblock %}
         <!-- here home or upload page -->
     </div>
 
-    {% include "layouts/contact.html" %}
+    <!-- footer -->
+    {% block footer %}
+    {% endblock %}
+  </div> <!--  end of conatiner-->
 
+    <!-- model -->
     {% block modal %}
     {% endblock %}
 
+    <!-- loader -->
     {% include "layouts/spinner.html" %}
     {% include "layouts/footer.html" %}
 
+    {% block chatboot %}
+    {% endblock %}
+
+    
+    <!-- js scripts -->
     {% block scripts %}
     {%  endblock %}
 
-  {% if messages %}
-        <script>
-                const Toast = Swal.mixin({
-      customClass: 'swal-upload',
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        color: "#b58126",
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
-      });
-      Toast.fire({
-        icon: "{{ messages['type'] }}",
-        title: "{{  messages['msg'] }}"
-      }); // end of alert
 
-
-      var mustLogin = "{{  messages['mustLogin'] }}"
-      if(mustLogin === "True")
-      {
-        document.querySelector(".sign-in").click()
-      }
-
-        </script>
-    {% endif %}
 </body>
 
 </html>

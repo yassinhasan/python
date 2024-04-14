@@ -4,16 +4,7 @@
 <link href="/css/download.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
-{% block nav %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
-{% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
 {% block content %}
-      <!-- <a class="arrow" href="#footer" aria-label="arrow">
-        <i class="fa-solid fa-angles-down"></i>
-      </a> -->
       <!-- after login -->
       <div class="home-wraper">
         <h3 class="heading-2 head-title">
@@ -29,7 +20,7 @@
                   <i class="fa-solid fa-copy copy"></i>
                  </div> -->
               </div>
-              <button type="submit" class="btn btn-primary btn-lg download-btn heading-6">Download <i class="fa-solid fa-download"></i></button>
+              <button type="submit" class="btn  btn-lg download-btn heading-6">Download <i class="fa-solid fa-download"></i></button>
           </form>
           
           <div class="results">
@@ -65,9 +56,7 @@
   <!-- overlay -->
         </div>  <!--end of resules-->
     </div>
-    <a class="arrow" href="#footer" aria-label="arrow">
-      <i class="fa-solid fa-angles-down"></i>
-    </a>
+
       <!-- after login -->
 {% endblock %}
 

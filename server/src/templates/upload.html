@@ -4,15 +4,6 @@
 <link href="..//css/upload.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
-{% block nav %}
-<a href="{{ url_for('downloadpage') }}"
-  class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
-{% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}"
-  class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
-
 
 {% block content %}
 
@@ -24,7 +15,7 @@
   <h2 class="username">
     {{ username }}
   </h2>
-  <h3 class="message heading-6">You can use many service like upload and download any files</h3>
+  <h3 class="message heading-6">You can use many services like upload and download any files</h3>
   <span class="down">&darr;</span>
 
   <div class="wrapper">
@@ -39,9 +30,7 @@
     <section class="uploaded-area hide"></section>
   </div>
 </div>
-  <a class="arrow" href="#footer" aria-label="arrow">
-    <i class="fa-solid fa-angles-down"></i>
-  </a>
+
 </div>
 
 {% endblock %}

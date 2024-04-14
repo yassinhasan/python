@@ -1,21 +1,23 @@
 {% extends 'master.html' %}
 {% block css %}
 <link href="/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/css/lib/chatbot.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
-{% block nav %}
-<a href="{{ url_for('downloadpage') }}"
-  class="heading-nav video-download  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
-{% block innerlinks %}
-<a href="{{ url_for('downloadpage') }}"
-  class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-{% endblock %}
 {% block content %}
 
 <div class="home-wraper">
   <div class="profile">
-    <img class="profile-img" src="/images/profile.png" alt="profile">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img class="profile-img" src="/images/profile.png" alt="profile">
+        </div>
+        <div class="flip-card-back">
+          <img class="profile-img" src="/images/hasan.png" alt="profile">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="name-area">
     <span class="caption-5">Hello, i'm </span>
@@ -28,14 +30,13 @@
         aria-label="GitHub">GitHub</a>
     </div>
   </div>
-
-  <!--  loginupload files -->
-
-  <!-- upload files -->
   <a class="arrow" href="#footer" aria-label="arrow">
     <i class="fa-solid fa-angles-down"></i>
   </a>
+
+  <!--  loginupload files -->
 </div>
+  <!-- upload files -->
 
 {% endblock %}
 
@@ -46,12 +47,19 @@
 
 {% endblock %}
 
+{% block footer %}
+{% include "layouts/contact.html" %}
+{% endblock %}
 
+{% block chatboot %}
+    {% include "layouts/chatbot.html" %}  
+{% endblock %}
 
 {% block scripts %}
 <script src="/js/firbase.js" type="module"></script>
 <script src="/js/helper.js"></script>
 <script src="/js/validation.js"></script>
 <script src="/js/user.js" type="module"></script>
+<script src="..//js/lib/chatbot.js"></script>
 <script src="/js/script.js"></script>
 {% endblock %}

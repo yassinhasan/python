@@ -1,0 +1,346 @@
+/* chatbot */
+
+.toggle-chatbox-btn {
+    position: fixed;
+    bottom: 50px;
+    left: 20px;
+    width: 72px;
+    border-radius: 50%;
+    color: white;
+    padding: 0 !important;
+    cursor: pointer;
+    transition: visibility 0s, opacity 0.5s linear, height 0s, bottom 0s;
+    opacity: 0;
+    animation-name: fadeInUp, heartbeat;
+    animation-duration: 0.5s, 2s;
+    animation-delay: 1s, 1s;
+    animation-iteration-count: 1, 3;
+    animation-fill-mode: forwards;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 12px;
+  }
+  
+  .toggle-chatbox-btn.scale {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+  }
+  .toggle-chatbox-btn.scale:hover {
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+  }
+
+  @keyframes heartbeat {
+    0% {
+        transform: scale(.9);
+    }
+  
+    60% {
+        transform: scale(1);
+    }
+  
+    100% {
+        transform: scale(.9);
+    }
+  }
+/*   
+  .chat_img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    padding: 1px;
+    color: var(--accent-color);
+    color: var(--primary-color);
+    color: var(--style-color);
+    font-size: 72px;
+  } */
+  
+  .tooltip,
+  .tooltip2 {
+    bottom: 41px;
+    left: 89px;
+    z-index: 20;
+    position: fixed;
+    overflow: visible;
+    border-radius: 5px;
+    background-color: var(--theme-color);
+    color: var(--caption-color);
+    border: 1px dotted var(--caption-color);
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    justify-content: start;
+    min-width: 230px;
+    text-align: start;
+    opacity: 0;
+    min-width: 165px;
+    cursor: pointer;
+    padding: 8px 8px;
+ 
+  }
+  
+  
+  .tooltip {
+  
+    animation-name: fadeInUpTolltip;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+  }
+  
+  .tooltip2 {
+  
+    animation-name: fadeInUpTolltip2;
+    animation-duration: 3s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+  }
+  
+  
+  
+  
+  @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        /* transform: translate3d(0, 100%, 0); */
+    }
+  
+    to {
+        opacity: 1;
+        /* transform: translate3d(0, 0, 0); */
+    }
+  }
+  
+  @keyframes fadeInUpTolltip {
+    0% {
+    
+        opacity: 0;
+    }
+  
+    50% {
+        opacity: 1;
+    }
+  
+    100% {
+        opacity: 0;
+        display: block;
+  
+    }
+  }
+  
+  @keyframes fadeInUpTolltip2 {
+    0% {
+        opacity: 0;
+  
+  
+    }
+  
+    100% {
+        opacity: 1;
+  
+    }
+  
+  }
+  
+  .tooltip p,
+  .tooltip2 p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+  }
+  
+  .tooltip .tooltiptext::after,
+  .tooltip2 .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent  var(--caption-color) transparent transparent;
+  
+  }
+  
+  
+  
+  .chat-box {
+    opacity: 0;
+    height: 0;
+    display: none;
+  
+  }
+ .chat-box {
+    box-shadow: 1px 1px 10px -1px #333;
+  }
+  
+  .chat-box.scale {
+    visibility: visible;
+    display: block;
+    opacity: 1;
+    z-index: 20;
+    height: 598px;
+    transition: visibility 0s, opacity 0.5s linear, height 0s;
+    position: fixed;
+    border-radius: 23px;
+    left: 30px;
+    bottom: 50px;
+    width: 320px;
+    background-color: var(--theme-color);
+  }
+  
+  .close-chatbox {
+    float: right;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  .close-chatbox:hover{
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+  }
+  .chat-box-header {
+    background: var(--accent-color);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #fbfbfb;
+    text-align: center;
+    border-radius: 10px 10px 44px 44px;
+    padding: 30px 0;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .chat-box-body {
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  
+  form {
+    padding: 10px;
+    margin-top: 7px;
+  }
+  
+  textarea.form-control {
+  
+    height: 140px !important;
+  }
+  
+  
+  
+  .send_msg {
+    background: var(--accent-color)  !important;
+    border: none !important;
+  }
+  .send_msg:hover {
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+  }
+  
+  input::placeholder , textarea::placeholder {
+    color: var(--caption-color) !important;
+    font-weight: 300;
+  
+  }
+  textarea.error::placeholder 
+  {
+    color: var(--bs-form-invalid-color) !important;
+  }
+  input , textarea , select{
+    background-color: var(--theme-color) !important;
+    color: var(--primary-color) !important;
+  
+  }
+  .form-group {
+    margin-bottom: 16px;
+  
+  }
+  .form-group input ,.form-group textarea {
+    height: 42px;
+    font-size: 12px !important;
+  }
+
+
+  .chat-box .invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    color: var(--bs-form-invalid-color);
+    font-size: 10px;
+    margin-left: 8px;
+  }
+
+  /* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  height: 20px;
+  --c:no-repeat radial-gradient(farthest-side, var(--bs-orange) 93%, var(--bs-orange));
+  background:
+    var(--c) 0    0,
+    var(--c) 50%  0,
+    var(--c) 100% 0;
+  background-size: 8px 8px;
+  position: relative;
+  animation: l4-0 1s linear infinite alternate;
+  display: inline-block;
+  margin-left: 8px;
+}
+.loader.show{
+  display: block;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  background:  var(--bs-orange);
+  left: 0;
+  top: 0;
+  animation: 
+    l4-1 1s  linear infinite alternate,
+    l4-2 0.5s cubic-bezier(0,200,.8,200) infinite;
+}
+@keyframes l4-0 {
+  0%      {background-position: 0  100%,50% 0   ,100% 0}
+  8%,42%  {background-position: 0  0   ,50% 0   ,100% 0}
+  50%     {background-position: 0  0   ,50% 100%,100% 0}
+  58%,92% {background-position: 0  0   ,50% 0   ,100% 0}
+  100%    {background-position: 0  0   ,50% 0   ,100% 100%}
+}
+@keyframes l4-1 {
+  100% {left:calc(100% - 8px)}
+}
+@keyframes l4-2 {
+  100% {top:-0.1px}
+}
+
+.contact-loader{
+  position: fixed;
+  bottom: 50px;
+  left: 23px;
+  display: none;
+  align-items: center;
+}
+.contact-loader span {
+  font-size: 12px;
+    position: relative;
+    top: -6px;
+    margin-left: 8px;
+    color: var(--caption-color);
+}
+.contact-loader.show{
+  display: flex;
+}
+
+
+@media only screen and (min-width: 600px){
+  .chat-box.scale{
+    width: 400px;
+  }
+}
