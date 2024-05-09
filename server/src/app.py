@@ -22,9 +22,10 @@ from config import config
 from helper import    getResponse, isUserLogged
 import urllib.request
 import asyncio
-from search import getDawaresults, getMuthdaresults, getNahdiresults
 import concurrent.futures
 from threading import Thread
+
+from sendmail import sendemail
 
 cred = credentials.Certificate(config)
 firebase_admin.initialize_app(cred, {
@@ -56,7 +57,7 @@ expires = datetime.datetime.now() + expires_in
 isLogged = False
 messages = None
 
-
+# mail config
 
 
 
@@ -112,39 +113,56 @@ def searchpage():
 
 @app.route("/searchItem", methods=['POST']) 
 def searchItem():
-        item = request.form.get('item')
-        items = []
-        
-        # items = getresults(item)
-        # urls = [f'https://unitedpharmacy.sa/ar/catalogsearch/result/?q={item}',f'https://www.nahdionline.com/ar/?q={item}',f'https://www.al-dawaa.com/english/?q={item}' ]
-        # urls = {
-        #     "dawa" :  f'https://www.al-dawaa.com/english/?q={item}',
-           
-        #     "muthda" :  f'https://unitedpharmacy.sa/ar/catalogsearch/result/?q={item}',
-        #      "nahdi" :  f'https://www.nahdionline.com/ar/?q={item}',
-        # }
-        
-        # with concurrent.futures.ThreadPoolExecutor(max_workers=60) as executor:
-        #     # Submit each download task to the thread pool
-        #     futures = [executor.submit(getresults, urls[url],url) for url in urls]
-        #     # Wait for all tasks to complete and retrieve the results
-        #     results = [future.result() for future in concurrent.futures.as_completed(futures)]
-        #     for result in results:
-        #        items.append(result)  
-            
-        results = []
-        pool = ThreadPool(3)
-        results.append(pool.apply_async(getDawaresults,args=[item])) 
-        results.append(pool.apply_async(getNahdiresults,args=[item])) # tuple of args for foo)
-        results.append(pool.apply_async(getMuthdaresults,args=[item])) # tuple of args for foo)
+        try:
 
-        items = [r.get() for r in results]
-        pool.close()
-        pool.join()  
-        response = make_response()
-        response= jsonify({"success":"ok","result": items})  
+            keyword = request.form.get('keyword')
+            cookie = request.form.get('cookie')
+            url = "https://dawaok.al-dawaa.com/instore/jquery-functions/ajax-customer-sku-search.php"
+
+            payload = f'keyword={keyword}'
+            headers = {
+            'Cookie': f'{cookie}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+            }   
+            response = requests.request("POST", url, headers=headers, data=payload)
+            code = response.status_code
+            if(code == 404):
+                response= jsonify({"error":"ok"}) 
+            else:
+                
+                response= jsonify({"success":"ok","result": response.text})  
+
+        except :
+            response= jsonify({"error":"ok"})  
         return response
-    
+
+
+@app.route("/testSession", methods=['POST']) 
+def testsession():
+        try:
+
+            keyword = request.form.get('test')
+            cookie = request.form.get('cookie')
+            url = "https://dawaok.al-dawaa.com/instore/jquery-functions/ajax-customer-sku-search.php"
+
+            payload = f'keyword={keyword}'
+            headers = {
+            'Cookie': f'{cookie}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+            }   
+            response = requests.request("POST", url, headers=headers, data=payload)
+            code = response.status_code
+            if(code == 404):
+                response= jsonify({"error":"ok" ,"result":code}) 
+            else:
+                
+                response= jsonify({"success":"ok","result":code})  
+
+        except :
+            response= jsonify({"error":"ok"})  
+        return response
+
+
 @app.route("/downloadvideo", methods=['POST']) 
 def downloadvideo():
 
@@ -163,20 +181,25 @@ def downloadvideo():
     
 @app.route("/contactme", methods=['POST']) 
 def contactme():
-    try:
-        contact_name = request.form.get('contact-name')
-        contact_email = request.form.get('contact-email')
-        contact_phone = request.form.get('contact-phone')
-        contact_subject = request.form.get('contact-subject')
-        contact_msg = request.form.get('contact-msg')
-        print(contact_email,contact_name,contact_msg,contact_phone,contact_subject)
-        response = make_response()
-        response= jsonify({"success":"success"})  
-        return response
-    except Exception as e:
-        response = make_response()
-        response= jsonify({"error":"msg not sent try again later!!"})  
-        return response
+
+        try:
+
+            msg = {
+                "name" :  request.form.get('contact-name'),
+                "email" :request.form.get('contact-email') ,
+                "phone" :  request.form.get('contact-phone') ,
+                "msg" : request.form.get('contact-msg')
+
+            }
+            sendemail(msg)
+            response = make_response()
+            response= jsonify({"success":"Mail has sent"})  
+            return response
+        except Exception as e:
+            response = make_response()
+            response= jsonify({"error":"somthing error"})  
+            return response
+
 
 
 @app.errorhandler(404)

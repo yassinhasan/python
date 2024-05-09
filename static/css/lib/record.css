@@ -1,0 +1,7 @@
+.recording-toggle i.play::before{
+
+    content: "\f03d";
+}
+.recording-toggle i.stop::before{
+    content: "\f28d";
+}

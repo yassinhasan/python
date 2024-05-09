@@ -1,7 +1,6 @@
 {% extends 'master.html' %}
 {% block css %}
 <link href="/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/css/lib/chatbot.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -21,8 +20,8 @@
   </div>
   <div class="name-area">
     <span class="caption-5">Hello, i'm </span>
-    <h2 class="heading-2">Hasan Meady</h2>
-    <h3 class="title caption-4">Full stack developer</h3>
+    <h2 class="heading-2 my-name">Hasan Meady</h2>
+    <h3 class="title caption-6">Full stack developer</h3>
     <div class="button-wraper">
       <a class="left-btn heading-6 btn" href="/files/Hassan Meady_CV.pdf" download target="_blank"
         aria-label="Download CV">Download CV</a>
@@ -51,15 +50,14 @@
 {% include "layouts/contact.html" %}
 {% endblock %}
 
-{% block chatboot %}
+<!-- {% block chatboot %}
     {% include "layouts/chatbot.html" %}  
-{% endblock %}
+{% endblock %} -->
 
 {% block scripts %}
 <script src="/js/firbase.js" type="module"></script>
 <script src="/js/helper.js"></script>
 <script src="/js/validation.js"></script>
 <script src="/js/user.js" type="module"></script>
-<script src="..//js/lib/chatbot.js"></script>
 <script src="/js/script.js"></script>
 {% endblock %}

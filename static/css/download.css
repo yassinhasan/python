@@ -13,7 +13,8 @@
     /* margin-top: 80px; */
 }
 .head-title{
-    color: var(--style-color);
+       /* color: var(--style-color); */
+   color: var(--gray-color);
     font-weight: bold;
 }
 .url-form{
@@ -56,9 +57,9 @@
     display: none;
     color: #fbfbfb;
     z-index: 100000;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
     border-radius: 50%;
     position: absolute;
     transition: all 0.3s ease-in-out;
@@ -66,14 +67,16 @@
     top: 50%;
     transform: translateY(-50%);
     right: 8px;
+    font-size: 12px;
 }
+
  
 .input-wraper .clear:hover{
     color: var(--style-color);
 }
 
 .url-input{
-    height: 56px;
+    height: 32px;
 }
 .url-input{
     font-size: 12px;
@@ -89,9 +92,8 @@
 .download-btn {
     transition: all 0.3s ease-in-out;
     margin: 16px;
-
     border-color: var(--accent-color) !important;
-    color: var(--theme-color) !important;
+    color: var(--forecolor) !important;
     border-color: var(--accent-color) !important;
     background-color: var(--accent-color) !important;
 }
@@ -139,8 +141,8 @@
     
 }
 .results .card-wraper{
-    background-color: var(--theme-color);
-    border: 1px solid #99999970;;
+    background-color: var(--background-color);
+    border: var(--border);;
     margin: auto;
     padding: 0 !important;
 }
@@ -191,7 +193,7 @@
         margin-top: 80px;
     }
     .url-form{
-        width: 95%;
+        width: 100%;
         margin: 16px auto 0 auto;
     }
     
@@ -202,13 +204,9 @@
     {
 
         cursor: pointer;
-        font-size: 16px !important;
         display: none;
     }
  
-    .url-input{
-        height: 64px;
-    }
     .url-input::placeholder
     {
         font-size: 12px;
@@ -229,16 +227,12 @@
     .input-wraper {
         margin: 16px 0;
         position: relative;
-        width: 95%;
+        width: 100%;
     }
-    .input-wraper .copy, .input-wraper .clear
-    {
-        cursor: pointer;
-        font-size: 18px !important;
-    }
+
  
     .url-input{
-        height: 64px;
+        height: 32px;
     }
     .url-input::placeholder
     {
@@ -260,14 +254,10 @@
   
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px)  and (max-width: 1199px){
-    .input-wraper .copy, .input-wraper .clear
-    {
-        cursor: pointer;
-        font-size: 20px !important;
-    }
+
  
     .url-input{
-        height: 64px;
+        height: 32px;
     }
     .url-input::placeholder
     {

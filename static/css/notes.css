@@ -4,7 +4,8 @@
 }
 .notes-wraper .hello{
 
-    color: #fba61b;
+        /* color: var(--style-color); */
+        color: var(--gray-color);
     font-weight: bold;
 }
 

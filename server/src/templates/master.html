@@ -25,19 +25,23 @@
     <!-- model -->
     {% block modal %}
     {% endblock %}
-
+    {% include  'modals/calcmodal.html' %}
     <!-- loader -->
     {% include "layouts/spinner.html" %}
     {% include "layouts/footer.html" %}
 
     {% block chatboot %}
+      {% include "layouts/chatbot.html" %}  
     {% endblock %}
 
     
     <!-- js scripts -->
     {% block scripts %}
+    
     {%  endblock %}
-
+    <script src="/js/lib/chatbot.js"></script>
+    <script src="/js/lib/calc.js"></script>
+    <script src="/js/lib/record.js"></script>
 
 </body>
 

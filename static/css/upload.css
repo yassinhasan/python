@@ -22,7 +22,7 @@ text-align: center;
 }
 .profile-wraper .wrapper{
   width: 100%;
-  background: var(--theme-color);
+
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -46,6 +46,7 @@ text-align: center;
   flex-direction: column;
   border-radius: 5px;
   border: 2px dashed var(--caption-color);
+  background: var(--background-color);
 
 }
 .profile-wraper  form :where(i, p){

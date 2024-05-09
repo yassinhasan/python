@@ -199,13 +199,10 @@ function hideLoginerror() {
 // contact form
 let ContactName = document.querySelector(".contact-name");
 let ContactEmail = document.querySelector(".contact-email");
-let ContactSubject = document.querySelector(".contact-subject");
+
 let ContactPhone = document.querySelector(".contact-phone");
 let ContactMsg = document.querySelector(".contact-msg");
 
-let ContactEmailInvalid = document.querySelector(".invalid-email-contact");
-let ContactNameInvalid = document.querySelector(".invalid-username-contact");
-let ContactSubjectInvalid = document.querySelector(".invalid-subject-contact");
 function isEmptyContactfields()
 {
 
@@ -221,11 +218,7 @@ function isEmptyContactfields()
     showContacterror("empty-email","you shoud enter email");
     isEmpty = true;
   }
-  if(ContactSubject.value.trim() === "" || ContactSubject.value.trim() ===null)
-  {
-    showContacterror("empty-subject","you shoud enter subject");
-    isEmpty = true;
-  }
+
   if(ContactMsg.value.trim() === "" || ContactMsg.value.trim() ===null)
   {
     showContacterror("empty-msg","you shoud enter message");
@@ -240,19 +233,15 @@ function showContacterror(errorCode,errorMessage) {
   switch (errorCode) {
 
     case "empty-username":
-        ContactNameInvalid.style.display = "block";
-        ContactNameInvalid.innerHTML = errorMessage
+        ContactName.classList.add("error")
+        ContactName.setAttribute("placeholder",errorMessage)
         break;
     case "empty-email":
-        ContactEmailInvalid.style.display = "block";
-        ContactEmailInvalid.innerHTML = errorMessage
-        break;
-    case "empty-subject":
-        ContactSubjectInvalid.style.display = "block";
-        ContactSubjectInvalid.innerHTML = errorMessage
+        ContactEmail.classList.add("error")
+        ContactEmail.setAttribute("placeholder",errorMessage)
         break;
     case "empty-msg":
-      ContactMsg.classList.add("error")
+        ContactMsg.classList.add("error")
         ContactMsg.setAttribute("placeholder",errorMessage)
         break;
     default:
@@ -264,9 +253,11 @@ function showContacterror(errorCode,errorMessage) {
 
 function clearContactEroor()
 {
-  ContactNameInvalid.style.display = "none";
-  ContactEmailInvalid.style.display = "none";
-  ContactSubjectInvalid.style.display = "none";
+
+  ContactName.classList.remove("error")
+  ContactName.setAttribute("placeholder","write your name ..")
+  ContactEmail.classList.remove("error")
+  ContactEmail.setAttribute("placeholder","write your email ..")
   ContactMsg.classList.remove("error")
   ContactMsg.setAttribute("placeholder","write your message here ..")
 }

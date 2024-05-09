@@ -1,53 +1,34 @@
 
 let toggleChatboxBtn = document.querySelector(".toggle-chatbox-btn");
 let chat_box = document.querySelector(".chat-box");
-let tooltip = document.querySelector(".tooltip");
-let tooltip2 = document.querySelector(".tooltip2");
 let send_msg = document.querySelector(".send_msg");
 let loader = document.querySelector(".contact-loader")
-
+let container =document.querySelector(".container")
 
 let closeChatboxBtn = document.querySelector(".close-chatbox");
 
 toggleChatboxBtn.addEventListener("click", () => {
-
+   container.classList.add("blur")
    chat_box.classList.toggle("scale");
    toggleChatboxBtn.classList.toggle("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
-   ContactName.focus()
+   
 })
 
 closeChatboxBtn.addEventListener("click", () => {
+   container.classList.remove("blur")
    toggleChatboxBtn.classList.toggle("scale");
    chat_box.classList.toggle("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
+
 })
 
-tooltip.addEventListener("click", () => {
 
-   toggleChatboxBtn.classList.toggle("scale");
-   chat_box.classList.toggle("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
-   ContactName.focus()
-})
-tooltip2.addEventListener("click", () => {
-
-   toggleChatboxBtn.classList.toggle("scale");
-   chat_box.classList.toggle("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
-   ContactName.focus()
-})
 
 
 function hideChatBox() {
    toggleChatboxBtn.classList.add("scale");
    chat_box.classList.remove("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
+
+   container.classList.remove("blur")
 }
 // send message
 // form
@@ -84,20 +65,20 @@ const sendMessage = async () => {
    fetch('/contactme', options) // api for the get request
      .then(response => response.json())
      .then(data => {
-       if (data.success == true) {
+       if (data.success) {
          showChatBoxAfterSendMesg()
+         fireAlert("success","message has been sent succufully")
        }
        else {
          console.log(data);
-         
          showChatBoxAfterSendMesg()
-
+         fireAlert("error","somthing error try later")
        }
      })
      .catch(error => {
       console.log(error);
       showChatBoxAfterSendMesg()
-
+      fireAlert("error","somthing error try later")
      })
 };
 
@@ -107,8 +88,9 @@ function hideChatBoxBeforeSendMesg()
    
    toggleChatboxBtn.style.display = "none"
    chat_box.classList.remove("scale");
-   tooltip.style.visibility = "hidden";
-   tooltip2.style.visibility = "hidden";
+ 
+
+
 }
 function showChatBoxAfterSendMesg()
 {
@@ -116,6 +98,7 @@ function showChatBoxAfterSendMesg()
    toggleChatboxBtn.style.display = "block"
    toggleChatboxBtn.classList.remove("scale")
    chat_box.classList.remove("scale");
+   container.classList.remove("blur")
 }
 
 

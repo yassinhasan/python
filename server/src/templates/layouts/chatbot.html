@@ -1,54 +1,45 @@
 <div class="contact-loader">
-    <div class="loader"></div>
-    <span class="loader-span">sending ...</span>
+  <div class="loader"></div>
+  <span class="loader-span">sending ...</span>
+</div>
+<div id="chat-circle" class="toggle-chatbox-btn">
+   Feddback
   </div>
-  <div id="chat-circle" class="toggle-chatbox-btn">
-     Feddback
+
+  <div class="chat-box">
+    <div class="chat-box-header">
+      <div>
+        <i class="fa-regular fa-envelope"></i>
+        <span>Leave Message</span>
+      </div>
+      <div>
+        <span class="close-chatbox"><i class="fa-solid fa-xmark"></i></span>
+      </div>
     </div>
-    <div class="tooltip">
-      <p class="tooltiptext">How can i help?</p>
-    </div>
-    <div class="tooltip2">
-      <p class="tooltiptext"> send me message now ..</p>
-    </div>
-    <div class="chat-box">
-      <div class="chat-box-header">
-        <div>
-          <i class="fa-regular fa-envelope"></i>
-          <span>Leave Message</span>
-        </div>
-        <div>
-          <span class="close-chatbox"><i class="fa-solid fa-xmark"></i></span>
+    <form class="form_msg" method="POST" action="">
+      <div class="form-group">
+        <input type="text" name="contact-name" class="form-control contact-name"  placeholder="your name" required>
+      
+      </div>
+      <div class="form-group">
+        <input type="email" name="contact-email" class="form-control contact-email"  placeholder="your email" required>
+      
+      </div>
+      <div class="form-group">
+        <input type="text" name="contact-phone" class="form-control contact-phone"  placeholder="your phone ((optional))">
+      </div>
+      <div class="form-group">
+        <textarea class="form-control contact-msg"  name="contact-msg" rows="3" placeholder="write your message here .." required></textarea>
+    
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit"  class="btn btn-primary send_msg">send <i class="fa-solid fa-paper-plane"></i>
+          </button>
         </div>
       </div>
-      <form class="form_msg" method="POST" action="">
-        <div class="form-group">
-          <input type="text" name="contact-name" class="form-control contact-name"  placeholder="your name" required>
-          <div class="invalid-feedback invalid-username-contact"></div>
-        </div>
-        <div class="form-group">
-          <input type="email" name="contact-email" class="form-control contact-email"  placeholder="your email" required>
-          <div class="invalid-feedback invalid-email-contact"></div>
-        </div>
-        <div class="form-group">
-          <input type="text" name="contact-phone" class="form-control contact-phone"  placeholder="your phone ((optional))">
-        </div>
-        <div class="form-group">
-          <input type="text" name="contact-subject" class="form-control contact-subject"  placeholder="subject" required>
-          <div class="invalid-feedback invalid-subject-contact"></div>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control contact-msg"  name="contact-msg" rows="3" placeholder="write your message here .." required></textarea>
-      
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="submit"  class="btn btn-primary send_msg">send <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <div class="chat-box-overlay"></div>
-    
-    </div>
-    
+    </form>
+    <div class="chat-box-overlay"></div>
+  
+  </div>
+  

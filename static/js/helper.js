@@ -47,15 +47,23 @@ function hideSignInmodal()
     // here we will do every thing
 }
 
-
 function fireAlert(type,msg){
+    var style = getComputedStyle(document.body)
+    let primaryColor = ""
+    if(type == "error")
+    {
+        primaryColor = "#b52626";
+    }else{
+        primaryColor = "#121212"
+    }
+    
     const Toast = Swal.mixin({
         customClass: 'swal-login',
         toast: true,
         position: "top-end",
         showConfirmButton: false,
         timer: 3000,
-        color: "#b52626",
+        color: primaryColor,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -67,3 +75,26 @@ function fireAlert(type,msg){
         title: msg
       }); // end of alert
 }
+
+function getTimeFormatting()
+{
+  var time = new Date();
+  var options = {
+    day: "numeric" ,
+    weekday: "short",
+    year: "2-digit",
+    month: "2-digit",
+    hour :  '2-digit' ,
+    minute :  '2-digit' ,        
+};
+  time = time.toLocaleString('en-TT', {options})
+  return {
+    "time" : time ,
+    "actualTime" :Date.now()
+  }
+}
+
+
+var days = ["اﻷحد", "اﻷثنين", "الثلاثاء", "اﻷربعاء", "الخميس", "الجمعة", "السبت"];
+
+

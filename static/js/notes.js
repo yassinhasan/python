@@ -149,7 +149,7 @@ function createStickyNote(note) {
     stickyNote.id = note.id;
     const noteContent = document.createElement("div");
     noteContent.classList.add("note-content");
-    noteContent.innerHTML = note.content;
+    noteContent.innerText = note.content;
 
   const stickyNoteTime = document.createElement("div"); 
   stickyNoteTime.classList.add("note-time"); 
@@ -229,7 +229,7 @@ function deleteNote(event) {
 function saveNote(event) {
   const stickyNote = event.target.parentElement;
   let noteContent = stickyNote.querySelector(".note-content")
-  let content = noteContent.innerHTML;
+  let content = noteContent.innerText;
    const id = stickyNote.id;
   saveAs(content,id,"text/plain;charset=UTF-8")
     fireAlert("success","Note has been saved as afile") 
@@ -317,7 +317,7 @@ function editNote(stickyNote)
   selectedStickyNoteValueBeforeEdit = selectedNoteContent.innerHTML.trim()
   editColor = stickyNote.style.getPropertyValue("--note-color");
   let noteContent = stickyNote.querySelector(".note-content")
-  let content = noteContent.innerHTML;
+  let content = noteContent.innerText;
   textareaNote.classList.add("edit")
   textareaNote.value = content
   addNoteBtn.classList.add("edit")
@@ -379,7 +379,7 @@ function sortNotes(notes)
 {
   if(notes != null)
   {
-    console.log(notes);
+   
     let sortedNotes = notes.sort((p1, p2) => (p1.actualTime) < p2.actualTime  ? 1 : (p1.actualTime > p2.actualTime) ? -1 : 0);
     return sortedNotes    
   }else{

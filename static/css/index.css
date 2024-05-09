@@ -1,3 +1,166 @@
+.home{
+  width: 100%;
+   position: relative;
+   display: flex;
+   /* align-items: center; */
+   justify-content: center;
+   min-height: 620px;
+   
+}
+
+.home-wraper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+}
+.home-wraper .profile img{
+  padding: 1px;
+  background-color: var(--background-color);
+}
+.profile {
+  margin-right: 24px;
+  /* width: 184px;
+  height: 184px; */
+  text-align: center;
+}
+.profile img {
+  max-width: 100%;
+  border-radius: 50%;
+  width: 184px;
+  height: 184px;
+  object-fit: cover;
+}
+.name-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 16px;
+}
+.name-area .heading {
+  color:  var(--primary-color);
+}
+.name-area .title {
+  color: var(--gray-color) !important;
+  
+}
+.name-area .my-name{
+  margin-bottom: 0 !important;
+}
+.button-wraper{
+  display: flex;
+  justify-content: center;
+}
+.left-btn,.right-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-right: 8px;
+  transition: all 0.4s ease-in-out;
+}
+.left-btn
+{
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  margin-right: 8px;
+}
+.right-btn 
+{
+  background-color: #121212;;
+  color: var(--forecolor) !important;
+}
+
+.left-btn:hover {
+  
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  animation: gelatine 0.5s 1;
+  background-color: var(--primary-color);;
+  color: var(--theme-color);
+  border: 1px solid var(--primary-color);
+  }
+.right-btn:hover,.right-btn:active,.right-btn:focus {
+  
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  animation: gelatine 0.5s 1;
+  background-color: #121212 !important;;
+  color: var(--forecolor) !important;
+  }
+
+
+ 
+.contact{
+  margin-top: 80px;
+  position: relative;
+    bottom: -80px;
+
+}
+.contact-wraper{
+  position: relative;
+  
+}
+.upper,.footer{
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.email-wraper {
+    /* width: calc(100% / 3 - 24px); */
+    border-radius: 16px;
+    border: 1px dotted var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin-top: 16px;
+    justify-content: space-between;
+    width: 100%/1.5;
+    background-color: var(--background-color);
+}
+body.light .email-wraper {
+  border: 1px dotted var(--primary-color);
+}
+.email-wraper a {
+  margin: 0 0 16px 0;
+  transition: all 0.4s ease-in-out;
+}
+.email-wraper a:hover,.email-wraper a:focus.email-wraper a:visited{
+  color: var(--accent-color);
+}
+.email-link,.face-link{
+  margin-right: 24px;
+  color: var(--primary-color);
+}
+.email-link > i,.face-link > i{
+  margin-right: 8px;
+}
+
+
+.footer .links{
+  margin-bottom: 16px;
+}
+.footer .links a{
+  text-decoration: none;
+  color:  var(--primary-color);
+  margin-right: 8px;
+}
+.love-icon{
+  margin-right: 4px;
+  color: var(--accent-color);
+}
+.arrow-down{
+  rotate: 180deg;
+}
+.copyright {
+  margin: 0;
+  padding: 0 0 24px 0;
+} 
 .home-wraper{
   display: flex;
   position: relative;
@@ -16,7 +179,7 @@
 .arrow{
   position: absolute;
   z-index: 6;
-  bottom: 90px;
+  bottom: 95px;
   left: 50%;
   width: fit-content;
   animation-name: arrow;
@@ -54,14 +217,7 @@
   transform: rotateY(180deg);
 }
 
-/* .flip-card-inner {
-  animation-name: rotate;
-  animation-duration: 3s;
-  animation-delay: 3s;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode:both;
-} */
+
 
 .flip-card-front, .flip-card-back {
   position: absolute;
@@ -117,21 +273,6 @@
 
   }
   
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px)  and (max-width: 991px){
-
-  }
-  
-  /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px)  and (max-width: 1199px){
-
-  }
-  
-  /* Extra large devices (large laptops and desktops, 1200px and up) */
-  @media only screen and (min-width: 1200px) {
-
-
-}
 
 
 
