@@ -1,6 +1,6 @@
 var RECORDING_ONGOING = false;
 var recordingToggleBtns = document.querySelectorAll(".recording-toggle"); // The button
-
+let  recordToast;
 recordingToggleBtns.forEach(recordingToggleElement=>{
 
     recordingToggleElement.addEventListener("click", function(){
@@ -23,15 +23,26 @@ var blob, deviceRecorder ;
 var chunks = [];
 
 async function startRecording(element){
-    element.querySelector(".fa-video").classList.remove("play")
-    element.querySelector(".fa-video").classList.add("stop")
+    element.innerHTML = "Stop"
+    // element.querySelector(".fa-video").classList.remove("play")
+    // element.querySelector(".fa-video").classList.add("stop")
+    recordToast = Swal.mixin({
+        customClass: 'swal-record',
+        toast: true,
+        position: "top-start",
+        showConfirmButton: false,
 
+      });
+
+       
     navigator.mediaDevices.getDisplayMedia(
       {
         video: {mediaSource: "screen"},
         audio: true
         }
     ).then((stream)=>{
+        recordToast.fire({   
+            title: "screen is recording"})
         deviceRecorder = new MediaRecorder(stream, {mimeType: "video/webm"});
         deviceRecorder.ondataavailable = (e) => {
             if(e.data.size > 0){
@@ -39,10 +50,12 @@ async function startRecording(element){
             }
         }
         deviceRecorder.onstop = () => {
+            recordToast.close()
             window.focus()
             RECORDING_ONGOING = !RECORDING_ONGOING; 
-            element.querySelector(".fa-video").classList.remove("stop")
-            element.querySelector(".fa-video").classList.add("playy")
+            element.innerHTML = "Record"
+            // element.querySelector(".fa-video").classList.remove("stop")
+            // element.querySelector(".fa-video").classList.add("playy")
             var filename = window.prompt("File name",  getTimeFormatting().time); // Ask the file name
             if(filename == null){
                 deviceRecorder.stop();
@@ -80,8 +93,10 @@ async function startRecording(element){
     .catch(function(err) {
         console.log('Permession not granted');
         RECORDING_ONGOING = !RECORDING_ONGOING; 
-        element.querySelector(".fa-video").classList.add("play")
-        element.querySelector(".fa-video").classList.remove("stop")
+        element.innerHTML = "Record"
+        // element.querySelector(".fa-video").classList.add("play")
+        // element.querySelector(".fa-video").classList.remove("stop")
+        recordToast.close()
       
       });
 
@@ -91,8 +106,9 @@ async function startRecording(element){
 
 function stopRecording(element){
     RECORDING_ONGOING = !RECORDING_ONGOING; 
-    element.querySelector(".fa-video").classList.remove("stop")
-    element.querySelector(".fa-video").classList.add("play")
+    element.innerHTML = "Record"
+    // element.querySelector(".fa-video").classList.remove("stop")
+    // element.querySelector(".fa-video").classList.add("play")
     deviceRecorder.stop(); // Stopping the recording
-
+    recordToast.close()
 }

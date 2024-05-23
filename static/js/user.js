@@ -22,11 +22,22 @@ function login() {
       // Signed in 
       const user = userCredential.user;
       user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        // check if user is admin
+        // goto dashboard
         // Send token to your backend via HTTPS
         localStorage.setItem("token",idToken)
         localStorage.setItem("uid",user.uid)
-        window.location.href= "/upload?token="+idToken
-        // ...
+        console.log( user.uid);
+        firbase.get(firbase.ref(firbase.db, 'users/' + user.uid) 
+        ).then(snapshot=>{
+          let loggedUser= snapshot.val()
+          if(loggedUser.role === "admin")
+            {
+              window.location.href= "/dashboard?token="+idToken
+            }else{
+              window.location.href= "/upload?token="+idToken
+            }
+        })
       }).catch(function(error) {
         // Handle error
         console.log(error);
@@ -81,13 +92,14 @@ function saveUserinDatabase(user) {
     firbase.set(firbase.ref(firbase.db, 'users/' + user.uid), {
       username: username_r.value,
       email: user.email,
-      password: password_r.value
+      password: password_r.value ,
+      "role" : "user"
   
     })
       .then(() => {
         user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
           // Send token to your backend via HTTPS
-          console.log(idToken);
+    
           localStorage.setItem("token",idToken)
           localStorage.setItem("uid",user.uid)
           window.location.href= "/upload?token="+idToken

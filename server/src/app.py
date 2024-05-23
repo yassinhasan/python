@@ -1,30 +1,16 @@
 import datetime
-from functools import wraps
-import json
-from multiprocessing import pool
-import subprocess
-import time
 from uuid import uuid4
 from flask import Flask, flash, jsonify, redirect ,render_template,request,make_response,session, url_for
 from flask_wtf import CSRFProtect
 import requests
-import urllib3
 from download import GetDownloadOptions
 import pyrebase
-from flask_cors import CORS,cross_origin
 import os
 import firebase_admin
-from  firebase_admin import auth
+from  firebase_admin import auth as auth
 from firebase_admin import credentials ,db 
-from multiprocessing.pool import ThreadPool
-
 from config import config
 from helper import    getResponse, isUserLogged
-import urllib.request
-import asyncio
-import concurrent.futures
-from threading import Thread
-
 from sendmail import sendemail
 
 cred = credentials.Certificate(config)
@@ -67,7 +53,9 @@ def indexpage():
 
 @app.route("/")
 def homepage():
+    global isLogged
     if isUserLogged() == True:
+        isLogged = True
         return redirect(url_for('uploadpage')) 
     else:
         isLogged = False
@@ -78,8 +66,24 @@ def homepage():
 def downloadpage():
     if isUserLogged() == True:
         global isLogged 
-        isLogged= True
+        isLogged = True
     template =   render_template("download.html",pagetitle="(download))✌Dr.Null",isLogged=isLogged) 
+    return getResponse(template)
+
+@app.route("/cvmaker")
+def cvmakerpage():
+    if isUserLogged() == True:
+        global isLogged 
+        isLogged = True
+    template =   render_template("cvmaker.html",pagetitle="(Cv Maker))✌Dr.Null",isLogged=isLogged) 
+    return getResponse(template)
+
+@app.route("/privacy")
+def privacypage():
+    if isUserLogged() == True:
+        global isLogged 
+        isLogged = True
+    template =   render_template("privacy.html",pagetitle="(Privacy))✌Dr.Null",isLogged=isLogged) 
     return getResponse(template)
 
 
@@ -189,7 +193,6 @@ def contactme():
                 "email" :request.form.get('contact-email') ,
                 "phone" :  request.form.get('contact-phone') ,
                 "msg" : request.form.get('contact-msg')
-
             }
             sendemail(msg)
             response = make_response()
@@ -210,22 +213,26 @@ def page_not_found(e):
 @app.route("/upload", methods=['GET'])
 def uploadpage():
     token = request.args.get('token')
+    # if user is already logged
     if isUserLogged() == True:
         isLogged = True
         uid = request.cookies.get('__session') 
         signedUser =  database.child("users").child(uid).get().val()
         template =   render_template("upload.html",pagetitle="(Upload))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
         return getResponse(template)
+    # if user not logged check token if already exists so get user
+        # token is not found so user not logged or has token so logged out
     if token is None:
         isLogged = False
         messages = {
             "type" : "warning" , 
-            "msg" : "token is missed!!" ,
+            "msg" : "You shoud login first!!"  ,
             "mustLogin" : True
         }
         template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
         return getResponse(template) 
     else:
+        # user here does not logged but has token so check token
         try :
             decoded_token = auth.verify_id_token(token)
             uid = decoded_token['uid']
@@ -237,10 +244,85 @@ def uploadpage():
             response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
             return response
         except Exception as e:
+            # user not loeeged but has token is invalid
             isLogged = False
             messages = {
                 "type" : "warning" , 
-                "msg" : "Token is invalid!!" ,
+                "msg" : "You shoud login first!!  or Token is invalid!!" ,
+                "mustLogin" : True
+            }
+
+        
+@app.route("/dashboard", methods=['GET'])
+def dashboardpage():
+    token = request.args.get('token')
+    # user is logged to he has session and has un session uid get user
+    if isUserLogged() == True:
+        isLogged = True
+        uid = request.cookies.get('__session') 
+        signedUser =  database.child("users").child(uid).get().val()
+        # check if user is found and has role admin 
+        if(signedUser and  signedUser['role'] == 'admin'):
+            template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
+            return getResponse(template)
+        # IF USER not admin
+        elif signedUser and  signedUser['role'] != 'admin' :
+            messages = {
+                    "type" : "warning" , 
+                    "msg" : "this user doesn't has access  to this page!!" ,
+                }
+            
+            return redirect(url_for('uploadpage'))
+        else:
+        # if user is not found or not admin or user
+            isLogged = False
+            messages = {
+                "type" : "warning" , 
+                "msg" : "You shoud login first or not has access to this page!!" ,
+                "mustLogin" : True
+            }
+            template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
+            return getResponse(template) 
+    # if not logged before and has not token
+    if token is None:
+        isLogged = False
+        messages = {
+            "type" : "warning" , 
+            "msg" : "You shoud login first!!" ,
+            "mustLogin" : True
+        }
+        template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
+        return getResponse(template) 
+    else:
+        try :
+            # user here come from logging and hasa token check token
+            decoded_token = auth.verify_id_token(token)
+            uid = decoded_token['uid']
+            signedUser =  database.child("users").child(uid).get().val()
+            # if user is found and is admin
+            if signedUser and  signedUser['role'] == 'admin' :
+                isLogged = True
+                template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
+                response = make_response(template)
+                response.set_cookie('__session', value=uid ,max_age = None, expires = expires)
+                response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
+                return response
+            else :
+               
+                messages = {
+                    "type" : "warning" , 
+                    "msg" : "this user doesn't has access  to this page!!" ,
+                }
+                template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
+                response = make_response(template)
+                return response
+          
+        except Exception as e:
+            # token is not invalid so logged out
+            isLogged = False
+            messages = {
+                "type" : "warning" , 
+                "msg" : "You shoud login first or Token is invalid!!" ,
                 "mustLogin" : True
             }
             template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
@@ -258,6 +340,30 @@ def logoutpage():
     response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
     return response
 
+@app.route("/usersdata",methods=['POST'])
+def usersdata():
+    try:
+        users = []
+        page = auth.list_users()
+        while page:
+            for user in page.users:
+
+                user = auth.get_user(user.uid)
+                userdata  = {
+                    "userId" : user.uid ,
+                    "email" :user.email ,
+                    "creationTime" :user.user_metadata.creation_timestamp ,
+                    "lastLogin" :user.user_metadata.last_sign_in_timestamp
+                }
+                users.append(userdata)
+            page = page.get_next_page()
+        response = make_response()
+        response= jsonify({"results":"ok","users":users})  
+        return response
+    except Exception as e:
+        response = make_response()
+        response= jsonify({"error": e})  
+        return response 
 
 if __name__ == "__main__":
     app.run(debug=True,port=int(os.environ.get('PORT',8080)))

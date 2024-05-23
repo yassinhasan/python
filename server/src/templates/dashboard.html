@@ -1,0 +1,76 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="/css/dashboard.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="heading-3 heading-dashboard">Dashboard</h1>
+    <div class="main-dashboard">
+        <div class="users">
+                <div class="icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="info">
+                    <p class="num"></p>
+                    <p class="title">Total Users</p>
+                </div>
+        </div>
+        <div class="active-users">
+                <div class="icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div class="info">
+                    <p class="num"></p>
+                    <p class="title">Active Users</p>
+                </div>
+        </div>
+        <div class="inactive-users">
+                <div class="icon">
+                    <i class="fa-solid fa-user-large-slash"></i>
+                </div>
+                <div class="info">
+                    <p class="num"></p>
+                    <p class="title">Inactive Users</p>
+                </div>
+        </div>
+
+
+    </div>
+    <div class="email-card">
+        <div class="card">
+            <div class="card-header">
+              Emails
+            </div>
+            <ul class="list-group list-group-flush email-items">
+            </ul>
+          </div>
+    </div>
+
+{% endblock %}
+
+
+{% block modal %}
+{% include 'modals/registermodal.html' %}
+{% include 'modals/loginmodal.html' %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+<!-- {% block chatboot %}
+    {% include "layouts/chatbot.html" %}  
+{% endblock %} -->
+
+{% block scripts %}
+<script src="/js/firbase.js" type="module"></script>
+<script src="/js/helper.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/user.js" type="module"></script>
+<script src="/js/dashboard.js" type="module"></script>
+{% if isLogged == True: %}
+<script src="/js/logout.js" type="module"></script>
+{%  endif %}
+<script src="/js/script.js"></script>
+{% endblock %}

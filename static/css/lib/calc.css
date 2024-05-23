@@ -58,8 +58,23 @@ label.form-label.span-net {
 
     width: 126%;
 }
-.clear-btn,.download-calc,.print-calc{
+.clear-btn,.download-calc,.print-calc,.view-calc{
     display: inline-block !important;
-    font-size: 12px;
+    font-size: 10px;
     margin-left: 8px;
+    color: #fbfbfb;
 }
+.view-calc{
+    background-color: #4caf50 !important;
+}
+.clear-btn:hover,.download-calc:hover,.print-calc:hover,.view-calc:hover{
+
+    transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+    animation: gelatine 0.5s 1;
+}
+.mwzna2::placeholder,.mwzna1::placeholder
+{
+    font-size: 10px;
+    color: var(--gray-color);
+}
+

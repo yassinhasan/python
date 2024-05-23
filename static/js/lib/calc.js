@@ -397,13 +397,13 @@ online.addEventListener("input", e => {
 })
 
 mwzna1.addEventListener("input", e => {
-    mwzna1Val = parseFloat(e.target.value == "" ? 0 : e.target.value)
+    mwzna1Val = parseFloat(eval(e.target.value) == "" ? 0 :eval( e.target.value))
     calc(true)
 
 })
 
 mwzna2.addEventListener("input", e => {
-    mwzna2Val = parseFloat(e.target.value == "" ? 0 : e.target.value)
+    mwzna2Val = parseFloat(eval(e.target.value) == "" ? 0 :eval( e.target.value))
     calc(true)
 })
 
@@ -456,8 +456,8 @@ let netSpan = 0
 let linkUrl = ""
 let totalWithoutComma =""
 let totalHellah =""
-let cashWithoutComma ="00"
-let cashHellah ="00"
+let cashWithoutComma =""
+let cashHellah =""
 let spanWithoutComma =""
 let spanHellah =""
 let cashTafqeet = ""
@@ -466,14 +466,14 @@ let spanTafqeet = ""
 function addTextToImage(imagePath, netTotal,netCash,netSpan) {
     var circle_canvas = document.getElementById("canvas");
     var context = circle_canvas.getContext("2d");
-    let dateNow = getTimeFormatting().time
+    let dateNow = getTimeFormatting(864e5).time
    let newDatenow =  dateNow.split(",")
     let customDay = newDatenow[0].split("/")
     let calcDay = customDay[0]
     let calcMonth = customDay[1]
     let calcYear = customDay[2]
 
-    var arabicDays = days[new Date().getDay()];
+    var arabicDays = days[new Date(Date.now() - 864e5).getDay()];
    
 
     if(netTotal != 0)
@@ -487,6 +487,7 @@ function addTextToImage(imagePath, netTotal,netCash,netSpan) {
 
         cashWithoutComma = netCash
         cashTafqeet = new Tafgeet(netCash, 'SAR').parse()
+        cashHellah = "-"
     }
     if(netSpan != 0)
     {
@@ -570,7 +571,7 @@ function addTextToImage(imagePath, netTotal,netCash,netSpan) {
         context.lineStyle = "#343a40";
         context.font = "50px sans-serif";
         context.direction = "ltr";
-        context.fillText(calcDay, 1320, 918);
+        context.fillText(calcDay, 1610, 918);
 
         // add month
         context.lineWidth = 24;
@@ -584,7 +585,7 @@ function addTextToImage(imagePath, netTotal,netCash,netSpan) {
         context.fillStyle = "#343a40";
         context.lineStyle = "#343a40";
         context.font = "50px sans-serif";
-        context.fillText(calcYear, 1600, 918);
+        context.fillText(calcYear, 1270, 918);
 
         // arabic day
         context.lineWidth = 24;
@@ -609,6 +610,7 @@ downloadCalc.addEventListener("click",e=>{
 })
 
 let printCalc = document.querySelector(".print-calc")
+
 printCalc.addEventListener("click",e=>{
     e.preventDefault()
     let w = window.innerWidth
@@ -634,7 +636,44 @@ printCalc.addEventListener("click",e=>{
     }, true);
     
 })
+let viewCalc = document.querySelector(".view-calc")
 
+viewCalc.addEventListener("click",e=>{
+    e.preventDefault()
+    let w = window.innerWidth
+    let h = window.innerHeight
+    addTextToImage("/images/calc.jpeg", netTotal,netCash,netSpan);
+    let windowContent = '';
+    windowContent += '';
+    windowContent += '<title>Print canvas</title>';
+    windowContent += '<div style="text-align:center;margin-top:24px">';
+    windowContent += `<button style='color: #fbfbfb;
+    border: none;
+    padding: 8px 16px;
+    background: #6c757d;
+    font-size: 18px;
+    border-radius: 8px;
+    margin-left: 16px;
+    margin-bottom:16px;
+    cursor: pointer;' onClick="window.close();"
+    >Close</button>
+    </div>
+    `
+    
+    ;
+    windowContent +=  `<div style=""><img src=${linkUrl} width="100%"  style="position:relative"></div>`;
+
+    windowContent += '';
+
+    const printWin = window.open('','_blank',w,h);
+    printWin.document.open();
+    printWin.document.write(windowContent); 
+
+    printWin.document.addEventListener('load', function() {
+        printWin.focus();  
+    }, true);
+    
+})
 
 total.addEventListener("blur", e => {
     addTextToImage("/images/calc.jpeg", netTotal,netCash,netSpan);

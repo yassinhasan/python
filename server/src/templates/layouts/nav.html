@@ -11,26 +11,30 @@
       {% block nav %}
       {% endblock %}
       {% if isLogged == True: %}
-      <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-        <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
-        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
-        <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
+      <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('uploadpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/upload' : %} {{ 'active' }} {%  endif %}">Files</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+        <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
+        <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
         
-        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"
-        data-bs-target="#calcModal">Calc</a>
-        <a href="#" class="heading-nav record recording-toggle" title="record screen"><i class="fa-solid fa-video play"></i></a>
+        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"data-bs-target="#calcModal">Calc</a>
+        <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
 
         <a href="#" class="heading-nav logout">logout</a>
+        <a href="{{ url_for('dashboardpage') }}" class="heading-nav  dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
+
         {%  else %}
-        <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
-        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"
-        data-bs-target="#calcModal">Calc</a>
-        <a href="#" class="heading-nav record recording-toggle" title="record screen"><i class="fa-solid fa-video play"></i></a>
+        <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+        <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
+        <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+        <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
         <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
           data-bs-target="#loginModal">Login</a>
         <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
           data-bs-target="#registerModal">Register</a>
+          <a href="{{ url_for('dashboardpage') }}" class="heading-nav  dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
+
         {% endif %} 
 
     </div>
@@ -40,24 +44,27 @@
         {% block innerlinks %}
         {% endblock %}
           {%  if isLogged == True: %}
-          <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-        <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
-          <a href="{{ url_for('uploadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
-          <a href="{{ url_for('notespage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
-          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"
-          data-bs-target="#calcModal">Calc</a>
-          <a href="#" class="heading-nav record recording-toggle" title="record screen"><i class="fa-solid fa-video play"></i></a>
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+        <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="{{ url_for('uploadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/upload': %} {{ 'active' }}{%  endif %}">Files</a>
+          <a href="{{ url_for('notespage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/notes' : %} {{ 'active' }} {%  endif %}">Notes</a>
+          <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
+          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+          <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
           <a href="#" class="heading-nav logout">logout</a>
+          <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
           {%  else %}
-          <a href="{{ url_for('downloadpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
-          <a href="{{ url_for('searchpage') }}" class="heading-nav video-download {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
-          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal"
-          data-bs-target="#calcModal">Calc</a>
-          <a href="#" class="heading-nav record recording-toggle" title="record screen"><i class="fa-solid fa-video play"></i></a>
+          <a href="{{ url_for('downloadpage') }}" class="heading-nav  {%  if url_for(request.endpoint)  == '/download': %} {{ 'active' }}{%  endif %}">Download</a>
+          <a href="{{ url_for('searchpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/search' : %} {{ 'active' }} {%  endif %}">Search</a>
+          <a href="{{ url_for('cvmakerpage') }}" class="heading-nav  {%  if url_for(request.endpoint) == '/cvmaker' : %} {{ 'active' }} {%  endif %}">Cv Maker</a>
+          <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
+          <a href="#" class="heading-nav record recording-toggle" title="record screen">Record</a>
           <a href="#" class="heading-nav sign-in" aria-label="login" data-bs-toggle="modal"
             data-bs-target="#loginModal">Login</a>
           <a href="#" class="heading-nav register" aria-label="register" data-bs-toggle="modal"
             data-bs-target="#registerModal">Register</a>
+            <a href="{{ url_for('dashboardpage') }}" class="heading-nav dashboard {%  if url_for(request.endpoint)  == '/dashboard': %} {{ 'active' }}{%  endif %}">Dashboard</a>
+
           {% endif %} 
       </div>
     </div>

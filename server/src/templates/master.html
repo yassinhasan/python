@@ -31,7 +31,9 @@
     {% include "layouts/footer.html" %}
 
     {% block chatboot %}
+      {% if admin != True %}
       {% include "layouts/chatbot.html" %}  
+      {% endif %}
     {% endblock %}
 
     
@@ -39,7 +41,9 @@
     {% block scripts %}
     
     {%  endblock %}
+    {% if admin != True %}
     <script src="/js/lib/chatbot.js"></script>
+    {% endif %}
     <script src="/js/lib/calc.js"></script>
     <script src="/js/lib/record.js"></script>
 

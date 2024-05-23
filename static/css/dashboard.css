@@ -1,0 +1,103 @@
+
+#chat-circle{
+    display: none;
+}
+.heading-dashboard{
+    color: var(--gray-color);
+    margin: 24px 0;
+    text-align: center;
+}
+.main-dashboard
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+.users ,.inactive-users,.active-users{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px;
+}
+.users{
+    background: #009688;
+}
+.active-users{
+    
+    background-color: #4caf50;
+}
+.inactive-users{
+    background-color: #E91E63;
+}
+.main-dashboard >div .icon {
+    width: 30%;
+    font-size: var(--heading-one);
+    color: var(--theme-color);
+}
+.main-dashboard >div .icon {
+    width: 65%;
+}
+.info{
+    text-align: center;
+}
+.info .num {
+    font-size: var(--heading-one);
+    color: var(--theme-color);
+    font-weight: bold;
+}
+.info .title {
+    font-size: var(--heading-two);
+    color: var(--theme-color);
+}
+.email-card{
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+}
+
+.email-card .card{
+    background-color: var(--theme-color);
+}
+.card-header{
+    color: var(--primary-color);
+}
+.user-email{
+    font-weight: 600;
+    border: none;
+    background: var(--background-color);
+    color: var(--primary-color);
+}
+.user-data{
+    border-bottom: 1px solid #80808045;
+    padding: 8px;
+}
+.status.active ,.span-data.active {
+    color: #4CAF50;
+}
+.status.inactive ,.span-data.inactive {
+    color: #E91E63;
+}
+p.create-at ,p.last-login{
+    position: relative;
+    left: 36px;
+
+}
+p.create-at{
+    margin: 0px 0 4px 0px;
+}
+
+.title-span
+{
+    color: #607D8B;
+    text-transform: capitalize;
+
+
+}
+span.span-data {
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: darkgray;
+}
+
