@@ -11,7 +11,7 @@
       "source": "**",
       "run": {
         "serviceId": "flask"   ,
-        "region": "us-central1",   
+        "region": "asia-east1",   
         "pinTag": true             
       }
     } ]

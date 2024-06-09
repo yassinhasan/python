@@ -42,7 +42,8 @@ async function startRecording(element){
         }
     ).then((stream)=>{
         recordToast.fire({   
-            title: "screen is recording"})
+            html: `<i class="fa-solid fa-video"></i> <span style="color:red;margin-left:8px">screen is recording</span>`})
+,
         deviceRecorder = new MediaRecorder(stream, {mimeType: "video/webm"});
         deviceRecorder.ondataavailable = (e) => {
             if(e.data.size > 0){

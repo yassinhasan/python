@@ -57,8 +57,11 @@ a.card-link.download {
 a.card-link.delete {
     color: #dd3333;
 }
+a.card-link.share {
+    color: #183718;
+}
 
-i.fa-solid.fa-trash:hover,i.fa-solid.fa-download:hover{ 
+i.fa-solid.fa-trash:hover,i.fa-solid.fa-download:hover,.fa-whatsapp:hover{ 
     transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
     animation: gelatine 0.5s 1;
     

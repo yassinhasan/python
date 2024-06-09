@@ -47,7 +47,7 @@ function hideSignInmodal()
     // here we will do every thing
 }
 
-function fireAlert(type,msg){
+function fireAlert(type,msg,customClass='swal-login',position="top-start"){
     var style = getComputedStyle(document.body)
     let primaryColor = ""
     if(type == "error")
@@ -58,9 +58,9 @@ function fireAlert(type,msg){
     }
     
     const Toast = Swal.mixin({
-        customClass: 'swal-login',
+        customClass: customClass,
         toast: true,
-        position: "top-end",
+        position: position,
         showConfirmButton: false,
         timer: 3000,
         color: primaryColor,

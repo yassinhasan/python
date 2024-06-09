@@ -1,0 +1,93 @@
+{% extends 'master.html' %}
+{% block css %}
+<link href="/css/lib/footer.css" rel="stylesheet" type="text/css" />
+
+
+<link href="/css/book.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/lib/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/js/lib/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="/js/lib/hash.js"></script>
+{% endblock %}
+{% block content %}
+	<!-- <h1>Hello Yassin</h1> -->
+
+	<div class="books">
+		<div class="card yassin-book">
+			<div class="book">
+				<img src="/images/yassin.PNG" alt="image"> 
+			</div>
+			<div class="book-info">
+				<p class="heading-5">
+					Yassin Book
+				</p>
+				<div class="button-wraper">
+					<a><i class="fa-solid fa-arrow-up-right-from-square yassin-book-showBtn book-show-btn "></i></a>
+					<a><i class="fa-solid fa-download book-download-btn"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="card expire-book">
+			<div class="book">
+				<img src="/images/notepad.jpg" alt="image"> 
+			</div>
+			<div class="book-info">
+				<p class="heading-5">
+					Expire 2024
+				</p>
+				<div class="button-wraper">
+					<a href="/files/data.txt" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square book-show-btn"></i></a>
+					<a><i class="fa-solid fa-copy book-copy-btn"></i></a>
+					<a href="/files/Expire.txt" download><i class="fa-solid fa-download expire-btn book-download-btn"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- after login -->
+{% endblock %}
+
+<!-- books block -->
+{% block books %}
+<div id="canvas">
+	<div class="zoom-icon zoom-icon-in"></div>
+	<div class="close-icon"><i class="fa-solid fa-xmark"></i></div>
+	
+	<div class="magazine-viewport">
+		<div class="magazine-container">
+			<div class="magazine">
+				<!-- Next button -->
+				<div ignore="1" class="next-button"></div>
+				<!-- Previous button -->
+				<div ignore="1" class="previous-button"></div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div id="slider-bar" class="turnjs-slider">
+				<div id="slider"></div>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}
+<!-- books block -->
+
+{% block modal %}
+{% include 'modals/registermodal.html' %}
+{% include 'modals/loginmodal.html' %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script src="/js/firbase.js" type="module"></script>
+<script src="/js/helper.js"></script>
+<script src="/js/validation.js"></script>
+{% if isLogged == True: %}
+<script src="/js/logout.js" type="module"></script>
+{% endif %}
+
+<script src="/js/user.js" type="module"></script>
+<script src="/js/lib/turn.js"></script>
+<script src="/js/book.js"></script>
+<script src="/js/script.js"></script>
+{% endblock %}

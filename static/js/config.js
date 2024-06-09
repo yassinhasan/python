@@ -7,7 +7,7 @@
     messagingSenderId: "1059798097671",
     appId: "1:1059798097671:web:ecd23ea79da32cba66afa2",
     measurementId: "G-LZHP6PBBW2",
-    databaseURL : "https://drnull-f3805-default-rtdb.firebaseio.com"
+    databaseURL : "https://drnull-f3805.asia-southeast1.firebasedatabase.app"
   };
   const csrfToken = document.head.querySelector("[name~=csrf_token][content]").content;
 

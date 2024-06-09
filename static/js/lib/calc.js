@@ -464,7 +464,7 @@ let cashTafqeet = ""
 let spanTafqeet = ""
 
 function addTextToImage(imagePath, netTotal,netCash,netSpan) {
-    var circle_canvas = document.getElementById("canvas");
+    var circle_canvas = document.getElementById("canvas2");
     var context = circle_canvas.getContext("2d");
     let dateNow = getTimeFormatting(864e5).time
    let newDatenow =  dateNow.split(",")

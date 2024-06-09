@@ -18,7 +18,7 @@ html,body {
   --heading-two: 24px;
   --heading-three: 22px;
   --heading-four: 20px;
-  --heading-five: 18px;
+  --heading-five: 14px;
   --heading-six: 14px;
   --heading-nav:14px;
   --caption-one: 20px;
@@ -32,7 +32,11 @@ html,body {
   --fw-14 : 14px;
   --fw-16 : 16px;
   --fw-18 : 18px;
-  --overlay-background:rgba(0, 0, 0, 0.9)
+  --overlay-background:rgba(0, 0, 0, 0.9);
+  --dot-bg: black;
+  --dot-color: white;
+  --dot-size: 0.5px;
+  --dot-space: 22px;
 }
 
 body{
@@ -62,7 +66,10 @@ body.light{
    --background-color : #fbfbfb;
   --box-shadow :1px 1px 10px -1px #3333335c;
   --forecolor : #fbfbfb;
-  --overlay-background:rgba(255, 255, 255, 0.9)
+  --overlay-background:rgba(255, 255, 255, 0.9);
+  --dot-bg: white;
+  --dot-color: black;
+  --dot-size: 0.9px;
 }
 
 /* common */
@@ -370,6 +377,48 @@ body.light{
     padding: 4px 8px;
     transition: all 0.5s ease-in-out;;
   }
+  .menu-btn{
+    display: block;
+    position: relative;
+  }
+  .inner-links{
+    position: absolute;
+    box-shadow: 10px 10px var(--accent-color);
+    right: 0px;
+    width: 192px;
+    flex-direction: column;
+    text-align: center;
+    background: var(--theme-color);
+    display: none;
+    transition: all 0.3s ease-in-out;
+  }
+  .burger{
+    cursor: pointer;
+     transition: all 0.3s ease-in-out;
+     font-size: var(--heading-two);
+     color: var(--primary-color);
+  }
+  .menu-btn .inner-links.show{
+    display: flex;
+  }
+  .menu-btn.show{
+    rotate: 90deg
+  }
+  nav .outer-links a {
+    margin: 8px;
+  }
+  nav .inner-links a {
+    margin: 0;
+    padding: 8px;
+    transition: all 0.5s ease-in-out;
+  }
+  nav .inner-links a:hover {
+      background-color: var(--primary-color);
+      color: var(--theme-color);
+  }
+  .outer-links{
+    display: none
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -384,6 +433,48 @@ body.light{
   .email-wraper ,.profile-wraper .upload-form ,.progress-area , .uploaded-area ,.wraper-textarea  {
     width: 50%;
 
+  }
+  .menu-btn{
+    display: block;
+    position: relative;
+  }
+  .inner-links{
+    position: absolute;
+    box-shadow: 10px 10px var(--accent-color);
+    right: 0px;
+    width: 192px;
+    flex-direction: column;
+    text-align: center;
+    background: var(--theme-color);
+    display: none;
+    transition: all 0.3s ease-in-out;
+  }
+  .burger{
+    cursor: pointer;
+     transition: all 0.3s ease-in-out;
+     font-size: var(--heading-two);
+     color: var(--primary-color);
+  }
+  .menu-btn .inner-links.show{
+    display: flex;
+  }
+  .menu-btn.show{
+    rotate: 90deg
+  }
+  nav .outer-links a {
+    margin: 8px;
+  }
+  nav .inner-links a {
+    margin: 0;
+    padding: 8px;
+    transition: all 0.5s ease-in-out;
+  }
+  nav .inner-links a:hover {
+      background-color: var(--primary-color);
+      color: var(--theme-color);
+  }
+  .outer-links{
+    display: none
   }
 }
 

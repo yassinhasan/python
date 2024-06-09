@@ -70,6 +70,14 @@ def downloadpage():
     template =   render_template("download.html",pagetitle="(download))✌Dr.Null",isLogged=isLogged) 
     return getResponse(template)
 
+@app.route("/book")
+def bookpage():
+    if isUserLogged() == True:
+        global isLogged 
+        isLogged = True
+    template =   render_template("book.html",pagetitle="(yassin))Him",isLogged=isLogged) 
+    return getResponse(template)
+
 @app.route("/cvmaker")
 def cvmakerpage():
     if isUserLogged() == True:
@@ -93,9 +101,15 @@ def notespage():
     if isUserLogged() == True:
         isLogged = True
         uid = request.cookies.get('__session') 
-        signedUser =  database.child("users").child(uid).get().val()
-        template =   render_template("notes.html",pagetitle="(Notes))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
-        return getResponse(template)
+        try:
+
+            signedUser =  database.child("users").child(uid).get().val()
+            template =   render_template("notes.html",pagetitle="(Notes))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
+            return getResponse(template)
+        except:
+            response = make_response()
+            response= jsonify({"error":"somthing error"})  
+            return response
     else:
         isLogged = False
         messages = {
@@ -212,14 +226,20 @@ def page_not_found(e):
 
 @app.route("/upload", methods=['GET'])
 def uploadpage():
+    
     token = request.args.get('token')
     # if user is already logged
     if isUserLogged() == True:
         isLogged = True
         uid = request.cookies.get('__session') 
-        signedUser =  database.child("users").child(uid).get().val()
-        template =   render_template("upload.html",pagetitle="(Upload))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
-        return getResponse(template)
+        try:  
+            signedUser =  database.child("users").child(uid).get().val()
+            template =   render_template("upload.html",pagetitle="(Upload))✌Dr.Null",username=signedUser['username'],isLogged=isLogged) 
+            return getResponse(template)
+        except:
+            response = make_response()
+            response= jsonify({"error":"somthing error"})  
+            return response
     # if user not logged check token if already exists so get user
         # token is not found so user not logged or has token so logged out
     if token is None:
@@ -260,29 +280,34 @@ def dashboardpage():
     if isUserLogged() == True:
         isLogged = True
         uid = request.cookies.get('__session') 
-        signedUser =  database.child("users").child(uid).get().val()
-        # check if user is found and has role admin 
-        if(signedUser and  signedUser['role'] == 'admin'):
-            template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
-            return getResponse(template)
-        # IF USER not admin
-        elif signedUser and  signedUser['role'] != 'admin' :
-            messages = {
+        try:     
+            signedUser =  database.child("users").child(uid).get().val()
+            # check if user is found and has role admin 
+            if(signedUser and  signedUser['role'] == 'admin'):
+                template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
+                return getResponse(template)
+            # IF USER not admin
+            elif signedUser and  signedUser['role'] != 'admin' :
+                messages = {
+                        "type" : "warning" , 
+                        "msg" : "this user doesn't has access  to this page!!" ,
+                    }
+                
+                return redirect(url_for('uploadpage'))
+            else:
+            # if user is not found or not admin or user
+                isLogged = False
+                messages = {
                     "type" : "warning" , 
-                    "msg" : "this user doesn't has access  to this page!!" ,
+                    "msg" : "You shoud login first or not has access to this page!!" ,
+                    "mustLogin" : True
                 }
-            
-            return redirect(url_for('uploadpage'))
-        else:
-        # if user is not found or not admin or user
-            isLogged = False
-            messages = {
-                "type" : "warning" , 
-                "msg" : "You shoud login first or not has access to this page!!" ,
-                "mustLogin" : True
-            }
-            template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
-            return getResponse(template) 
+                template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
+                return getResponse(template) 
+        except:
+            response = make_response()
+            response= jsonify({"error":"somthing error"})  
+            return response
     # if not logged before and has not token
     if token is None:
         isLogged = False
@@ -298,25 +323,30 @@ def dashboardpage():
             # user here come from logging and hasa token check token
             decoded_token = auth.verify_id_token(token)
             uid = decoded_token['uid']
-            signedUser =  database.child("users").child(uid).get().val()
-            # if user is found and is admin
-            if signedUser and  signedUser['role'] == 'admin' :
-                isLogged = True
-                template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
-                response = make_response(template)
-                response.set_cookie('__session', value=uid ,max_age = None, expires = expires)
-                response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
+            try:
+
+                signedUser =  database.child("users").child(uid).get().val()
+                # if user is found and is admin
+                if signedUser and  signedUser['role'] == 'admin' :
+                    isLogged = True
+                    template =   render_template("dashboard.html",pagetitle="(Dashboard))✌Dr.Null",username=signedUser['username'],isLogged=isLogged,admin=True) 
+                    response = make_response(template)
+                    response.set_cookie('__session', value=uid ,max_age = None, expires = expires)
+                    response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
+                    return response
+                else :
+                
+                    messages = {
+                        "type" : "warning" , 
+                        "msg" : "this user doesn't has access  to this page!!" ,
+                    }
+                    template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
+                    response = make_response(template)
+                    return response
+            except:
+                response = make_response()
+                response= jsonify({"error":"somthing error"})  
                 return response
-            else :
-               
-                messages = {
-                    "type" : "warning" , 
-                    "msg" : "this user doesn't has access  to this page!!" ,
-                }
-                template = render_template("index.html",pagetitle="(H.meady)✌Dr.Null",isLogged=isLogged,messages=messages)
-                response = make_response(template)
-                return response
-          
         except Exception as e:
             # token is not invalid so logged out
             isLogged = False
