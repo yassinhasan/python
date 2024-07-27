@@ -21,27 +21,62 @@ function login() {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-        // check if user is admin
-        // goto dashboard
-        // Send token to your backend via HTTPS
-        localStorage.setItem("token",idToken)
-        localStorage.setItem("uid",user.uid)
-        console.log( user.uid);
-        firbase.get(firbase.ref(firbase.db, 'users/' + user.uid) 
-        ).then(snapshot=>{
-          let loggedUser= snapshot.val()
-          if(loggedUser.role === "admin")
-            {
-              window.location.href= "/dashboard?token="+idToken
-            }else{
-              window.location.href= "/upload?token="+idToken
-            }
-        })
-      }).catch(function(error) {
-        // Handle error
-        console.log(error);
-      });
+      if(user.emailVerified)
+      {
+        user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+          // check if user is admin
+          // goto dashboard
+          // Send token to your backend via HTTPS
+          localStorage.setItem("token",idToken)
+          localStorage.setItem("uid",user.uid)
+          console.log( user.uid);
+          firbase.get(firbase.ref(firbase.db, 'users/' + user.uid) 
+          ).then(snapshot=>{
+            let loggedUser= snapshot.val()
+            if(loggedUser.role === "admin")
+              {
+                window.location.href= "/dashboard?token="+idToken
+              }else{
+                window.location.href= "/upload?token="+idToken
+              }
+          })
+        }).catch(function(error) {
+          // Handle error
+          console.log(error);
+        });
+      }else{
+        hideSpinner()
+
+        Swal.fire({
+          customClass: 'verify-alert',
+          title: "<strong>Attention!!</strong>",
+          html: `
+          Your email address is not verified, click verify now
+          `,
+          showCloseButton: false,
+          allowOutsideClick: false,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText: `Send Verification Email`,
+          confirmButtonAriaLabel: "Send Verification Email",
+        }).then(result => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            firbase.sendEmailVerification(user)
+            .then(()=>{
+              fireAlert("success", "Verification email sent successfully" )
+              document.querySelector(".close-login-modal").click()
+            }).catch(error=>{
+              fireAlert("error", error )
+            })
+ 
+          }
+        else if (result.isDismissed) {
+         
+    // close modal
+        }
+        });
+      }
     })
     .catch((error) => {
       hideSpinner()
@@ -77,7 +112,12 @@ function register() {
       firbase.createUserWithEmailAndPassword(firbase.auth, emailValue,passwordValue)
         .then((userCredential) => {
           const user = userCredential.user;
-          saveUserinDatabase(user)
+          firbase.sendEmailVerification(user)
+          .then(() => {
+            // Email verification sent!
+            saveUserinDatabase(user)
+          }).catch(error=>fireAlert("error",error));
+         
         })
         .catch((error) => {
           hideSpinner()
@@ -93,22 +133,14 @@ function saveUserinDatabase(user) {
       username: username_r.value,
       email: user.email,
       password: password_r.value ,
-      "role" : "user"
+      "role" : "user" ,
+      "status": "pending"
   
     })
-      .then(() => {
-        user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-          // Send token to your backend via HTTPS
-    
-          localStorage.setItem("token",idToken)
-          localStorage.setItem("uid",user.uid)
-          window.location.href= "/upload?token="+idToken
-          // ...
-        }).catch(function(error) {
-          // Handle error
-          hideSpinner()
-          console.log(error);
-        });
+      .then(() => {        
+        hideSpinner()
+        fireAlert("info",'An email verification link has been sent to ' + user.email )
+        document.querySelector(".close-register-modal").click()
       })
       .catch((error) => {
         hideSpinner()

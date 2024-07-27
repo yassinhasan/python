@@ -1,10 +1,34 @@
-@media print {
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+@font-face {
+    font-family: "Caveat";
+    src: 
+         url('../css/webfonts/Caveat-VariableFont_wght.ttf') , /* Safari, Android, iOS */
+        
+}
+@font-face {
+    font-family: "Poppins";
+    src: 
+         url('../css/webfonts/Poppins-Regular.ttf') , /* Safari, Android, iOS */
+        
+}
+@font-face {
+    font-family: "Roboto";
+    src: 
+         url('../css/webfonts/Roboto-Regular.ttf') , /* Safari, Android, iOS */
+        
+}
+@font-face {
+    font-family: "Gideon Roman";
+    src: 
+         url('../css/webfonts/GideonRoman-Regular.ttf') , /* Safari, Android, iOS */
+        
+}
+@font-face {
+    font-family: "Montserrat";
+    src: 
+         url('../css/webfonts/Montserrat-VariableFont_wght.ttf') , /* Safari, Android, iOS */
+        
+}
 
     :root {
         --cv1-font-size-text: 14px;
@@ -473,12 +497,12 @@
        margin-right: 16px;
     }
     .cv4 .info-div .list-container li i {
-        margin-right: 8px;
+        margin-right: 16px;
     }
     .cv4 .info-div .list-container li a {
         color: var(--cv4-fc1) !important; 
         font-size: var(--cv4-font-size-text);
-        margin: 4px 0;
+        margin: 16px 0;
     }
     
     .cv4 .fullname_cv {
@@ -489,7 +513,7 @@
         margin: 0px !important;
         LETTER-SPACING: 3px;
         text-align: center;
-        margin-bottom: 0 !important;
+        margin-bottom: 8px !important;
       
     }
     .cv4 .fullname_cv {
@@ -500,16 +524,16 @@
     }
     .cv4 .jop-cv  {
         font-size: var(--cv4-font-size-title);
-        margin: 0px !important;
+        margin: 8pxpx !important;
     }
     .cv4 .jop-cv p {
-        margin: 0px !important;
+        margin: 8pxpx !important;
     }
     .cv4 .contact-div{
  
     }
     .cv4 .parent-list{
-        margin-top: 8px;
+        margin-top: 16px;
     }
     .cv4 .center-box .grid-div i{
         width: 12%;
@@ -526,7 +550,7 @@
     }
     
     .cv4 .details-box{
-        margin-top: 8px;
+        margin-top: 16px;
     }
     .cv4 .heading-title {
         position: relative;
@@ -543,7 +567,7 @@
         color: var(--cv4-fc1);
         font-size: var(--cv4-font-size-text);
         line-height: 1.7;
-        margin: 2px 0;
+        margin: 16px 0;
     }
     
     .cv4  .end-box {

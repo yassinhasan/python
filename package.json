@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "hasan meady",
   "license": "ISC",
   "devDependencies": {
     "firebase-tools": "^13.5.1"

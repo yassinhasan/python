@@ -23,6 +23,8 @@ const assets = [
   "/static/images/icon-384x384.png",
   "/static/images/icon-512x512.png",
   "/static/images/profile.jpg",
+  "/static/images/*.*",
+  "/static/files/*.*",
  
 
 ]

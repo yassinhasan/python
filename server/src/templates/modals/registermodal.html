@@ -5,27 +5,27 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="registerModalLabel">Register</h5>
-          <i class="fa-solid fa-xmark btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
+          <i class="fa-solid fa-xmark btn-close close-register-modal" type="button" data-bs-dismiss="modal" aria-label="Close"></i>
         </div>
         <div class="modal-body">
           <form action="/register" method="POST" class="registerform">
             <div class="mb-3">
               <label for="username-r" class="form-label">User Name</label>
-              <input type="text" class="form-control" id="username-r" aria-describedby="user name" required
+              <input type="text" class="form-control" id="username-r" aria-describedby="username-r" required
                 name="username-r" autocomplete="username-r">
               <div class="invalid-feedback invalid-username">
               </div>
             </div>
             <div class="mb-3">
               <label for="email-r" class="form-label">Email Addres</label>
-              <input type="email" class="form-control" id="email-r" aria-describedby="emailHelp" required
-                autocomplete="email" name="email-r">
+              <input type="email" class="form-control" id="email-r" aria-describedby="email-r" required
+                autocomplete="email-r" name="email-r">
               <div class="invalid-feedback invalid-email">
               </div>
             </div>
             <div class="mb-3">
               <label for="password-r" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password-r" required autocomplete="current-password" name="password-r">
+              <input type="password" class="form-control" id="password-r" required autocomplete="password-r" name="password-r">
               <div class="invalid-feedback invalid-password"></div>
             </div>
             <button type="submit" class="btn btn-primary  register-btn-modal">Register</button>

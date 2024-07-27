@@ -1,11 +1,34 @@
 {% extends 'master.html' %}
 {% block css %}
 <link href="/css/dashboard.css" rel="stylesheet" type="text/css" />
+<script src="/js/lib/google-charts.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
 {% endblock %}
 
 {% block content %}
 
     <h1 class="heading-3 heading-dashboard">Dashboard</h1>
+    <div class="dash-menu">
+        <div class="">
+                <div class="icon">
+                    <a href="#" class="send-email" aria-label="email" data-bs-toggle="modal"data-bs-target="#emailModal">  <i class="fa-solid fa-paper-plane"></i></a>
+                </div>
+        </div>
+        <div class="">
+                <div class="icon">
+                    <a href="#" class="editusers-link" aria-label="users" data-bs-toggle="modal"data-bs-target="#editusersModal">  <i class="fa-regular fa-pen-to-square"></i></a>
+                  
+                </div>
+        </div>
+        <div class="">
+                <div class="icon">
+                   
+                    <a> <i class="fa-solid fa-chart-line"></i></a>
+                </div>
+        </div>
+
+
+    </div>
     <div class="main-dashboard">
         <div class="users">
                 <div class="icon">
@@ -37,6 +60,10 @@
 
 
     </div>
+    <div class="charts row">
+        <div id="chart_div" class="col"></div>
+        <div id="timeline" class="col"></div>
+    </div>
     <div class="email-card">
         <div class="card">
             <div class="card-header">
@@ -53,15 +80,15 @@
 {% block modal %}
 {% include 'modals/registermodal.html' %}
 {% include 'modals/loginmodal.html' %}
+{% include 'modals/emailmodal.html' %}
+{% include 'modals/editusersmodal.html' %}
 {% endblock %}
 
 {% block footer %}
 
 {% endblock %}
 
-<!-- {% block chatboot %}
-    {% include "layouts/chatbot.html" %}  
-{% endblock %} -->
+
 
 {% block scripts %}
 <script src="/js/firbase.js" type="module"></script>

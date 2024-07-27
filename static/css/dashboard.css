@@ -7,11 +7,29 @@
     margin: 24px 0;
     text-align: center;
 }
-.main-dashboard
+.dash-menu{
+    margin-bottom: 24px;
+        display: flex;
+        justify-content: space-around;
+    box-shadow: var(--box-shadow);
+
+    text-align: center;
+}
+.dash-menu  a ,.dash-menu .icon {
+    font-size: 36px;
+    cursor: pointer;
+    color: var(--gray-color);
+}
+.dash-menu .icon:hover {
+    animation: gelatine 0.5s 1;
+    border-color: var(--accent-color);
+}
+.main-dashboard , .dash-menu
 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 10px;
+    padding: 24px;
 }
 .users ,.inactive-users,.active-users{
     display: flex;
@@ -19,6 +37,7 @@
     width: 100%;
     border-radius: 8px;
     padding: 8px;
+
 }
 .users{
     background: #009688;
@@ -71,12 +90,27 @@
 .user-data{
     border-bottom: 1px solid #80808045;
     padding: 8px;
+    font-size: 12px;
 }
 .status.active ,.span-data.active {
     color: #4CAF50;
 }
 .status.inactive ,.span-data.inactive {
     color: #E91E63;
+}
+.last-login .active{
+    color: #198754;    
+}   
+.last-login .inactive{
+    color: #6c757d;
+}
+.status.verified ,.span-data.verified {
+    color: #0a7310;
+    font-size: 10px;
+}
+.status.unverified ,.span-data.verified {
+    color: #c8c8c8;
+    font-size: 10px;
 }
 p.create-at ,p.last-login{
     position: relative;
@@ -96,8 +130,52 @@ p.create-at{
 }
 span.span-data {
     font-family: sans-serif;
-    font-size: 16px;
     font-weight: 600;
     color: darkgray;
 }
 
+/* charts */
+.charts {
+    margin: 24px auto;
+    width: 100%;
+    /* background: #333; */
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+#chart_div{
+    display: flex;
+    justify-content: center;
+}
+#chart_div svg{
+    border-radius: 16px;
+}
+#chart_div text{
+    fill: var(--primary-color);
+}
+#chart_div rect{
+    fill: var(--background-color);
+}
+#timeline{
+    display: none;
+}
+.ck {z-index: 9999 !important;}
+.cke_notifications_area{
+    display: none !important;
+}
+
+
+/* EDIT USERS */
+.edit-users-card{
+    width: 100% !important;
+}
+.edit-users-list{
+    display: flex !important;
+    margin-bottom: 8px;
+    justify-content: space-between !important;
+}
+.edit-users-delete{
+    cursor: pointer;
+    color: var(--error-color );
+}

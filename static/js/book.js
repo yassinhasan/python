@@ -91,6 +91,7 @@ function loadApp() {
    // Zoom.js
 
    $('.magazine-viewport').zoom({
+	   
 	   flipbook: $('.magazine'),
 
 	   max: function() { 
@@ -122,7 +123,7 @@ function loadApp() {
 		   },
 
 		   zoomIn: function () {
-
+			   document.querySelector(".close-icon").style.display = "none"
 			   $('#slider-bar').hide();
 			   $('.made').hide();
 			   $('.magazine').removeClass('animated').addClass('zoom-in');
@@ -142,7 +143,7 @@ function loadApp() {
 		   },
 
 		   zoomOut: function () {
-
+			   document.querySelector(".close-icon").style.display = "block"
 			   $('#slider-bar').fadeIn();
 			   $('.exit-message').hide();
 			   $('.made').fadeIn();

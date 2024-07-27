@@ -1,4 +1,5 @@
 import datetime
+from threading import Thread
 from uuid import uuid4
 from flask import Flask, flash, jsonify, redirect ,render_template,request,make_response,session, url_for
 from flask_wtf import CSRFProtect
@@ -10,14 +11,15 @@ import firebase_admin
 from  firebase_admin import auth as auth
 from firebase_admin import credentials ,db 
 from config import config
+
 from helper import    getResponse, isUserLogged
-from sendmail import sendemail
+from sendmail import sendemail , sendevents
 
 cred = credentials.Certificate(config)
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://drnull-f3805-default-rtdb.firebaseio.com'
+    'databaseURL': 'https://drnull-f3805.asia-southeast1.firebasedatabase.app'
 })
-ref = db.reference('users')
+
 
 
 firebase = pyrebase.initialize_app(config)
@@ -377,13 +379,15 @@ def usersdata():
         page = auth.list_users()
         while page:
             for user in page.users:
-
+               
                 user = auth.get_user(user.uid)
+          
                 userdata  = {
                     "userId" : user.uid ,
                     "email" :user.email ,
                     "creationTime" :user.user_metadata.creation_timestamp ,
-                    "lastLogin" :user.user_metadata.last_sign_in_timestamp
+                    "lastLogin" :user.user_metadata.last_sign_in_timestamp ,
+                    "email_verified": user.email_verified
                 }
                 users.append(userdata)
             page = page.get_next_page()
@@ -394,6 +398,67 @@ def usersdata():
         response = make_response()
         response= jsonify({"error": e})  
         return response 
+
+@app.route("/editusers",methods=['POST'])
+def editusers():
+    try:
+        
+        users = db.reference("users").get()
+        response = make_response()
+        response= jsonify({"results":"ok","users":users})  
+        return response
+    except Exception as e:
+        response = make_response()
+        response= jsonify({"error": e})  
+        return response 
+
+@app.route("/deleteuser",methods=['POST'])
+def deleteuser():
+
+
+        try:
+
+            uid=request.form.get('uid')  
+            user = db.reference("users").child(uid)
+            user.delete()
+            auth.delete_user(uid)
+        # delete from auth and delte from realtime authentiocation 
+            response= jsonify({"results":"ok","users":uid})  
+            return response
+        except Exception as e:
+            response = make_response()
+            response= jsonify({"error": "error"})  
+            return response 
+    
+
+@app.route("/sendemailevents",methods=['POST'])
+def sendemailevents():
+
+
+
+    emails=request.form.getlist('email-user')
+    subject= request.form.get('email-subject')
+    msg=request.form.get('content')
+
+    try:
+       
+        if len(emails) == 1:
+                emails = emails[0].split(",")
+        
+        for email in emails:
+            
+             Thread(target=sendevents, args=(email,subject,msg)).start()
+            #  sendevents(email,subject,messages)
+        response = make_response()
+        response= jsonify({"success":"ok","msg":msg})  
+        return response
+    except Exception as e:
+        response = make_response()
+        response= jsonify({"error": e})  
+        return response 
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True,port=int(os.environ.get('PORT',8080)))

@@ -1,3 +1,4 @@
+
 let currentTab = 0;
 let userCvData = {};
 // create cv
@@ -49,6 +50,11 @@ let repeatSkillsForm;
 let repeatCoursesForm;
 let repeatRefForm;
 let repeatLangForm;
+let x = 50
+let y = 50
+let imagePos = {
+  "x":x,"y":y
+}
 let fontFamily = [
   '"Poppins", sans-serif',
   '"Roboto", sans-seri',
@@ -68,7 +74,7 @@ let originalHasanCV = {
       "phone_cv": "+966546035917",
       "email_cv": "dr_hasan781@yahoo.com",
       "address_cv": "Al Mubarraz, Al Ahsa,Saudi Arabia",
-      "portfolio_cv": "https://drnull.web.app"
+      "portfolio_cv": "https://hasanmeady.web.app"
     },
     {
       "phone_cv": "+966575653417",
@@ -244,6 +250,44 @@ function downloadCvAsImage(element) {
   showLoaderWithTitle("Creating Image CV ..")
   let cv = document.querySelector(`.cv${cvNumber}`);
   convertToImage(cv, `cv${cvNumber}`)
+}
+
+
+function downloadCvAsPdf(element) {
+  showLoaderWithTitle("Creating Pdf CV ..")
+  let cvNumber = element.getAttribute("data-target")
+  if(cvNumber == "all") return
+  let cv = document.querySelector(`.cv${cvNumber}`);
+  // convertToImage(cv, `cv${cvNumber}`)
+  const { jsPDF } = window.jspdf;
+  var doc =new jsPDF(
+'px','px', [500, 700],true
+); 
+
+
+
+doc.setFont("Caveat","normal");
+doc.setFont("Poppins","normal");
+doc.setFont("Roboto","normal");
+doc.setFont("Gideon Roman","normal");
+doc.setFont("Montserrat","normal");
+doc.setFont("fa-regular-400","normal");
+doc.setFont("fa-solid-400","normal");
+doc.setFont("fa-brands-400","normal");
+
+  doc.html(cv, {
+    callback: function (doc) {
+      
+        doc.save(`cv${cvNumber}.pdf` );
+        removeLoaderWithTitle()
+        fireAlert("success", "Your CV is downloaded as Pdf","success-alert")
+    },
+    x: 20,
+    y: 20,
+    html2canvas: { scale: 0.5 },
+    margin: [20, 20, 20, 20] // [left, bottom, right, top]
+});
+
 }
 
 function printCv(element){
@@ -495,7 +539,6 @@ function previewImage() {
     }
     imageCvDisplay.forEach(imageBox => {
       imageBox.src = srcImage
-    
        imageBox.parentElement.style.display = 'flex'
     })
   }
@@ -544,16 +587,10 @@ function fillAsList(data_target, dataList, item) {
         //  if i want to show item in list escpially in cv number 2 not one
         if (item == "email_cv") {
           if (cv == 2) {
-            divsList.innerHTML += `<li>
-                  <div class="text-size-bold">Email${num}: </div>
-                  <a class="text-size padding-left">${data[item]}</a>
-                </li>`
+            divsList.innerHTML += `<li><div class="text-size-bold">Email${num}: </div><a class="text-size padding-left">${data[item]}</a></li>`
           }
           else if (cv == 3 || cv == 4) {
-            divsList.innerHTML += `<li class="grid-div">
-                <i class="fa-regular fa-envelope contact-icon"></i>
-                <a class="email link-color">${data[item]}</a>
-                    </li>`
+            divsList.innerHTML += `<li class="grid-div"><i class="fa-regular fa-envelope contact-icon"></i><a class="email link-color">${data[item]}</a></li>`
           } else {
             divsList.innerHTML += `<li>${data[item]}</li>`
           }
@@ -565,12 +602,7 @@ function fillAsList(data_target, dataList, item) {
             divsList.innerHTML += `<li><div class="text-size-bold">Phone${num}: </div><div class="text-size padding-left">${data[item]}</div></li>`
           }
           else if (cv == 3 || cv == 4) {
-            divsList.innerHTML += `
-            <li class="grid-div">
-            <i class="fa-solid fa-phone-flip contact-icon"></i>
-            <span class="phone">${data[item]}</span>
-            </li>
-            `
+            divsList.innerHTML += `<li class="grid-div"><i class="fa-solid fa-phone-flip contact-icon"></i><span class="phone">${data[item]}</span></li>`
           } else {
             divsList.innerHTML += `<li>${data[item]}</li>`
           }
@@ -580,13 +612,7 @@ function fillAsList(data_target, dataList, item) {
             divsList.innerHTML += `<li><div class="text-size-bold">Portfolio${num}: </div><a class="text-size padding-left" href="${data[item]}" target="_blank">${data[item]}</a></li>`
           }
           else if (cv == 3 || cv == 4) {
-            divsList.innerHTML += `
-              <li class="grid-div">
-              <i class="fa-solid fa-globe contact-icon"></i>
-              <span><a class="portfolio link-color"
-                      href="${data[item]}">${data[item]}</a></span>
-          </li>
-              `
+            divsList.innerHTML += `<li class="grid-div"><i class="fa-solid fa-globe contact-icon"></i><span><a class="portfolio link-color"href="${data[item]}">${data[item]}</a></span></li>`
           } else {
             divsList.innerHTML += `<li><a class="text-size link-color" href="${data[item]}" target="_blank"  !important">${data[item]}</a></li>`
           }
@@ -597,11 +623,7 @@ function fillAsList(data_target, dataList, item) {
           }
           else if (cv == 3 || cv == 4) {
             console.log(cv);
-            divsList.innerHTML += `
-          <li class="grid-div">
-          <i class="fa-solid fa-location-dot contact-icon"></i>
-          <span class="address">${data[item]}</span>
-        </li>`
+            divsList.innerHTML += `<li class="grid-div"><i class="fa-solid fa-location-dot contact-icon"></i><span class="address">${data[item]}</span></li>`
           } else {
             divsList.innerHTML += `<li>${data[item]}</li>`
           }
@@ -689,7 +711,7 @@ if (localStorage.getItem("userCv") != null) {
       confirmButtonText: `
         <i class="fa-brands fa-creative-commons-share"></i> Create
         `,
-      confirmButtonAriaLabel: "Thumbs up, Create!",
+      confirmButtonAriaLabel: "Thumbs up, Create New!",
       cancelButtonText: `
         <i class="fa-solid fa-pen-to-square"></i> Edit
         `,
@@ -701,6 +723,7 @@ if (localStorage.getItem("userCv") != null) {
         localStorage.removeItem("stylecss-cv1")
         localStorage.removeItem("stylecss-cv2")
         localStorage.removeItem("stylecss-cv3")
+        localStorage.removeItem("imagePos")
         generateCVFromLocalStorage()
       } else if (result.isDismissed) {
         edit = true
@@ -1208,3 +1231,84 @@ function detectBrowser() {
 }
 
 detectBrowser()
+
+
+
+
+// adjust image position
+
+// window.addEventListener('keyup', arrowUp)
+// window.addEventListener('keydown', arrowDown)
+
+// function arrowDown(e) {
+//   const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
+//   key.classList.add('press')
+// }
+// function arrowUp(e) {
+//   const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
+//    key.classList.remove('press')
+// }
+
+function changeImagePosition(arrow)
+{
+
+  let pos = arrow.getAttribute("data-target")
+  switch (pos) {
+    case "up":
+      y +=5
+      break;
+    case "down":
+      y -=5
+      break;
+    case "right":
+      x +=5
+      break;
+    case "left":
+      x-=5
+      break;
+  
+    default:
+      break;
+  }
+  imagePos = imagePos ?? {}
+  imagePos['x'] = x
+  imagePos['y'] = y
+  imagePreview.style.objectPosition = `${x}% ${y}%`
+  localStorage.setItem("imagePos", JSON.stringify(imagePos) )
+  document.querySelectorAll(".image-cv").forEach(element=>
+    {
+      element.style.objectPosition = `${x}% ${y}%`
+    }
+  )
+}
+
+let allImages = document.querySelectorAll(".image-cv");
+imagePos = JSON.parse(localStorage.getItem("imagePos"))
+if(imagePos)
+{
+  x= imagePos['x'] 
+  y = imagePos['y'] 
+
+}
+imagePreview.style.objectPosition = `${x}% ${y}%`
+if(allImages)
+{
+allImages.forEach(element=>
+    {
+    if(imagePos){
+        element.style.objectPosition = `${x}% ${y}%`
+        element.style.ObjectFit = `"cover;"`
+    }else{
+
+    }
+    element.style.objectPosition = `"${x}% ${y}% !impoerant"`
+    element.style.ObjectFit = `cover;`
+    }
+  
+)
+}
+
+$(".dragable").draggable(
+  {axis: "x,y"}
+)
+

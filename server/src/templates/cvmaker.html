@@ -5,6 +5,8 @@
 
 <link href="/css/cvmaker.css" media="screen"  rel="stylesheet" type="text/css" />
 <link href="/css/cvmaker-print.css" rel="stylesheet" media="print"  type="text/css" />
+<link href="/css/lib/jquery-ui.css" rel="stylesheet">  
+<script src="/js/lib/jquery-ui.js"></script>  
 <!-- <link href="/css/lib/glide.core.min.css" rel="stylesheet"> -->
 
 <link rel="stylesheet" href="/css/lib/sliderm.css">
@@ -38,7 +40,7 @@
                         <label for="firstname_cv" class="form-label">First Name</label>
                         <input type="text" class="form-control firstname_cv" autofocus aria-describedby="firstname_cv"
                             required name="firstname_cv" list="datalist_firstname_cv"
-                            onkeyup="generateCV('firstname-container','firstname_cv','firstname_cv')"
+                            oninput="generateCV('firstname-container','firstname_cv','firstname_cv')"
                             placeholder="Ex: Hasan">
                         <datalist id="datalist_firstname_cv">
                             <option value="Hasan">
@@ -50,7 +52,7 @@
                         <label for="middlename_cv" class="form-label">Middle Name (Optional)</label>
                         <input type="text" class="form-control middlename_cv" aria-describedby="middlename_cv"
                             name="middlename_cv" autocomplete="middlename_cv" list="datalist_middlename_cv"
-                            onkeyup="generateCV('middlename-container','middlename_cv','middlename_cv')"
+                            oninput="generateCV('middlename-container','middlename_cv','middlename_cv')"
                             placeholder="Ex: Elhussiny">
                         <datalist id="datalist_middlename_cv">
                             <option value="Elhussiny">
@@ -61,7 +63,7 @@
                     <div class="mb-2  col-sm-12 col-md-4">
                         <label for="lastname_cv" class="form-label">Last Name</label>
                         <input type="text" class="form-control lastname_cv" aria-describedby="lastname_cv"
-                            name="lastname_cv" onkeyup="generateCV('lastname-container','lastname_cv','lastname_cv')"
+                            name="lastname_cv" oninput="generateCV('lastname-container','lastname_cv','lastname_cv')"
                             placeholder="Ex: Meady" list="datalist_lastname_cv">
                         <datalist id="datalist_lastname_cv">
                             <option value="Meady">
@@ -72,7 +74,7 @@
                     <div class="mb-2  col-sm-12 col-md-12">
                         <label for="job_cv" class="form-label">Jop</label>
                         <input type="text" class="form-control job_cv" aria-describedby="job_cv" name="job_cv"
-                            list="datalist_job_cv" onkeyup="generateCV('jop-container','job_cv','job_cv')"
+                            list="datalist_job_cv" oninput="generateCV('jop-container','job_cv','job_cv')"
                             placeholder="Ex: Pharmacist">
                         <datalist id="datalist_job_cv">
                             <option value="Pharamacist">
@@ -108,7 +110,7 @@
                                 <label for="phone_cv" class="form-label">Phone</label>
                                 <input type="text" class="form-control phone_cv" aria-describedby="phone_cv"
                                     name="phone_cv" list="datalist_phone_cv"
-                                    onkeyup="generateCV('phone-container','phone_cv','contact')"
+                                    oninput="generateCV('phone-container','phone_cv','contact')"
                                     placeholder="EX: +966546035917">
                                 <datalist id="datalist_phone_cv">
                                     <option value="+966546035917">
@@ -121,7 +123,7 @@
                                 <label for="email_cv" class="form-label">Email</label>
                                 <input type="email" class="form-control email_cv" aria-describedby="email_cv"
                                     name="email_cv" list="datalist_email_cv"
-                                    onkeyup="generateCV('email-container','email_cv','contact')"
+                                    oninput="generateCV('email-container','email_cv','contact')"
                                     placeholder="EX: dr_hasan781@yahoo.com">
                                 <datalist id="datalist_email_cv">
                                     <option value="dr_hasan781@yahoo.com">
@@ -134,7 +136,7 @@
                                 <label for="address_cv" class="form-label">Address</label>
                                 <input type="text" class="form-control address_cv" aria-describedby="address_cv"
                                     name="address_cv" list="datalist_address_cv"
-                                    onkeyup="generateCV('address-container','address_cv','contact')"
+                                    oninput="generateCV('address-container','address_cv','contact')"
                                     placeholder="EX: Al Mubarraz, Al Ahsa,Saudi Arabia">
                                 <datalist id="datalist_address_cv">
                                     <option value="Al Mubarraz, Al Ahsa,Saudi Arabia">
@@ -146,7 +148,7 @@
                                 <label for="portfolio_cv" class="form-label">Portfolio Website</label>
                                 <input type="url" class="form-control portfolio_cv" aria-describedby="portfolio_cv"
                                     name="portfolio_cv" list="datalist_portfolio_cv"
-                                    onkeyup="generateCV('portfolio-container','portfolio_cv','contact')"
+                                    oninput="generateCV('portfolio-container','portfolio_cv','contact')"
                                     placeholder="EX: https://hasanmeady.web.app">
                                 <datalist id="datalist_portfolio_cv">
                                     <option value="https://hasanmeady.web.app">
@@ -158,7 +160,7 @@
                             <!-- <div class="mb-2  col-sm-12 col-md-6">
                             <label for="summary_cv" class="form-label">Extra Info</label>
                             <input type="text" class="form-control summary_cv" aria-describedby="summary_cv"
-                                name="summary_cv" autocomplete="summary_cv" onkeyup="generateCV()">
+                                name="summary_cv" autocomplete="summary_cv" oninput="generateCV()">
                             <div class="invalid-feedback invalid_summary_cv">
                             </div>
                         </div> -->
@@ -183,7 +185,7 @@
                                 <label for="edu_descrption" class="form-label">Description</label>
                                 <input type="text" class="form-control edu_descrption" aria-describedby="edu_descrption"
                                     name="edu_descrption" list="datalistedu_descrption"
-                                    onkeyup="generateCV('education-container','edu_descrption','education')"
+                                    oninput="generateCV('education-container','edu_descrption','education')"
                                     placeholder="EX: Bachelor’s degree in pharmacy (Very Good), Tanta University">
                                 <datalist id="datalistedu_descrption">
                                     <option value="Bachelor’s degree in pharmacy (Very Good), Tanta University">
@@ -194,14 +196,14 @@
                             <!-- <div class="mb-2  col-sm-12 col-md-6">
                             <label for="edu_startdate" class="form-label">Start Date</label>
                             <input type="date" class="form-control edu_startdate" aria-describedby="edu_startdate"
-                                name="edu_startdate" autocomplete="edu_startdate" onkeyup="generateCV()">
+                                name="edu_startdate" autocomplete="edu_startdate" oninput="generateCV()">
                             <div class="invalid-feedback invalid_edu_startdate">
                             </div>
                         </div>
                         <div class="mb-2  col-sm-12 col-md-6">
                             <label for="edu_enddate" class="form-label">End Date</label>
                             <input type="date" class="form-control edu_enddate" aria-describedby="edu_enddate"
-                                name="edu_enddate" autocomplete="edu_enddate" onkeyup="generateCV()">
+                                name="edu_enddate" autocomplete="edu_enddate" oninput="generateCV()">
                             <div class="invalid-feedback invalid_edu_enddate">
                             </div>
                         </div> -->
@@ -228,7 +230,7 @@
                                 <input type="text" class="form-control exp_description"
                                     aria-describedby="exp_description" name="exp_description"
                                     list="datalisteduexp_description"
-                                    onkeyup="generateCV('work-container','exp_description','workExperience')"
+                                    oninput="generateCV('work-container','exp_description','workExperience')"
                                     placeholder="EX:Pharmacist at Aldwaa, Alahsaa">
                                 <datalist id="datalisteduexp_description">
                                     <option value="Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)">
@@ -243,21 +245,21 @@
                             <!-- <div class="mb-2  col-sm-12 col-md-6">
                             <label for="exp_organization" class="form-label">Company / Organization</label>
                             <input type="text" class="form-control exp_organization" aria-describedby="exp_organization"
-                                name="exp_organization" autocomplete="exp_organization" onkeyup="generateCV()">
+                                name="exp_organization" autocomplete="exp_organization" oninput="generateCV()">
                             <div class="invalid-feedback invalid_exp_organization">
                             </div>
                         </div>
                         <div class="mb-2  col-sm-12 col-md-6">
                             <label for="exp_startdate" class="form-label">Start Date</label>
                             <input type="date" class="form-control exp_startdate" aria-describedby="exp_startdate"
-                                name="exp_startdate" autocomplete="exp_startdate" onkeyup="generateCV()">
+                                name="exp_startdate" autocomplete="exp_startdate" oninput="generateCV()">
                             <div class="invalid-feedback invalid_exp_startdate">
                             </div>
                         </div>
                         <div class="mb-2  col-sm-12 col-md-6">
                             <label for="exp_enddate" class="form-label">End Date</label>
                             <input type="date" class="form-control exp_enddate" aria-describedby="exp_enddate"
-                                name="exp_enddate" autocomplete="exp_enddate" onkeyup="generateCV()">
+                                name="exp_enddate" autocomplete="exp_enddate" oninput="generateCV()">
                             <div class="invalid-feedback invalid_exp_enddate">
                             </div>
                         </div> -->
@@ -283,7 +285,7 @@
                                 <label for="skill_cv" class="form-label">Skill</label>
                                 <input type="text" class="form-control skill_cv" aria-describedby="skill_cv"
                                     name="skill_cv" list="datalist_skill_cv"
-                                    onkeyup="generateCV('skills-container','skill_cv','siklls')"
+                                    oninput="generateCV('skills-container','skill_cv','siklls')"
                                     placeholder="EX:Communication Skills">
                                 <datalist id="datalist_skill_cv">
                                     <option
@@ -318,7 +320,7 @@
                                 <label for="courses_desc" class="form-label">Description</label>
                                 <input type="text" class="form-control courses_desc" aria-describedby="courses_desc"
                                     name="courses_desc" list="datalistcourses_desc"
-                                    onkeyup="generateCV('courses-container','courses_desc','courses')"
+                                    oninput="generateCV('courses-container','courses_desc','courses')"
                                     placeholder="EX: Web and Programming Fundamentals">
                                 <datalist id="datalistcourses_desc">
                                     <option
@@ -390,7 +392,7 @@
                                 <label for="ref_desc" class="form-label">Description</label>
                                 <input class="form-control ref_desc" list="datalistOptions" id="ref_desc"
                                     placeholder="Ex: Available upon request"
-                                    onkeyup="generateCV('ref-container','ref_desc','References')">
+                                    oninput="generateCV('ref-container','ref_desc','References')">
                                 <datalist id="datalistOptions">
                                     <option value="Available upon request">
                                 </datalist>
@@ -479,7 +481,6 @@
                             <option value='"Roboto", sans-seri'>Roboto</option>
                             <option value='"Gideon Roman", serif'>Gideon Roman</option>
                             <option value='"Open Sans", sans-serif'>Open Sans</option>
-                            <option value='"Lato", sans-serif'>Lato</option>
                             <option value='"Montserrat", sans-serif'>Montserrat</option>
                         </select>
                     </div>
@@ -506,47 +507,58 @@
                             value="#e9e9e9" oninput="changeFc2(this)">
                     </div>
                 </div>
+                <div class="col-sm-12 arrow-key-container">
+                    <div>
+                        <label for="" class="form-label">Change Image Position</label>
+                    </div>
+                    <div>
+                        <div class="arrow-key up" data-key="38" data-target="up" onclick="changeImagePosition(this)"></div><br>
+                        <div class="arrow-key left" data-key="37" data-target="left" onclick="changeImagePosition(this)"></div>
+                        <div class="arrow-key down" data-key="40" data-target="down" onclick="changeImagePosition(this)"></div>
+                        <div class="arrow-key right" data-key="39" data-target="right" onclick="changeImagePosition(this)"></div>
+                    </div>
+                </div>
                 <button class="default-btn">Default</button>
             </div>
         </div>
         <!-- Slider main container -->
         <div class="cv-wraper">
-            <div class="cv-box cv1 cv flex" id="cv1">
+            <div class="cv-box cv1 cv flex" id="cv1" data-target="1">
                 <div class="inner-cv grid">
                     <div class="left">
                         <div class="top-box column">
                             <div class="image-cv-box">
-                                <img src="/images/hasan.png" class="image-cv item" alt="image">
+                                <img src="/images/hasan.png" class="image-cv item dragable" alt="image">
                             </div>
-                            <div class="name-parent parent-list">
+                            <div class="name-parent parent-list dragable">
                                 <p class="fullname_cv item">Hasan Meady</p>
                             </div>
-                            <div class="jop-parent parent-list">
+                            <div class="jop-parent parent-list dragable">
                                 <p class="jop-cv item">Pharmacist</p>
                             </div>
                         </div>
                         <div class="bottom-box">
-                            <div class="phone-parent parent-list">
+                            <div class="phone-parent parent-list dragable">
                                 <h4 class="heading-title">Phone</h4>
                                 <ul class="phone-container list-container item">
                                     <li class="phone">+966546035917</li>
                                     <li class="phone">+966575653417</li>
                                 </ul>
                             </div>
-                            <div class="email-parent parent-list">
+                            <div class="email-parent parent-list dragable">
                                 <h4 class="heading-title">Email</h4>
                                 <ul class="email-container list-container item">
                                     <li class="email">dr_hasan781@yahoo.com</li>
                                     <li class="email">hasanmmeady781@gmail.com</li>
                                 </ul>
                             </div>
-                            <div class="address-parent parent-list">
+                            <div class="address-parent parent-list dragable">
                                 <h4 class="heading-title">Address</h4>
                                 <ul class=" address-container list-container item">
                                     <li class="address">Al Mubarraz, Al Ahsa, Saudi Arabia</li>
                                 </ul>
                             </div>
-                            <div class="portfolio-parent parent-list">
+                            <div class="portfolio-parent parent-list dragable">
                                 <h4 class="heading-3 heading-title">Portfolio</h4>
                                 <ul class="portfolio-container list-container item">
                                     <li><a class="portfolio" href="https://hasanmeady.web.app"
@@ -556,13 +568,13 @@
                         </div>
                     </div>
                     <div class="right-secion">
-                        <div class="education-parent parent-list">
+                        <div class="education-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Education</h4>
                             <ul class="ul education-container list-container item">
                                 <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
                             </ul>
                         </div>
-                        <div class="work-parent parent-list">
+                        <div class="work-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Work Experience</h4>
                             <ul class="ul work-container list-container item">
                                 <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
@@ -570,7 +582,7 @@
                                 <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
                             </ul>
                         </div>
-                        <div class="skills-parent parent-list">
+                        <div class="skills-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Skills</h4>
                             <ul class="ul list-container item skills-container">
                                 <li>Communication Skills: Proficient in liaising and communication with
@@ -582,7 +594,7 @@
                                     fixing or development.</li>
                             </ul>
                         </div>
-                        <div class="courses-parent parent-list">
+                        <div class="courses-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Courses And Trainning</h4>
                             <ul class="ul list-container item courses-container">
                                 <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
@@ -595,14 +607,14 @@
                                 <li>Git-Version Control</li>
                             </ul>
                         </div>
-                        <div class="lang-parent parent-list">
+                        <div class="lang-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Language Skills</h4>
                             <ul class="ul list-container item lang-container">
                                 <li><span class="lang-item">Arabic:</span><span class="lang-skills">Native</span> </li>
                                 <li><span class="lang-item">English:</span><span class="lang-skills">Fluent</span> </li>
                             </ul>
                         </div>
-                        <div class="ref-parent parent-list">
+                        <div class="ref-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Refrecness</h4>
                             <ul class="ul list-container item ref-container">
                                 <li>Available upon request</li>
@@ -611,13 +623,13 @@
                     </div>
                 </div>
             </div>
-            <div class="cv-box cv2 cv flex" id="cv2">
+            <div class="cv-box cv2 cv flex" id="cv2" data-target="2" >
                 <div class="inner-cv grid">
                     <div class="left">
                         <div class="bottom-box">
                             <h4 class="heading-3 heading-title">Contact</h4>
                             <div class="contact-section">
-                                <ul class="phone-container list-container item">
+                                <ul class="phone-container list-container dragable item">
                                     <li>
                                         <div class="text-size-bold">Mobile: </div>
                                         <span class="phone text-size">+966546035917</span>
@@ -627,28 +639,24 @@
                                         <span class="phone text-size">+966575653417</span>
                                     </li>
                                 </ul>
-                                <ul class="email-container list-container item">
+                                <ul class="email-container list-container dragable item">
                                     <li>
-                                        <div class="text-size-bold">Email: </div><a
-                                            class="email text-size">dr_hasan781@yahoo.com<< /a>
+                                        <div class="text-size-bold">Email: </div><a class="email text-size">dr_hasan781@yahoo.com</a>
                                     </li>
                                     <li>
-                                        <div class="text-size-bold">Email: </div><a
-                                            class="email text-size">hasanmmeady781@gmail.com</a>
+                                        <div class="text-size-bold">Email: </div><a class="email text-size">hasanmmeady781@gmail.com</a>
                                     </li>
                                 </ul>
-                                <ul class="address-container list-container item">
+                                <ul class="address-container list-container dragable item">
                                     <li>
                                         <div class="text-size-bold text-size">Adress: </div>
-                                        <span class="text-size-bold address text-size">Al Mubarraz, Al Ahsa,Saudi
-                                            Arabia </span>
+                                        <span class="text-size-bold address text-size">Al Mubarraz, Al Ahsa,Saudi Arabia </span>
                                     </li>
                                 </ul>
-                                <ul class="portfolio-container list-container item">
+                                <ul class="portfolio-container list-container dragable item">
                                     <li>
                                         <div class="text-size-bold text-size">Portfolio: </div>
-                                        <a class="text-size-bold portfolio text-size" href="https://hasanmeady.web.app"
-                                            target="_blank">https://hasanmeady.web.app </a>
+                                        <a class="text-size-bold portfolio text-size" href="https://hasanmeady.web.app" target="_blank">https://hasanmeady.web.app</a>
                                     </li>
                                 </ul>
                             </div>
@@ -657,33 +665,33 @@
                     <div class="right-secion">
                         <div class="top-box column">
                             <div class="image-cv-box">
-                                <img src="/images/hasan.png" class="image-cv item" alt="image">
+                                <img src="/images/hasan.png" class="image-cv item dragable" alt="image">
                             </div>
-                            <div class="name-parent parent-list">
+                            <div class="name-parent parent-list dragable">
                                 <p class="fullname_cv item">Hasan Meady</p>
                             </div>
-                            <div class="jop-parent parent-list">
+                            <div class="jop-parent parent-list dragable">
                                 <p class="jop-cv item">Pharmacist</p>
                             </div>
 
                         </div>
-                        <div class="education-parent parent-list">
+                        <div class="education-parent parent-list dragable">
                             <h4 class="heading-3 heading-title">Education</h4>
-                            <ul class="ul education-container list-container item">
+                            <ul class="ul education-container list-container  item">
                                 <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
                             </ul>
                         </div>
-                        <div class="work-parent parent-list">
+                        <div class="work-parent parent-list dragable">
                             <h4 class="heading-title">Work Experience</h4>
-                            <ul class="ul work-container list-container item">
+                            <ul class="ul work-container list-container  item">
                                 <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
                                 <li>Pharmacist, Ibn Alnafess Pharmacy (part-time), Tanta, Egypt, (2010 - 2011)</li>
                                 <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
                             </ul>
                         </div>
-                        <div class="skills-parent parent-list">
+                        <div class="skills-parent parent-list dragable">
                             <h4 class="heading-title">Skills</h4>
-                            <ul class="ul skills-container list-container item">
+                            <ul class="ul skills-container list-container  item">
                                 <li>Communication Skills: Proficient in liaising and communication with
                                     stakeholders,including experience with internal and external parties. Fluent in
                                     Arabic and English.</li>
@@ -693,9 +701,9 @@
                                     fixing or development.</li>
                             </ul>
                         </div>
-                        <div class="courses-parent parent-list">
+                        <div class="courses-parent parent-list dragable">
                             <h4 class="heading-title">Courses And Trainning</h4>
-                            <ul class="ul courses-container list-container item">
+                            <ul class="ul courses-container list-container  item">
                                 <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
                                 </li>
                                 <li>Advanced Database Management using MySQL</li>
@@ -706,17 +714,17 @@
                                 <li>Git-Version Control</li>
                             </ul>
                         </div>
-                        <div class="lang-parent parent-list">
+                        <div class="lang-parent parent-list dragable">
                             <h4 class="heading-title">Language Skills</h4>
-                            <ul class="ul lang-container list-container item">
+                            <ul class="ul lang-container list-container  item">
                                 <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span> </li>
                                 <li><span class="lang-item">English:</span><span class="lang-skills"> Fluent</span>
                                 </li>
                             </ul>
                         </div>
-                        <div class="ref-parent parent-list">
+                        <div class="ref-parent parent-list dragable">
                             <h4 class="heading-title">Refrecness</h4>
-                            <ul class="ul  ref-container list-container item">
+                            <ul class="ul  ref-container list-container  item">
                                 <li class="li">Available upon request</li>
                             </ul>
                         </div>
@@ -724,27 +732,27 @@
 
                 </div>
             </div>
-            <div class="cv-box cv3 cv" id="cv3">
+            <div class="cv-box cv3 cv" id="cv3" data-target="3">
                 <div class="inner-cv">
                     <div class="top-box  info-div">
                         <div class="left">
-                            <div class="name-parent parent-list">
+                            <div class="name-parent parent-list dragable">
                                 <p class="fullname_cv item">Hasan <span class="last-name">Meady</span></p>
                             </div>
-                            <div class="jop-parent parent-list">
+                            <div class="jop-parent parent-list dragable">
                                 <p class="jop-cv item">Pharmacist</p>
                             </div>
                         </div>
                         <div class="right">
                             <div class="image-cv-box">
-                                <img src="/images/hasan.png" class="image-cv item" alt="image">
+                                <img src="/images/hasan.png" class="image-cv item dragable" alt="image">
                             </div>
                         </div>
 
                     </div>
                     <div class="center-box center-box-1">
                         <div class="left">
-                            <div class="phone-parent parent-list">
+                            <div class="phone-parent parent-list dragable">
                                 <div class="phone-container list-container item">
                                     <ul class="grid-div">
                                         <i class="fa-solid fa-phone-flip contact-icon"></i>
@@ -756,7 +764,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="email-parent parent-list">
+                            <div class="email-parent parent-list dragable">
                                 <div class="email-container list-container item">
                                     <ul class="grid-div">
                                         <i class="fa-regular fa-envelope contact-icon"></i>
@@ -768,7 +776,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="address-parent parent-list">
+                            <div class="address-parent parent-list dragable">
                                 <div class=" address-container list-container item">
                                     <ul class="grid-div">
                                         <i class="fa-solid fa-location-dot contact-icon"></i>
@@ -776,7 +784,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="portfolio-parent parent-list">
+                            <div class="portfolio-parent parent-list dragable">
                                 <div class="portfolio-container list-container item">
                                     <ul class="grid-div">
                                         <i class="fa-solid fa-globe contact-icon"></i>
@@ -787,7 +795,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div class="education-parent parent-list">
+                            <div class="education-parent parent-list dragable">
                                 <h4 class="heading-title">Education</h4>
                                 <ul class="ul education-container list-container item">
                                     <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
@@ -797,7 +805,7 @@
                     </div>
                     <div class="center-box center-box-2">
                         <div class="left">
-                            <div class="work-parent parent-list">
+                            <div class="work-parent parent-list dragable">
                                 <h4 class="heading-title">Work Experience</h4>
                                 <ul class="ul work-container list-container item">
                                     <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
@@ -807,7 +815,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div class="skills-parent parent-list">
+                            <div class="skills-parent parent-list dragable">
                                 <h4 class="heading-title">Skills</h4>
                                 <ul class="ul skills-container list-container item">
                                     <li>Communication Skills: Proficient in liaising and communication with
@@ -825,7 +833,7 @@
                     </div>
                     <div class="center-box center-box-3">
                         <div class="left">
-                            <div class="courses-parent parent-list">
+                            <div class="courses-parent parent-list dragable">
                                 <h4 class="heading-title">Courses And Trainning</h4>
                                 <ul class="ul courses-container list-container item">
                                     <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
@@ -840,7 +848,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div class="lang-parent parent-list">
+                            <div class="lang-parent parent-list dragable">
                                 <h4 class="heading-title">Language Skills</h4>
                                 <ul class="ul lang-container list-container item">
                                     <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span>
@@ -853,7 +861,7 @@
                     </div>
                     <div class="end-box">
                         <div class="end">
-                            <div class="ref-parent parent-list">
+                            <div class="ref-parent parent-list dragable">
                                 <h4 class="heading-title">Refrecness</h4>
                                 <ul class="ul  ref-container list-container item">
                                     <li class="li">Available upon request</li>
@@ -863,18 +871,18 @@
                     </div>
                 </div>
             </div>
-            <div class="cv-box cv4 cv" id="cv4">
+            <div class="cv-box cv4 cv" id="cv4" data-target="4">
                 <div class="inner-cv">
                     <div class="top-box  info-div">
                         <div class="center">
-                            <div class="name-parent parent-list">
+                            <div class="name-parent parent-list dragable">
                                 <p class="fullname_cv item">Hasan <span class="last-name">Meady</span></p>
                             </div>
-                            <div class="jop-parent parent-list">
+                            <div class="jop-parent parent-list dragable">
                                 <p class="jop-cv item">Pharmacist</p>
                             </div>
                             <div class="contact-div">
-                                <div class="phone-parent parent-list contact-list">
+                                <div class="phone-parent parent-list dragable contact-list">
                                     <div class="phone-container list-container item">
                                         <ul class="grid-div">
                                             <i class="fa-solid fa-phone-flip contact-icon"></i>
@@ -886,7 +894,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="email-parent parent-list contact-list">
+                                <div class="email-parent parent-list dragable contact-list">
                                     <div class="email-container list-container item">
                                         <ul class="grid-div">
                                             <i class="fa-regular fa-envelope contact-icon"></i>
@@ -898,7 +906,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="address-parent parent-list contact-list">
+                                <div class="address-parent parent-list dragable contact-list">
                                     <div class=" address-container list-container item">
                                         <ul class="grid-div">
                                             <i class="fa-solid fa-location-dot contact-icon"></i>
@@ -906,7 +914,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="portfolio-parent parent-list contact-list">
+                                <div class="portfolio-parent parent-list dragable contact-list">
                                     <div class="portfolio-container list-container item">
                                         <ul class="grid-div">
                                             <i class="fa-solid fa-globe contact-icon"></i>
@@ -919,13 +927,13 @@
                         </div>
                     </div>
                     <div class="details-box">
-                        <div class="education-parent parent-list">
+                        <div class="education-parent parent-list dragable">
                             <h4 class="heading-title">Education</h4>
                             <ul class="ul education-container list-container item">
                                 <li>Bachelor’s degree in pharmacy (Very Good), Tanta University, Egypt (2010)</li>
                             </ul>
                         </div>
-                        <div class="work-parent parent-list">
+                        <div class="work-parent parent-list dragable">
                             <h4 class="heading-title">Work Experience</h4>
                             <ul class="ul work-container list-container item">
                                 <li>Pharmacist at Aldwaa, Alahsaa, KSA (2011 - Present)</li>
@@ -933,7 +941,7 @@
                                 <li>Pharmacist, Ministry of Health hospitals (Public Duty), Tanta, Egypt (2011)</li>
                             </ul>
                         </div>
-                        <div class="skills-parent parent-list">
+                        <div class="skills-parent parent-list dragable">
                             <h4 class="heading-title">Skills</h4>
                             <ul class="ul skills-container list-container item">
                                 <li>Communication Skills: Proficient in liaising and communication with
@@ -945,7 +953,7 @@
                                     fixing or development.</li>
                             </ul>
                         </div>
-                        <div class="courses-parent parent-list">
+                        <div class="courses-parent parent-list dragable">
                             <h4 class="heading-title">Courses And Trainning</h4>
                             <ul class="ul courses-container list-container item">
                                 <li>Web and Programming Fundamentals (PHP, JAVASCRIPT, TYPESCRIPT, PYTHON,HTML, CSS)
@@ -958,7 +966,7 @@
                                 <li>Git-Version Control</li>
                             </ul>
                         </div>
-                        <div class="lang-parent parent-list">
+                        <div class="lang-parent parent-list dragable">
                             <h4 class="heading-title">Language Skills</h4>
                             <ul class="ul lang-container list-container item">
                                 <li><span class="lang-item">Arabic:</span><span class="lang-skills"> Native</span> </li>
@@ -966,7 +974,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="ref-parent parent-list">
+                        <div class="ref-parent parent-list dragable">
                             <h4 class="heading-title">Refrecness</h4>
                             <ul class="ul  ref-container list-container item">
                                 <li class="li">Available upon request</li>
@@ -1009,7 +1017,8 @@
 <script src="/js/lib/printjs.js"></script>
 <script src="/js/lib/sliderm.js"></script>
 <script src="/js/lib/html-rtf.js"></script>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="/js/lib/jspdf.js"></script>
+<script src="/js/lib/default_vfs.js"></script>
 <script src="/js/cvmaker.js"></script>
 <script src="/js/script.js"></script>
 {% endblock %}
