@@ -7,6 +7,7 @@
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css" />
     <link href="/css/lib/fontawesome.css" rel="stylesheet">
     <link href="/css/lib/glutin-fonts.css" rel="stylesheet">
     <link
@@ -15,7 +16,7 @@
     <!-- alert -->
     <link href="/css/lib/sweetalert2.css" rel="stylesheet">
     <!-- bootstrap -->
-    <link href="/css/lib/bootstrap.css" media="screen"  rel="stylesheet">
+    <link href="/css/lib/bootstrap.css" media="screen" rel="stylesheet">
     <title>{{ pagetitle }}</title>
     <meta name="description"
         content="this site made by dr hasan (dr.null) to help his friends to find solution to bypass restriction from other bad people who block sharing files">
@@ -57,17 +58,9 @@
     </style>
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814855103569462"
      crossorigin="anonymous"></script> -->
-     <script src="/js/lib/jquery.min.1.7.js"></script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/66a4e759becc2fed692be5f0/1i3q2fdji';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    <!--End of Tawk.to Script-->
+
+    {% if url_for(request.endpoint)  == '/book': %}
+    <script src="/js/lib/jquery.min.1.7.js"></script>
+    {% else %}
+    <script src="/js/lib/jquery-3.7.1.min.js"></script>
+    {% endif %}

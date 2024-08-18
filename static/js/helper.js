@@ -1,3 +1,4 @@
+
 let spinners = document.querySelector(".main.spinners");
 let overlay = document.querySelector(".main.overlay");
 
@@ -172,4 +173,12 @@ function demoFromHTML() {
       //          this allow the insertion of new lines after html
       pdf.save('Test.pdf');
   }, margins);
+}
+
+
+function createLogs(message)
+{
+  uploadString(logsRef, message).then((snapshot) => {
+    console.log('Uploaded a raw string!');
+  });
 }

@@ -126,7 +126,7 @@ $loadinglabel.Size = New-Object System.Drawing.Size(200, 20)
 $Form.Controls.Add($loadinglabel)
 try {
 
-$login = Invoke-WebRequest -Uri "http://172.23.27.43:555/Home/SelectStore" -SessionVariable websesssion
+$login = Invoke-WebRequest -Uri "http://172.23.27.43:555/Home/SelectStore" -SessionVariable websesssion -UseBasicParsing
 }
 
 catch {
@@ -141,7 +141,7 @@ Where-Object { $_.name -eq "__RequestVerificationToken" }).value
 Write-Host $forgeryToken
 $body = @{
 "__RequestVerificationToken" = $forgeryToken
-"SELECTED_STORE" = "P$pharmacyNo"
+"SelectedStore" = "P$pharmacyNo"
 }
 
 $header = @{
@@ -152,15 +152,29 @@ $header = @{
 
 
 try {
-Invoke-WebRequest -Method Post -Headers $header -Uri "http://172.23.27.43:555/Home/SelectStore" -Body $body -WebSession $websesssion
-$login2 = Invoke-WebRequest -Uri "http://172.23.27.43:555/Account/Login" -SessionVariable websesssion
+Invoke-RestMethod -Method Post -Headers $header -Uri "http://172.23.27.43:555/Home/SelectStore" -Body $body -WebSession $websesssion
+
+}
+
+catch {
+
+
+[System.Windows.Forms.MessageBox]::Show("Invalid Store", 'Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
+
+$Form.Close()
+$Form.Dispose()
+[Environment]::Exit(1)
+}
+try {
+
+$login2 = Invoke-WebRequest -Uri "http://172.23.27.43:555/Account/Login" -WebSession $websesssion -UseBasicParsing
 $forgeryToken2 = ($login2.InputFields |
 Where-Object { $_.name -eq "__RequestVerificationToken" }).value
 
 $body2 = @{
 "UserID" = $userName
 "Password" = $password
-"RememberMe" = "false"
+"RememberMe" = "true"
 "__RequestVerificationToken" = $forgeryToken2
 }
 
@@ -172,7 +186,7 @@ $header2 = @{
 catch {
 
 
-[System.Windows.Forms.MessageBox]::Show("Invalid Store", 'Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
+[System.Windows.Forms.MessageBox]::Show("Can not login", 'Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
 
 $Form.Close()
 $Form.Dispose()
@@ -180,7 +194,7 @@ $Form.Dispose()
 }
 
 
-$Results2 = Invoke-WebRequest -Method Post -Headers $header2 -Uri "http://172.23.27.43:555/Account/Login" -Body $body2 -WebSession $websesssion
+$Results2 = Invoke-WebRequest -Method Post -Uri "http://172.23.27.43:555/Account/Login" -Headers $header2 -Body $body2 -WebSession $websesssion -UseBasicParsing
 
 $forgeryToken3 = ($Results2.InputFields |
 Where-Object { $_.name -eq "__RequestVerificationToken" }).value
@@ -200,9 +214,12 @@ $header3 = @{
 }
 
 
-$data = Invoke-WebRequest -Method Post -Headers $header3 -Uri "http://172.23.27.43:555/GoodsReceived/GetGrTransactions" -Body $body3 -WebSession $websesssion | Select-Object -Expand Content
+$data = Invoke-RestMethod -Method Post -Headers $header3 -Uri "http://172.23.27.43:555/GoodsReceived/GetGrTransactions" -Body $body3 -WebSession $websesssion | Select -ExpandProperty "Data"
 try {
-$jsonObj = $data | ConvertFrom-Json
+$json = [ordered]@{}
+$json = ConvertTo-Json($data)
+$data2 = ConvertFrom-Json $json
+
 }
 catch {
 [System.Windows.Forms.MessageBox]::Show("Invalid entry data", 'Warning', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
@@ -211,43 +228,34 @@ $Form.Dispose()
 [Environment]::Exit(1)
 }
 
-$json = $jsonObj.Data
 
 
-if ($json) {
-
-$report = foreach ($obj in $json.PSObject.Properties) {
-$j2 = $obj.Value.PSObject.Properties
-foreach ($obj2 in $j2) {
-$batch = $obj2.Value.Batch
-$ItemNumber = $obj2.Value.ItemNumber
-$Description = $obj2.Value.Description
+$report = foreach ($obj2 in $data2.PsObject.Properties.Value)
+{
+$batch = $obj2.Batch
+$ItemNumber = $obj2.ItemNumber
+$Description = $obj2.Description
 foreach ($bt in $batch) {
 
 $bt2 = $bt
 if (-not ([string]::IsNullOrEmpty($bt)) ) {
-if ($bt.StartsWith("B") -and $bt.EndsWith("24") ) {
+if ( ( $bt.StartsWith("B") -and ( $bt.EndsWith("24") -or $bt.EndsWith("25") ) -or ( $bt.EndsWith("24") -or $bt.EndsWith("25") ) ) ) {
 $bt2 = $bt.Replace('B', '')
 $bt2 = ($bt2 -split '(..)').Where({ $_ }) -join '-'
 $bt2 = $bt2.Substring($bt2.Length - 5)
 [PSCustomObject]@{
-"ItemNumber" = $ItemNumber[$batch.IndexOf($bt)]
-"Description" = $Description[$batch.IndexOf($bt)]
+"ItemNumber" = $ItemNumber
+"Description" = $Description
 "Expire" = $bt2
 }
 }
 }
 
 }
+
 }
-}
-}
-
-
-
-
-
 $report | Select-Object ItemNumber , Description , Expire | Sort-Object Expire | ConvertTo-CSV -NoTypeInformation | Out-File -encoding UTF8 -filepath $path
+
 
 $loadinglabel.Text = "Fenished"
 [string]$Header = 'Fenished'
@@ -297,4 +305,3 @@ $Form.ShowDialog()
 
 $myshell = New-Object -com "Wscript.Shell"
 $myshell.sendkeys("{ENTER}")
-

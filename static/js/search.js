@@ -212,7 +212,7 @@ function repareDate(web_name,web_results,filter=false,sort='asc')
             <div class="card" >
               <!-- <span class="hint-name ${web_name}">${web_name}</span> -->
               <div class="image-wraper">
-              <img src="${image}" class="card-img-top" alt="...">
+              <img referrerPolicy="no-referrer" src="${image}" class="card-img-top" alt="...">
               </div>
                 <div class="card-body">
               

@@ -7,24 +7,25 @@
     margin: 24px 0;
     text-align: center;
 }
-.dash-menu{
-    margin-bottom: 24px;
-        display: flex;
-        justify-content: space-around;
-    box-shadow: var(--box-shadow);
+.action-wraper {
+    display: flex;
+    padding: 0px 24px;
+}
 
-    text-align: center;
-}
-.dash-menu  a ,.dash-menu .icon {
-    font-size: 36px;
+.action-wraper  > div {
+    font-size: 24px;
     cursor: pointer;
-    color: var(--gray-color);
+
+    margin-right: 24px;
 }
-.dash-menu .icon:hover {
+.action-wraper  > div a{
+    color: var(--gray-color) !important;
+}
+.action-wraper>div:hover {
     animation: gelatine 0.5s 1;
     border-color: var(--accent-color);
 }
-.main-dashboard , .dash-menu
+.main-dashboard 
 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -174,8 +175,101 @@ span.span-data {
     display: flex !important;
     margin-bottom: 8px;
     justify-content: space-between !important;
+    height: 95px !important;
+}
+.edit-users-list{
+    background-color: var(--background-color);
+}
+.edit-users-list:hover{
+    background-color: var(--accent-color);
+}
+
+.edit-users-email {
+    color: var(--primary-color);
+    font-weight: 500;
 }
 .edit-users-delete{
     cursor: pointer;
     color: var(--error-color );
+}
+
+.user-edit-wraper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-edit-wraper select {
+    margin-right: 10px;
+    font-size: 14px !important;
+  
+}
+.user-edit-wraper .role-user.active-role,.user-edit-wraper .status-user.active-status{
+    color: #0a7310 !important;
+}
+.user-edit-wraper .role-user.inactive-role,.user-edit-wraper .status-user.inactive-status{
+    color: #ff9800 !important;
+}
+/* loader */
+.dashboard-wraper{
+    display: none;
+}
+.loader.show{
+    display: flex;
+
+}
+/* loader */
+
+@media only screen and (max-width: 600px)  {
+    .edit-users-list{
+        display: block !important;
+    }
+    .edit-users-email{
+        text-align: start;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+    .user-edit-wraper select {
+        font-size: 10px !important;
+    }
+    .edit-users-delete i {
+        font-size: 12px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    .edit-users-list{
+        display: block !important;
+    }
+    .edit-users-email{
+        text-align: start;
+        margin-bottom: 8px;
+    }
+}
+
+/* logs */
+.logs-wraper {
+   
+    box-shadow: var(--box-shadow);
+    padding: 16px;
+}
+
+tr.row-danger {
+    background: #dc3545 !important;
+    /* margin-bottom: 4px !important; */
+    /* border-color: red !important; */
+    border: 2px solid #9E9E9E !important;
+    color: #fff;
+}
+tr.row-info {
+    background: #6c757d !important;
+    /* margin-bottom: 4px !important; */
+    /* border-color: red !important; */
+    border: 2px solid #9E9E9E !important;
+    color: #fff;
+}
+tr.row-low {
+    background: #ffc107  !important;
+    /* margin-bottom: 4px !important; */
+    /* border-color: red !important; */
+    border: 2px solid #9E9E9E !important;
+    color: #0d0d0d;
 }

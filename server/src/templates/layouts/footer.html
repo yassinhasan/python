@@ -1,11 +1,13 @@
 
     <!-- firebase -->
-    <!-- <script src="/js/lib/jquery.js"></script> -->
     <script src="/js/lib/sweetalert2.js"></script>
     <script src="/js/lib/pooper.js"></script>
     <script src="/js/lib/bootstrap.min.js"></script>
     <script src="/js/config.js"></script>
- 
+    {%  if isLogged == False: %}
+    <script src="/js/user.js" type="module"></script>
+    {% endif %} 
+  
 
 
     {% if messages %}

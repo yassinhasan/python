@@ -17,7 +17,7 @@ from sendmail import sendemail , sendevents
 
 cred = credentials.Certificate(config)
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://drnull-f3805.asia-southeast1.firebasedatabase.app'
+    'databaseURL': config['databaseURL']
 })
 
 

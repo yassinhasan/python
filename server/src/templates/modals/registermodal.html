@@ -11,21 +11,22 @@
           <form action="/register" method="POST" class="registerform">
             <div class="mb-3">
               <label for="username-r" class="form-label">User Name</label>
-              <input type="text" class="form-control" id="username-r" aria-describedby="username-r" required
-                name="username-r" autocomplete="username-r">
+              <input type="text" class="form-control" id="username-r"  required
+                name="username-r" autocomplete="off">
               <div class="invalid-feedback invalid-username">
               </div>
             </div>
             <div class="mb-3">
               <label for="email-r" class="form-label">Email Addres</label>
-              <input type="email" class="form-control" id="email-r" aria-describedby="email-r" required
-                autocomplete="email-r" name="email-r">
+              <input type="email" class="form-control" id="email-r" required
+                autocomplete="username" name="email-r">
               <div class="invalid-feedback invalid-email">
               </div>
             </div>
             <div class="mb-3">
               <label for="password-r" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password-r" required autocomplete="password-r" name="password-r">
+              <input type="password" class="form-control" id="password-r" required autocomplete  name="password-r">
+              <i class="fa-regular fa-eye" id="togglePassword1"></i>
               <div class="invalid-feedback invalid-password"></div>
             </div>
             <button type="submit" class="btn btn-primary  register-btn-modal">Register</button>

@@ -1,6 +1,30 @@
 import * as firbase from "./firbase.js";
+const togglePassword = document
+  .querySelector('#togglePassword');
+const togglePassword1 = document
+  .querySelector('#togglePassword1');
+  const password = document.querySelector('#password');
+  const passwordR = document.querySelector('#password-r');
+function showHidePass(element,pass)
+{
+element.addEventListener('click', () => {
+  // Toggle the type attribute using
+  // getAttribure() method
+  const type = pass
+      .getAttribute('type') === 'password' ?
+      'text' : 'password';
+      pass.setAttribute('type', type);
+  // Toggle the eye and bi-eye icon
+ 
+  
+  element.classList.toggle('bi-eye');
+});
+}
+showHidePass(togglePassword,password)
+showHidePass(togglePassword1,passwordR)
 // sign in
 let sign_in_btn = document.querySelector(".login-btn-modal");
+
 sign_in_btn.addEventListener("click", (e) => {
   e.preventDefault();
   login()
@@ -21,67 +45,85 @@ function login() {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      if(user.emailVerified)
-      {
-        user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-          // check if user is admin
-          // goto dashboard
-          // Send token to your backend via HTTPS
-          localStorage.setItem("token",idToken)
-          localStorage.setItem("uid",user.uid)
-          console.log( user.uid);
-          firbase.get(firbase.ref(firbase.db, 'users/' + user.uid) 
-          ).then(snapshot=>{
-            let loggedUser= snapshot.val()
-            if(loggedUser.role === "admin")
+      // read from database check if user approved or pending  if pending fire message not allowed if approved go login page
+      // make button to copy data
+      const data = firbase.ref(firbase.db, 'users/' + user.uid );
+      firbase.onValue(data, (snapshot) => {
+        const loggedUser = snapshot.val();
+        if(user.emailVerified)         
+            {
+              if(loggedUser.status == 'pending')
               {
-                window.location.href= "/dashboard?token="+idToken
+                hideSpinner()
+                fireAlert("error" , "Sorry you are panned contact dr hasan to get approved for this ")
+               
               }else{
-                window.location.href= "/upload?token="+idToken
+                user.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+                  // check if user is admin
+                  // goto dashboard
+                  // Send token to your backend via HTTPS
+                  localStorage.setItem("token",idToken)
+                  localStorage.setItem("uid",user.uid)
+                  localStorage.setItem("userEmail",user.email)
+                  var message = `${user.email} has been logged`;
+                  firbase.createLogs("info",message)
+                    if(loggedUser.role === "admin")
+                      {
+                        window.location.href= "/dashboard?token="+idToken
+                      }else{
+                        window.location.href= "/upload?token="+idToken
+                      }
+                    });
               }
-          })
-        }).catch(function(error) {
-          // Handle error
-          console.log(error);
-        });
-      }else{
-        hideSpinner()
 
-        Swal.fire({
-          customClass: 'verify-alert',
-          title: "<strong>Attention!!</strong>",
-          html: `
-          Your email address is not verified, click verify now
-          `,
-          showCloseButton: false,
-          allowOutsideClick: false,
-          showCancelButton: true,
-          focusConfirm: false,
-          confirmButtonText: `Send Verification Email`,
-          confirmButtonAriaLabel: "Send Verification Email",
-        }).then(result => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            firbase.sendEmailVerification(user)
-            .then(()=>{
-              fireAlert("success", "Verification email sent successfully" )
-              document.querySelector(".close-login-modal").click()
-            }).catch(error=>{
-              fireAlert("error", error )
-            })
- 
-          }
-        else if (result.isDismissed) {
-         
-    // close modal
-        }
-        });
-      }
+        }else{
+              hideSpinner()
+
+              Swal.fire({
+                customClass: 'verify-alert',
+                title: "<strong>Attention!!</strong>",
+                html: `
+                Your email address is not verified or you are panned, click verify now
+                `,
+                showCloseButton: false,
+                allowOutsideClick: false,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText: `Send Verification Email`,
+                confirmButtonAriaLabel: "Send Verification Email",
+              }).then(result => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  firbase.sendEmailVerification(user)
+                  .then(()=>{
+                    Swal.fire({
+                      title: "Success!",
+                      text: "Verification email sent successfully!",
+                      icon: "success"
+                    });
+                  }).catch(error=>{
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: error,
+                    
+                    });
+                  })
+      
+                }
+              else if (result.isDismissed) {
+              
+          // close modal
+              }
+              });
+            }
+      })
+
+
     })
     .catch((error) => {
       hideSpinner()
       const errorCode = error.code;
-      console.log(errorCode);
       const errorMessage = error.message;
       showLoginerror(errorCode, errorMessage)
     });
@@ -116,6 +158,8 @@ function register() {
           .then(() => {
             // Email verification sent!
             saveUserinDatabase(user)
+            var message = `${emailValue} regsiter new account`;
+            firbase.createLogs("info",message)
           }).catch(error=>fireAlert("error",error));
          
         })
@@ -134,12 +178,20 @@ function saveUserinDatabase(user) {
       email: user.email,
       password: password_r.value ,
       "role" : "user" ,
-      "status": "pending"
-  
+      "status": "approved"
+
     })
       .then(() => {        
         hideSpinner()
-        fireAlert("info",'An email verification link has been sent to ' + user.email )
+        Swal.fire({
+          title: "<strong>Success</strong>",
+          icon: "success",
+          html: 
+          `<p>An email verification link has been sent to  <a href="mailto:${user.email}">${user.email}</a></p>`,
+          showCloseButton: true,
+          showCancelButton: false,
+          focusConfirm: false,
+        });
         document.querySelector(".close-register-modal").click()
       })
       .catch((error) => {
@@ -163,7 +215,6 @@ function saveUserinDatabase(user) {
         }); // end of alert
       });
   }
-
 
 
 

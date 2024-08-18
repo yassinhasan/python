@@ -1,12 +1,12 @@
 import * as firbase from "./firbase.js";
 
 // todo 
-  // add spinner when load user
-  // add method to change pending or verify user
-  // add user dicrctly
+  // add method to change pending or verify user when select or change user from user to admin popup confim will show change user from state to another then confirm 
+  // make method form backup database
   // add images in send emails
-  // add tab for change user password 
-
+  // add tab for change user password or email
+let loader = document.querySelector(".loader")
+let dashboardWraper = document.querySelector(".dashboard-wraper")
 let usersNumSpan = document.querySelector(".users .info .num")
 let emailItems = document.querySelector(".email-items")
 let inactiveUsersNum = document.querySelector(".inactive-users .num")
@@ -64,6 +64,7 @@ getUsersData()
 
 function getUsersData() {
 
+  loader.classList.add("show")
   const options = {
     headers: {
       "X-CSRFToken": csrfToken,
@@ -81,13 +82,13 @@ function getUsersData() {
       let activeUsersCount = 0
       let inactiveUsersCount = 0
       if (data.results) {
-      
+        
         let loggingData = {}
         emailItems.innerHTML = ""
         selectEmail.innerHTML = ""
         let emails = data.users.map(user => user.email)
 
-        selectEmail.innerHTML += ` <option value="${emails}">All Users</option>`
+        selectEmail.innerHTML += ` <option value="${emails}" selected>All Users</option>`
         data.users.forEach((user, index) => {
           loggingData[index] = [
             user.email,
@@ -134,6 +135,8 @@ function getUsersData() {
 
         google.charts.setOnLoadCallback(drawChart(usersData));
         // google.charts.setOnLoadCallback(drawChartTimeLine(loggingData));
+        dashboardWraper.style.display = "block"
+        loader.classList.remove("show")
       }
 
     })
@@ -226,20 +229,34 @@ function editUsersFetch() {
           for (const key in users) {
              
               let user = users[key]
-           
-              if(user['role'] != 'admin')
-              {
+              let editUser =  user['role'] != 'admin' ? `<div class="edit-users-action">
+              <a class="edit-users-delete" data-target="${key}" data-username="${user['username']}">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </div>`: ""
+
+            let role = user['role'] != 'admin' ? 'user' : 'admin'
+            let roleClass = user['role'] == 'admin'  ? 'active-role' : 'inactive-role'
+            let statusClass = user['status'] == 'approved'  ? 'active-status' : 'inactive-status'
+            let status = user['status'] == 'approved' ? 'approved' : 'pending'
+
                 editUsersContainer.innerHTML +=`
                 <li class="list-group-item edit-users-list">
                     <div class="edit-users-email">${user['email']}</div>
-                    <div class="edit-users-action">
-                      <a class="edit-users-delete" data-target="${key}">
-                        <i class="fa-solid fa-trash"></i>
-                      </a>
+                    <div class="user-edit-wraper">
+                    <select class="form-select role-user ${roleClass}"  name="role-user" id="role-user"  data-target="${key}" data-username="${user['username']}">
+                      <option style="color:red"  value='user' ${role == 'user' ? 'selected' : ''} >User</option>
+                      <option style="color:green"  value='admin'  ${role == 'admin' ? 'selected' : ''}>Admin</option>
+                    </select>
+                    <select class="form-select status-user ${statusClass}"  name="status-user" id="status-user" data-target="${key}" data-username="${user['username']}" >
+                      <option style="color:green" value='approved' ${status == 'approved' ? 'selected' : ''}>Approved</option>
+                      <option style="color:red"  value='pending'  ${status == 'pending' ? 'selected' : '' }>Pending</option>
+                    </select>
+                    ${editUser}
                     </div>
                 </li>
                 `
-              }
+             
             }
           
       }
@@ -250,8 +267,100 @@ function editUsersFetch() {
         el.addEventListener("click",()=>
         {
           let uid = el.getAttribute("data-target");
-          showSpinner()
-          deleteUsersFetch(uid,el)
+         
+          Swal.fire({
+            title: "Do you want to delete this user?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              showSpinner()
+              deleteUsersFetch(uid,el)
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
+
+          
+         
+        })
+      }
+      )
+      // edit user role
+      let editUsersRole  = document.querySelectorAll(".role-user");
+      editUsersRole.forEach(el=>
+      {
+        el.addEventListener("change",()=>
+        {
+          let uid = el.getAttribute("data-target");
+          let userName= el.getAttribute("data-username");
+          let role = el.value
+          Swal.fire({
+            title: "Do you want to change role of  this user ?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+               showSpinner()
+              //  update
+               firbase.update(firbase.ref(firbase.db, 'users/' + uid), {
+                "role": role
+              }).then(data=>{
+                hideSpinner()  
+                fireAlert("success","user role successfully")
+              })
+              // write log
+              var message = ` ${localStorage.getItem("userEmail")} change role of ${userName} to ${role}`;
+              firbase.createLogs("critical",message)
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
+
+          
+         
+        })
+      }
+      )
+      // edit user status
+      let editUsersStatus  = document.querySelectorAll(".status-user");
+      editUsersStatus.forEach(el=>
+      {
+        el.addEventListener("change",()=>
+        {
+          let uid = el.getAttribute("data-target");
+          let userName= el.getAttribute("data-username");
+          let status = el.value
+          Swal.fire({
+            title: "Do you want to change status of  this user?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+               showSpinner()
+               firbase.update(firbase.ref(firbase.db, 'users/' + uid), {
+                "status": status
+              }).then(data=>{
+                hideSpinner()  
+                fireAlert("success","user status successfully")
+              })
+              var message = ` ${localStorage.getItem("userEmail")} change status of ${userName} to ${status}`;
+              firbase.createLogs("critical",message)
+              
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
+
           
          
         })
@@ -268,6 +377,7 @@ function editUsersFetch() {
 
 
 function deleteUsersFetch(uid,element) {
+  let userName= element.getAttribute("data-username");
   let formdata = new FormData()
   formdata.append("uid",uid)
   const options = {
@@ -286,10 +396,11 @@ function deleteUsersFetch(uid,element) {
 
       if (data.results) {
         hideSpinner()  
-        element.parentElement.parentElement.remove()
+        element.parentElement.parentElement.parentElement.remove()
         fireAlert("success","user deleted successfully")
         getUsersData()
-
+        var message = ` ${localStorage.getItem("userEmail")} delete  user: ${userName} `;
+        firbase.createLogs("critical",message)
       }
       if(data.error)
       {
@@ -306,3 +417,60 @@ function deleteUsersFetch(uid,element) {
     })
 
 }
+
+
+
+
+var columns = [{data:'Info'},{data:'Message'},{data:'Time'}];
+var data =[];
+
+
+function getLogs()
+{
+  const dbRef = firbase.ref(firbase.db)
+  let tableBody = document.querySelector(".table-body")
+  tableBody.innerHTML = ""
+  firbase.get(firbase.child(dbRef,`logs`)).then((snapshot) => {
+    if (snapshot.exists()) {
+     let logs = snapshot.val()
+     for (const key in logs) {
+ 
+      const log = logs[key];
+        let logData = {
+          "Info" : log.type,
+          "Message" :log.message,
+          "Time" : log.time,
+        }
+
+        data.push(logData)
+     }
+     let classInfo;
+     let table = new DataTable('#myTableLogs',{
+      "data": data,
+      "columns": columns ,
+      createdRow: function (row, data, dataIndex) {
+        switch (data['Info']) {
+          case "critical": classInfo = "row-danger"
+            break;
+          case "info": classInfo = "row-info"
+            break;
+          case "low": classInfo = "row-low"
+            break;
+        
+          default:
+            classInfo = ""
+            break;
+        }
+        $(row).addClass(classInfo);
+       
+        
+    },
+    });
+
+    } else {
+      console.log("no logs");
+    }
+})
+}
+
+getLogs()

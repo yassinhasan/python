@@ -140,6 +140,8 @@ function completeDownload(link)
         icon: "success",
         title: "File Uploaded in successfully"
       }); // end of alert
+      var message = ` ${localStorage.getItem("userEmail")} add new file  ${shortFileName}  Size: ${fileSize}`;
+      firbase.createLogs("low",message)
 
 }
 

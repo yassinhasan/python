@@ -35,7 +35,7 @@ html,body {
   --overlay-background:rgba(0, 0, 0, 0.9);
   --dot-bg: black;
   --dot-color: white;
-  --dot-size: 0.5px;
+  --dot-size: 1px;
   --dot-space: 22px;
 }
 
@@ -69,7 +69,7 @@ body.light{
   --overlay-background:rgba(255, 255, 255, 0.9);
   --dot-bg: white;
   --dot-color: black;
-  --dot-size: 0.9px;
+  --dot-size: 1.4px;
 }
 
 /* common */
@@ -174,7 +174,6 @@ body.light{
     --heading-two: 18px;
     --heading-three: 16px;
     --heading-four: 16px;
-    --heading-five: 10px;
     --caption-one: 24px;
     --caption-two: 16x;
     --caption-three: 12px;
@@ -514,6 +513,7 @@ body.light{
 }
 .loader.show{
   display: block;
+
 }
 .loader.show::before {
   content: "";
@@ -555,4 +555,20 @@ body.light{
 .loader-title{
   color: var(--primary-color);
   font-size: var(--fw-14);
+}
+
+
+/* login icon */
+#togglePassword,#togglePassword1{
+  position: absolute;
+  right: 34px;
+  top: 61%;
+  cursor: pointer;
+  color: var(--accent-color);
+}
+#togglePassword1{
+  top: 71%;
+}
+.bi-eye::before{
+  content: "\f070"
 }
