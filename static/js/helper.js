@@ -182,3 +182,13 @@ function createLogs(message)
     console.log('Uploaded a raw string!');
   });
 }
+
+  function getUserInfo()
+{
+   fetch("http://ipinfo.io").then( result=>{
+     ip =   result.ip ;
+      localStorage.setItem("ip",ip)
+  })
+     
+} 
+

@@ -154,7 +154,8 @@ function repareDate(web_name,web_results,filter=false,sort='asc')
       if(web_name == "dawaa")
       {
         code = Array.isArray(sortedWebResults[index]['sku']) ? "" : sortedWebResults[index]['sku']
-        exclusive = sortedWebResults[index]['labels'] ? sortedWebResults[index]['labels'][0]["prod_txt"]  : ""
+
+        exclusive = (sortedWebResults[index]['labels'] && sortedWebResults[index]['labels'].length > 0)  ? sortedWebResults[index]['labels'][0]["prod_txt"]  : ""
       }
     
 
@@ -212,7 +213,7 @@ function repareDate(web_name,web_results,filter=false,sort='asc')
             <div class="card" >
               <!-- <span class="hint-name ${web_name}">${web_name}</span> -->
               <div class="image-wraper">
-              <img referrerPolicy="no-referrer" src="${image}" class="card-img-top" alt="...">
+              <img src="${image}" referrerPolicy="no-referrer"   class="card-img-top" alt="...">
               </div>
                 <div class="card-body">
               
@@ -391,9 +392,11 @@ let muthdaUrl = "https://y1goq9dtv8-dsn.algolia.net/1/indexes/*/queries?x-algoli
     headers: {
   "X-Algolia-Api-Key" : "NGFkYzM5MDgzYjA0YmI2YzdlYjk4YjIwNDFjZjQzZTg2ZDQ4M2Q0ZGM5ZTVjYTgxYTNjZWRlMjllZDg0YTg3Y3RhZ0ZpbHRlcnM9",
   "X-Algolia-Application-Id": "Y1GOQ9DTV8",
-  "Content-Type": "application/json;charset=UTF-8"
+  "Content-Type": "application/json;charset=UTF-8" ,
     },
+   
     method: 'POST',
+   
     body: JSON.stringify(muthdRequest) // Convert JSON data to a string and set it as the request body
   };
         // fetch dawaa
@@ -408,6 +411,7 @@ let muthdaUrl = "https://y1goq9dtv8-dsn.algolia.net/1/indexes/*/queries?x-algoli
               dawaResults = dawaResults.results ? dawaResults.results[0]['hits'] : []
               nahdiResults = nahdiResults.results ? nahdiResults.results[0]['hits'] : []
               unitedResults = unitedResults.results ? unitedResults.results[0]['hits'] : []
+            
               // console.log(dawaResults);
               // console.log(nahdiResults);
               // console.log(unitedResults);
@@ -675,9 +679,12 @@ inputUrl.addEventListener("input",e=>
     .then((response) => response.json())
     .then((data) =>{
       if(data.success){
-        let results  = JSON.parse(data.result)
-        let items = results.map(result=> result['desc'])
-        autocomplete(inputUrl,keyword, items);
+        if(data.result)
+        {
+          let results  = JSON.parse(data.result)
+          let items = results.map(result=> result['desc'])
+          autocomplete(inputUrl,keyword, items);
+        }
       }else{
         console.log("may be session expired");
       }

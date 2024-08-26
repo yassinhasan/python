@@ -32,6 +32,10 @@ function listFiles() {
     firbase.onAuthStateChanged(firbase.auth, (user) => {
         if (user) {
             const uid = user.uid;
+            if(localStorage.getItem("emailUser") == null)
+                {
+                  localStorage.setItem("emailUser",user.email)
+                }
             // Create a reference under which you want to list
             const listRef = firbase.storageRef(firbase.storage, `users/${uid}/`);
             // Find all the prefixes and items.
@@ -45,11 +49,12 @@ function listFiles() {
                 });
         } else {
             console.log("user not signed in")
+            fireAlert("error","you shoud login first")
+            logoutUser()
         }
     });
 
 }
-
 
 
 
@@ -109,7 +114,7 @@ function prepraListFilesHtml(uid, res) {
                          <div class="card-body">
                            <a href="${sorted[x].url}" class="card-link download" target="_blank"><i class="fa-solid fa-download"></i></a>
                            <a href="#" class="card-link delete" data-filename="${sorted[x].name}"><i class="fa-solid fa-trash"></i></a>
-                           <a href="whatsapp://send?text=Hello this is download link of file ${encodeURIComponent(sorted[x].url)}"   target="_blank"  class="card-link share""><i class="fa-brands fa-whatsapp"></i></a>
+                           <a href="whatsapp://send?text=Helly this is download link ${encodeURIComponent(sorted[x].url)}"   target="_blank"  class="card-link share""><i class="fa-brands fa-whatsapp"></i></a>
                          </div>
                        </div>
                        </div>
@@ -144,7 +149,8 @@ function prepraListFilesHtml(uid, res) {
                                                         showFilesSpinner()
                                                         cardWraper.innerHTML = "";
                                                         listFiles()
-    
+                                                        var message = ` ${localStorage.getItem("userEmail")} delete  file  ${fileToDeleted} `;
+                                                        firbase.createLogs("low",message)
                                                     }).catch((error) => {
                                                         console.log(error);
                                                     });
@@ -237,4 +243,41 @@ function getFilePrivew(fileExtension) {
     }
 
     return imgElement;
+}
+
+function logoutUser() {
+    firbase.signOut(firbase.auth)
+    .then(() => {
+        let formdata = new FormData()
+        const options = {
+          headers: {
+        "X-CSRFToken" : csrfToken,
+        "ContentType": 'application/json;charset=UTF-8',
+          },
+          credentials: 'include' ,
+          method: 'POST',
+          body: formdata // Convert JSON data to a string and set it as the request body
+        };
+        fetch('/logout', options) // api for the get request
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            if (data.success == true) {
+              localStorage.removeItem("token")
+              localStorage.removeItem("uid")
+              window.location.href = "/";
+            }
+            else {
+              hideSpinner()
+
+            }
+          })
+          .catch(error => {
+            hideSpinner()
+
+          })
+
+  }).catch((error) => {
+    console.log(error);
+  });
 }

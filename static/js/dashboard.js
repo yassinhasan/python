@@ -65,6 +65,7 @@ getUsersData()
 function getUsersData() {
 
   loader.classList.add("show")
+  fireAlert("info","loading users data ...")
   const options = {
     headers: {
       "X-CSRFToken": csrfToken,
@@ -137,6 +138,7 @@ function getUsersData() {
         // google.charts.setOnLoadCallback(drawChartTimeLine(loggingData));
         dashboardWraper.style.display = "block"
         loader.classList.remove("show")
+        getLogs()
       }
 
     })
@@ -427,11 +429,13 @@ var data =[];
 
 function getLogs()
 {
+  fireAlert("info","loading logs for today today")
   const dbRef = firbase.ref(firbase.db)
   let tableBody = document.querySelector(".table-body")
   tableBody.innerHTML = ""
-  firbase.get(firbase.child(dbRef,`logs`)).then((snapshot) => {
+  firbase.get(firbase.child(dbRef,`logs/${firbase.today}`)).then((snapshot) => {
     if (snapshot.exists()) {
+     
      let logs = snapshot.val()
      for (const key in logs) {
  
@@ -462,15 +466,13 @@ function getLogs()
             break;
         }
         $(row).addClass(classInfo);
-       
-        
     },
     });
-
+    fireAlert("info","loading logs fenished")
     } else {
+      fireAlert("info","no logs today")
       console.log("no logs");
     }
 })
 }
 
-getLogs()

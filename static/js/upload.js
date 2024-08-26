@@ -2,6 +2,7 @@
 import * as firbase from "./firbase.js";
 
 
+
 const dropArea = document.querySelector(".upload-form"),
     dropText = dropArea.querySelector(".drop-text") ,
     fileInput = document.querySelector(".file-input"),
@@ -46,6 +47,10 @@ function uploadFile() {
   firbase.onAuthStateChanged(firbase.auth, (user) => {
         if (user) {
             const uid = user.uid;
+            if(localStorage.getItem("userEmail") == null)
+            {
+              localStorage.setItem("userEmail",user.email)
+            }
             const usersRef = firbase.storageRef(firbase.storage, `users/${uid}/${fullFileName}`);
             const uploadTask = firbase.uploadBytesResumable(usersRef, file);
             uploadTask.on('state_changed',

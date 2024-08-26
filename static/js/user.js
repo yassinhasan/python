@@ -101,11 +101,12 @@ function login() {
                       text: "Verification email sent successfully!",
                       icon: "success"
                     });
+                   
                   }).catch(error=>{
                     Swal.fire({
                       icon: "error",
                       title: "Oops...",
-                      text: error,
+                      text: "can not send email verification",
                     
                     });
                   })
@@ -117,6 +118,7 @@ function login() {
               }
               });
             }
+       
       })
 
 
@@ -150,7 +152,7 @@ function register() {
         return;
       }
       let emailValue = email_r.value.trim();
-      let passwordValue = password_r.value.trim();
+      let passwordValue = passwordR.value.trim();
       firbase.createUserWithEmailAndPassword(firbase.auth, emailValue,passwordValue)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -160,7 +162,7 @@ function register() {
             saveUserinDatabase(user)
             var message = `${emailValue} regsiter new account`;
             firbase.createLogs("info",message)
-          }).catch(error=>fireAlert("error",error));
+          }).catch(error=>fireAlert("error","error in creating account try again later"));
          
         })
         .catch((error) => {
@@ -193,27 +195,9 @@ function saveUserinDatabase(user) {
           focusConfirm: false,
         });
         document.querySelector(".close-register-modal").click()
+        firbase.goOffline()
       })
-      .catch((error) => {
-        hideSpinner()
-        const Toast = Swal.mixin({
-          customClass: 'swal-login',
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
-          color: "#b52626",
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          }
-        });
-        Toast.fire({
-          icon: "error",
-          title: error
-        }); // end of alert
-      });
+
   }
 
 
