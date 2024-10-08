@@ -75,7 +75,7 @@ function uploadFile() {
                     // Handle successful uploads on complete
                     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                     firbase.getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        completeDownload(downloadURL)
+                        completeDownload(downloadURL,user.email)
                        
                     })
                 }
@@ -108,7 +108,7 @@ function progressDownload(progress) {
 
 
 }
-function completeDownload(link)
+function completeDownload(link,email)
 {
  
     progressArea.innerHTML = "";
@@ -145,7 +145,7 @@ function completeDownload(link)
         icon: "success",
         title: "File Uploaded in successfully"
       }); // end of alert
-      var message = ` ${localStorage.getItem("userEmail")} add new file  ${shortFileName}  Size: ${fileSize}`;
+      var message = ` ${localStorage.getItem("userEmail") == null ? email:localStorage.getItem("userEmail")  } add new file  ${shortFileName}  Size: ${fileSize}`;
       firbase.createLogs("low",message)
 
 }

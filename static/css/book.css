@@ -19,7 +19,7 @@ div#canvas {
 }
 
 .books .card {
-	max-width: 280px;
+	max-width: 250px;
 	box-shadow: var(--box-shadow);
 	background-color: var(--background-color);
 	border-radius: 8px;
@@ -80,6 +80,7 @@ div#canvas {
     font-size: 32px;
     color: #f27474;
 	cursor: pointer;
+	display: none;
 }
 .close-icon:hover , .zoom-icon-in:hover{
 	transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
