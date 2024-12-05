@@ -78,24 +78,36 @@ function getUsersData() {
   fetch('/usersdata', options) // api for the get request
     .then(response => response.json())
     .then(data => {
-      const currentDate = new Date()
-      const currentDateIndays = currentDate.getTime()
+     
+      const currentDateIndays = new Date().getTime()
       let activeUsersCount = 0
       let inactiveUsersCount = 0
       if (data.results) {
         
-        let loggingData = {}
+        let  lastLogin ;
+        let lastLoginInDays = 0;
         emailItems.innerHTML = ""
         selectEmail.innerHTML = ""
         let emails = data.users.map(user => user.email)
 
         selectEmail.innerHTML += ` <option value="${emails}" selected>All Users</option>`
         data.users.forEach((user, index) => {
-          loggingData[index] = [
-            user.email,
-            new Date(user.lastLogin),
-            new Date(),
-          ]
+          let uid = localStorage.getItem("uid");
+
+          if(uid == user.userId)
+          {
+
+             lastLogin = new Date();
+            lastLoginInDays = new Date().getTime()
+          }else{
+            lastLogin = new Date(user.lastLogin)
+            lastLoginInDays = lastLogin.getTime()
+          }
+          // loggingData[index] = [
+          //   user.email,
+          //   new Date(user.lastLogin),
+          //   new Date(),
+          // ]
           // fill select email in form
           selectEmail.innerHTML += `
                    <option value="${user.email}">${user.email}</option>
@@ -103,10 +115,11 @@ function getUsersData() {
           // console.log(userDetails);
           const creationTime = new Date(user.creationTime);
           const creationTimeFormatted = creationTime.getDate() + '/' + (creationTime.getMonth() + 1) + '/' + creationTime.getFullYear();
-          const lastLogin = new Date(user.lastLogin);
-
           const lastLoginFormatted = lastLogin.getDate() + '/' + (lastLogin.getMonth() + 1) + '/' + lastLogin.getFullYear();
-          let diffInLogin = Math.floor((currentDateIndays - lastLogin) / (24 * 3600 * 1000))
+          let diffInLogin =Math.abs(Math.ceil((currentDateIndays - lastLoginInDays) / (24 * 3600 * 1000)))
+  
+        
+          
           let active = ''
           let email_verified = ''
           if (diffInLogin <= 7) {
@@ -158,7 +171,10 @@ function CKupdate(){
   }
 }
 
-CKEDITOR.replace( 'content' );
+CKEDITOR.replace( 'content',{
+  "extraPlugins" : "filebrowser"
+});
+
 sendemailBtn.addEventListener("click", e => {
   e.preventDefault()
   showSpinner()
@@ -471,6 +487,7 @@ function getLogs()
     fireAlert("info","loading logs fenished")
     } else {
       fireAlert("info","no logs today")
+      document.querySelector(".logs-wraper").innerHTML = "No Logs Today";
       console.log("no logs");
     }
 })

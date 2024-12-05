@@ -212,6 +212,7 @@ span.span-data {
 /* loader */
 .dashboard-wraper{
     display: none;
+    padding-bottom: 80px;
 }
 .loader.show{
     display: flex;

@@ -381,7 +381,7 @@ document.querySelector(".expire-btn").addEventListener("click",e=>{
 document.querySelector(".book-copy-btn").addEventListener("click",e=>
    {
    var jsonFile = new XMLHttpRequest();
-   jsonFile.open("GET","/files/expire24.txt",true);
+   jsonFile.open("GET","/files/expire25.txt",true);
    jsonFile.send();
 
    jsonFile.onreadystatechange = function() {
