@@ -5,6 +5,7 @@ pycryptodome
 Cmake  
 flask_session
 flask-cors
+yt_dlp
 FLASK-WTF
 firebase_admin
 pyrebase4
