@@ -354,7 +354,9 @@ $('#canvas').hide();
 
 document.querySelector(".yassin-book-showBtn").addEventListener("click",e=>
    {
+	   fireAlert("nfo", "wait until pages will be loaded",fire_time=9000)
 	   document.querySelector(".books").style.display = "none"
+	//    document.querySelector(".accordion-waper").style.display = "none"
 	   document.querySelector(".zoom-icon-in").style.display = "block"
 	   document.querySelector(".close-icon").style.display = "block"
 	   yepnope({
@@ -370,6 +372,8 @@ document.querySelector(".close-icon").addEventListener("click",e=>{
    document.querySelector(".books").style.display = "grid"
    document.querySelector(".close-icon").style.display = "none"
    document.querySelector(".zoom-icon-in").style.display = "none"
+//    document.querySelector(".accordion-waper").style.display = "block"
+
    $('.magazine').turn("destroy");
 })
 
@@ -381,7 +385,7 @@ document.querySelector(".expire-btn").addEventListener("click",e=>{
 document.querySelector(".book-copy-btn").addEventListener("click",e=>
    {
    var jsonFile = new XMLHttpRequest();
-   jsonFile.open("GET","/files/expire25.txt",true);
+   jsonFile.open("GET","/files/expire24.txt",true);
    jsonFile.send();
 
    jsonFile.onreadystatechange = function() {

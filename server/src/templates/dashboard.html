@@ -5,10 +5,17 @@
 <link href="/css/dashboard.css" rel="stylesheet" type="text/css" />
 <script src="/js/lib/google-charts.js"></script>
 <script src="/ckeditor/ckeditor.js"></script>
+
 {% endblock %}
 
 {% block content %}
-
+<!-- alert -->
+<!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong> Required Daily Target Calculator Added In THis Path</strong>   Menu => Target or <a href="#" class="heading-nav target" aria-label="target" data-bs-toggle="modal"data-bs-target="#targetModal">Click Here</a>         
+      <br>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> -->
+<!-- end alert -->
     <h1 class="heading-2 heading-dashboard">Dashboard</h1>
     <div class="action-wraper">
         <div class="icon">
@@ -18,10 +25,10 @@
             <a href="#" class="editusers-link" aria-label="users" title="edit users" data-bs-toggle="modal"data-bs-target="#editusersModal">  <i class="fa-regular fa-pen-to-square"></i></a>
           
         </div>
-        <div class="icon">
+        <!-- <div class="icon">
                    
             <a> <i class="fa-solid fa-chart-line"></i></a>
-        </div>
+        </div> -->
     </div>
     <div class="loader"></div>
     <div class="dashboard-wraper">
@@ -83,7 +90,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 
 {% endblock %}
