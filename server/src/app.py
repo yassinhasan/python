@@ -72,12 +72,12 @@ def downloadpage():
     template =   render_template("download.html",pagetitle="(download))✌Dr.Null",isLogged=isLogged) 
     return getResponse(template)
 
-@app.route("/book")
+@app.route("/data")
 def bookpage():
     if isUserLogged() == True:
         global isLogged 
         isLogged = True
-    template =   render_template("book.html",pagetitle="(yassin))Him",isLogged=isLogged) 
+    template =   render_template("data.html",pagetitle="Mixed Data",isLogged=isLogged) 
     return getResponse(template)
 
 @app.route("/cvmaker")
@@ -203,13 +203,14 @@ def downloadvideo():
 def contactme():
 
         try:
-
+            
             msg = {
                 "name" :  request.form.get('contact-name'),
                 "email" :request.form.get('contact-email') ,
                 "phone" :  request.form.get('contact-phone') ,
                 "msg" : request.form.get('contact-msg')
             }
+            
             sendemail(msg)
             response = make_response()
             response= jsonify({"success":"Mail has sent"})  
@@ -372,6 +373,8 @@ def logoutpage():
     response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
     return response
 
+
+
 @app.route("/usersdata",methods=['POST'])
 def usersdata():
     try:
@@ -381,7 +384,7 @@ def usersdata():
             for user in page.users:
                
                 user = auth.get_user(user.uid)
-          
+               
                 userdata  = {
                     "userId" : user.uid ,
                     "email" :user.email ,
@@ -433,9 +436,6 @@ def deleteuser():
 
 @app.route("/sendemailevents",methods=['POST'])
 def sendemailevents():
-
-
-
     emails=request.form.getlist('email-user')
     subject= request.form.get('email-subject')
     msg=request.form.get('content')
@@ -457,10 +457,13 @@ def sendemailevents():
         response= jsonify({"error": e})  
         return response 
 
-
-
+@app.route("/upload",methods=['POST'])
+def upload():
+     subject= request.form.get('upload')
+     print(subject)
 
 if __name__ == "__main__":
+    # app.run(debug=True,port=int(os.environ.get('PORT',8080)) ,host="192.168.1.146")
     app.run(debug=True,port=int(os.environ.get('PORT',8080)))
    
 

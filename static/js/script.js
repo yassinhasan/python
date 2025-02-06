@@ -15,16 +15,20 @@ if(localStorage.getItem("light_theme") === "")
     document.body.classList.add("light")
 }
 
-
+let bgColor = "#fff"
 fa_moon.addEventListener("click",()=>{
    
     if (localStorage.getItem("light_theme") === "light") {
         localStorage.setItem("light_theme","")
+        bgColor = "#000"
     }else{
         localStorage.setItem("light_theme","light")
+        bgColor = "#fff"
     }
     document.body.classList.toggle("light");
     fa_moon.classList.toggle("day")
+   
+
   
 })
 
@@ -40,3 +44,10 @@ menu_btn.addEventListener("click",()=>{
 })
 
 
+
+// permesssion notification prevent ater click on dropdown- item to be dissapear
+document.querySelectorAll('.permssion-dropdown .dropdown-item').forEach(el => {
+    el.addEventListener('click',(e)=>{
+        e.stopPropagation();
+    })
+})
