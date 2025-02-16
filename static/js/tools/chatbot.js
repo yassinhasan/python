@@ -64,15 +64,15 @@ const sendMessage = async () => {
    };
    fetch('/contactme', options) // api for the get request
      .then(response => response.json())
-     .then(data => {
-       if (data.success) {
+     .then(result => {
+       if (result.status == 'success') {
          showChatBoxAfterSendMesg()
-         fireAlert("success","message has been sent succufully")
+         fireAlert("success",result.data.message)
        }
        else {
-         console.log(data);
+         console.log(result);
          showChatBoxAfterSendMesg()
-         fireAlert("error","somthing error try later")
+         fireAlert("error",result.error)
        }
      })
      .catch(error => {

@@ -1,50 +1,59 @@
-
+<script src="/js/main.js"></script>
     <!-- firebase -->
      <!-- toastify -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
-     <!-- end toastify -->
-     <script src="/js/lib/sweetalert2.js"></script>
-     <script src="/js/lib/pooper.js"></script>
-     <script src="/js/lib/bootstrap.min.js"></script>
-     <script src="/js/config.js"></script>
-     <!-- <script src="/js/worker.js"></script> -->
-     <!-- main js -->
-     <script src="/js/main.js"></script>
- 
-     {%  if isLogged == False: %}
-     <script src="/js/user.js" type="module"></script>
-     {% endif %} 
- 
-   
- 
- 
-     {% if messages %}
-     <script>
-             const Toast = Swal.mixin({
-     customClass: 'swal-upload',
-     toast: true,
-     position: "top-end",
-     showConfirmButton: false,
-     timer: 3000,
-     color: "#b58126",
-     timerProgressBar: true,
-     didOpen: (toast) => {
-       toast.onmouseenter = Swal.stopTimer;
-       toast.onmouseleave = Swal.resumeTimer;
-     }
-     });
-     Toast.fire({
-     icon: "{{ messages['type'] }}",
-     title: "{{  messages['msg'] }}"
-     }); // end of alert
-     
-     
-     var mustLogin = "{{  messages['mustLogin'] }}"
-     if(mustLogin === "True")
-     {
-     document.querySelector(".sign-in").click()
-     }
-     
-     </script>
-     {% endif %}
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
+    <!-- end toastify -->
+    <script src="/js/lib/sweetalert2.js"></script>
+    <script src="/js/lib/pooper.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/config.js"></script>
+  
+
+    <script src="/js/firebase.js" type="module"></script>
+    <script src="/js/helper.js"></script>
+    <script src="/js/validation.js"></script>
+    <!-- <script src="/js/worker.js"></script> -->
+    <!-- main js -->
+    <script src="/js/user.js" type="module"></script>
+    <script src="/js/logout.js" type="module"></script>
+
+
+    {% if messages %}
+    <script>
+            const Toast = Swal.mixin({
+    customClass: 'swal-upload',
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    color: "#b58126",
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+    });
+    Toast.fire({
+    icon: "{{ messages['type'] }}",
+    title: "{{  messages['msg'] }}"
+    }); // end of alert
+    
+    
+    var mustLogin = "{{  messages['mustLogin'] }}"
+    if(mustLogin === "True")
+    {
+    document.querySelector(".sign-in").click()
+    }
+    
+    </script>
+    {% endif %}
+
+    <script src="/js/tools/calc.js"></script>
+    <script src="/js/tools/chatbot.js"></script>
+    <script src="/js/tools/target.js"></script>
+    <script src="/js/tools/record.js"></script>
+    <script src="/js/notification.js"></script>
+    <script src="/js/script.js"></script>

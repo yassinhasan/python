@@ -7,6 +7,7 @@
 <link href="/css/cvmaker-print.css" rel="stylesheet" media="print"  type="text/css" />
 <link href="/css/lib/jquery-ui.css" rel="stylesheet">  
 <script src="/js/lib/jquery-ui.js"></script>  
+
 <!-- <link href="/css/lib/glide.core.min.css" rel="stylesheet"> -->
 
 <link rel="stylesheet" href="/css/lib/sliderm.css">
@@ -1003,14 +1004,7 @@
 
 
 {% block scripts %}
-<script src="/js/firbase.js" type="module"></script>
-<script src="/js/helper.js"></script>
-<script src="/js/validation.js"></script>
-{% if isLogged == True: %}
-<script src="/js/logout.js" type="module"></script>
-{% endif %}
 
-<script src="/js/user.js" type="module"></script>
 <script src="/js/lib/repeater.js"></script>
 <script src="/js/lib/html2canvas.js"></script>
 
@@ -1020,5 +1014,4 @@
 <script src="/js/lib/jspdf.js"></script>
 <script src="/js/lib/default_vfs.js"></script>
 <script src="/js/cvmaker.js"></script>
-<script src="/js/script.js"></script>
 {% endblock %}

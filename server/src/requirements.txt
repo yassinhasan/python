@@ -5,7 +5,7 @@ pycryptodome
 Cmake  
 flask_session
 flask-cors
-yt_dlp
+yt_dlp=2025.01.26
 FLASK-WTF
 firebase_admin
 pyrebase4

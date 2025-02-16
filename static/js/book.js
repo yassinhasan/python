@@ -1,3 +1,4 @@
+
 function loadApp() {
 
 	$('#canvas').fadeIn(1000);
@@ -356,7 +357,7 @@ document.querySelector(".yassin-book-showBtn").addEventListener("click",e=>
    {
 	   fireAlert("nfo", "wait until pages will be loaded",fire_time=9000)
 	   document.querySelector(".books").style.display = "none"
-	//    document.querySelector(".accordion-waper").style.display = "none"
+	   document.querySelector(".accordion-waper").style.display = "none"
 	   document.querySelector(".zoom-icon-in").style.display = "block"
 	   document.querySelector(".close-icon").style.display = "block"
 	   yepnope({
@@ -372,7 +373,7 @@ document.querySelector(".close-icon").addEventListener("click",e=>{
    document.querySelector(".books").style.display = "grid"
    document.querySelector(".close-icon").style.display = "none"
    document.querySelector(".zoom-icon-in").style.display = "none"
-//    document.querySelector(".accordion-waper").style.display = "block"
+   document.querySelector(".accordion-waper").style.display = "block"
 
    $('.magazine').turn("destroy");
 })
@@ -407,3 +408,21 @@ document.querySelector(".book-copy-btn").addEventListener("click",e=>
 // 	both: ['/css/lib/docs.css', '/js/lib/docs.js'],
 // 	complete: loadApp
 // });
+
+async function getFileUrl(el,file_name){
+
+   const storageRef = storage.ref("/files/cgp/"+file_name);
+   try {
+	 const downloadURL = await storageRef.getDownloadURL();
+	 console.log("Download URL:", downloadURL);
+
+	 // Display the URL or use it
+	 const a_element = document.createElement("a");
+	 a_element.setAttribute("href", downloadURL);
+	 a_element.setAttribute("target", "_blank");
+	 a_element.click();
+
+   } catch (error) {
+	 console.error("Error fetching download URL:", error);
+	 alert("Failed to get download URL. Check the file path.");
+   }}

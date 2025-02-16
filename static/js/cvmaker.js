@@ -297,6 +297,7 @@ function printCv(element){
   document.querySelector(`.cv${cvNumber}`).classList.add("print")
  setTimeout(() => {
   window.print()
+
  }, 100);
 }
 
@@ -330,6 +331,7 @@ async function convertToImage(element, name) {
       document.querySelector(".cv-wraper").style.scale = scale
       removeLoaderWithTitle()
       fireAlert("success", "Your CV is downloaded as Image","success-alert")
+
     });
   })
   return h
@@ -1311,4 +1313,3 @@ allImages.forEach(element=>
 $(".dragable").draggable(
   {axis: "x,y"}
 )
-

@@ -3,6 +3,7 @@ import {get, goOffline,getDatabase, child,update ,remove ,ref, set, onValue ,pus
 import { sendEmailVerification , getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 import { getStorage, ref as storageRef, uploadString, uploadBytes, uploadBytesResumable, getDownloadURL, listAll, getMetadata , deleteObject} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+import {getMessaging , getToken} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,12 +18,14 @@ const db = getDatabase(firebase);
 const auth = getAuth();
 const storage = getStorage(firebase);
 let date = new Date()
-let today = date.getDate()+"-"+(date.getMonth() + 1)+"-"+date.getFullYear()
+let logToday = date.getDate()+"-"+(date.getMonth() + 1)+"-"+date.getFullYear()
 let todayTime =date.getDate()+"-"+(date.getMonth() + 1)+"-"+date.getFullYear() + " "+date.getHours()+":"+date.getSeconds()
+const messaging = getMessaging(firebase);
 
 function createLogs(type,message)
 {
-  set(ref(db, `logs/${today}/`+self.crypto.randomUUID()), {
+  
+  set(ref(db, `logs/${logToday}/`+self.crypto.randomUUID()), {
     "type": type ,
     "actualTime" : new Date().getTime(),
     "message":message,
@@ -32,4 +35,7 @@ function createLogs(type,message)
   })
 
 }
- export  {today,goOffline,createLogs,uploadString,sendEmailVerification , get,child,remove ,update , query, orderByChild,push,auth,db,storage,ref,storageRef,uploadBytes,uploadBytesResumable,getDownloadURL,listAll,getMetadata,deleteObject,set,onValue,createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword}
+
+
+
+ export  {logToday,goOffline,createLogs,uploadString,sendEmailVerification , get,child,remove ,update , query, orderByChild,push,auth,db,storage,ref,storageRef,uploadBytes,uploadBytesResumable,getDownloadURL,listAll,getMetadata,deleteObject,set,onValue,createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword , messaging , getToken}

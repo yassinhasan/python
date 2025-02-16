@@ -396,16 +396,24 @@ online.addEventListener("input", e => {
     calc()
 })
 
-mwzna1.addEventListener("input", e => {
-    mwzna1Val = parseFloat(eval(e.target.value) == "" ? 0 :eval( e.target.value))
-    calc(true)
+function safeEval(value) {
+    try {
+        return Function(`'use strict'; return (${value})`)() || 0;
+    } catch {
+        return 0;
+    }
+}
 
-})
+mwzna1.addEventListener("input", e => {
+    mwzna1Val = safeEval(e.target.value);
+    calc(true);
+});
 
 mwzna2.addEventListener("input", e => {
-    mwzna2Val = parseFloat(eval(e.target.value) == "" ? 0 :eval( e.target.value))
-    calc(true)
-})
+    mwzna2Val = safeEval(e.target.value);
+    calc(true);
+});
+
 
 
 let clearBtn = document.querySelector(".clear-btn")
@@ -702,5 +710,4 @@ mwzna1.addEventListener("blur", e => {
 mwzna2.addEventListener("blur", e => {
     addTextToImage("/images/calc.jpeg", netTotal,netCash,netSpan);
 })
-
 
