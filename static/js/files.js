@@ -1,5 +1,4 @@
 import { auth, ref,onAuthStateChanged,storage,uploadBytesResumable,getDownloadURL, createLogs ,storageRef, uploadString, uploadBytes, listAll, getMetadata , deleteObject} from './firebase.js';
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Octr", "Nov", "Dec"];
 const fileTypes = {
 
     file: "<img src='/images/file.png' alt='file'>",
