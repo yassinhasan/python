@@ -1,5 +1,7 @@
 from flask import make_response, jsonify
 from functools import wraps
+from flask_wtf.csrf import generate_csrf
+
 
 def get_response(template, status_code=200):
     """
@@ -10,7 +12,16 @@ def get_response(template, status_code=200):
     Returns:
         Response: Flask response object with security headers
     """
-    response = make_response(template, status_code)
+    csrf_token = generate_csrf()
+
+    response = make_response(template, status_code )
+    response.set_cookie(
+        'csrf_token',
+        csrf_token ,
+        httponly=True,  # Prevent JavaScript from accessing the cookie
+        secure=True,     # Only send over HTTPS
+        samesite='Lax'   # Prevent CSRF attacks
+    )
     response.headers['Cache-Control'] = 'private, max-age=300, s-maxage=600'
 #     response.headers['X-Content-Type-Options'] = 'nosniff'
 #     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
@@ -32,15 +43,19 @@ def json_response(data, status_code=200):
     response.status_code = status_code
     return response
 
+from flask import jsonify
+
 def error_response(message, status_code=400, details=None):
     """
-    Create a standardized error response
+    Create a standardized error response.
+
     Args:
-        message (str): Human-readable error message
-        status_code (int): HTTP status code (default: 400)
-        details (dict): Additional error details (optional)
+        message (str): Human-readable error message.
+        status_code (int): HTTP status code (default: 400).
+        details (dict): Additional error details (optional).
+
     Returns:
-        Response: JSON-formatted error response
+        Response: JSON-formatted error response.
     """
     response_data = {
         'status': 'error',
@@ -48,7 +63,7 @@ def error_response(message, status_code=400, details=None):
         'message': message
     }
     if details:
-        response_data['details'] = details
+        response_data['details'] = details  # Add details as a nested object
     response = jsonify(response_data)
     response.status_code = status_code
     return response

@@ -1,8 +1,10 @@
 import datetime
+from dotenv import load_dotenv
+import logging
 import os
-from flask import Flask, redirect, url_for
-from flask_wtf import CSRFProtect 
-from flask_wtf.csrf import generate_csrf
+from flask import Flask, jsonify, make_response, redirect, request, url_for
+from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
 from config import config
 from helpers.responses import json_response
 from services.firebase import initialize_firebase
@@ -22,14 +24,18 @@ from routes.expire import expire_bp
 from routes.data import data_bp
 from routes.library import library_bp
 from routes.lastactive import lastactive_bp
-import dotenv
-dotenv.load_dotenv()
-# Initialdaize Flask app
-app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY','hasanmeady0546035917')
-app.config["SESSION_PERMANENT"] = True
+# Initialize Flask app
+# Load environment variables from .env file
+load_dotenv()
 
-scrf = CSRFProtect(app)
+app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'hasanmeady123456789azertyuiop')
+app.config["SESSION_PERMANENT"] = True
+app.config['WTF_CSRF_ENABLED'] = True
+CORS(app, supports_credentials=True, origins=["https://drnull.web.app"])
+csrf = CSRFProtect(app)
+
+
 
 # Initialize Firebase
 firebase_services = initialize_firebase(config)
@@ -66,15 +72,11 @@ def page_not_found(error):
 
 
 
-# for postman
-@app.route('/get_csrf', methods=['GET'])
-def get_csrf():
-    csrf_token = generate_csrf()
-    return json_response({'csrf_token': csrf_token})
-# 
 
-
+# Logging configuration
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 if __name__ == "__main__":
-    app.run(debug=os.environ.get('DEBUG'), port=int(os.environ.get('PORT', 8080)))
+    app.run(debug= os.environ.get('DEBUG'), port=int(os.environ.get('PORT', 8080)))
 
 

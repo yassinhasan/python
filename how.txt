@@ -1,5 +1,15 @@
 gcloud builds submit --tag gcr.io/drnull-f3805/flask
 gcloud run deploy --image  gcr.io/drnull-f3805/flask
+
+gcloud run deploy flask \
+  --image=gcr.io/drnull-f3805/flask \
+  --platform=managed \
+  --region=me-central1 \
+  --cpu=4 \
+  --memory=4Gi \
+  --allow-unauthenticated
+
+
 firebase deploy --only hosting --project drnull-f3805
 
 -------------------

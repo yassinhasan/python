@@ -26,8 +26,7 @@ RUN apt-get update \
 
 
 RUN  pip install --upgrade pip
-RUN  pip install --upgrade yt-dlp
 RUN   pip install  --no-cache -r requirements.txt
 
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD exec gunicorn --bind :$PORT --workers 4 --threads 6 --timeout 0 app:app

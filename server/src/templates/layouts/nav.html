@@ -11,8 +11,9 @@
         {% block nav %}
         {% endblock %}
         {% if isLogged == True %}
+        <a href="{{ url_for('library.library_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/library' %}active{% endif %}">Files Library</a>
           <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
-          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Files</a>
+          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>
           <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
           <a href="{{ url_for('notes.notespage') }}" class="heading-nav {% if url_for(request.endpoint) == '/notes' %}active{% endif %}">Notes</a>
           <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
@@ -36,18 +37,18 @@
 
     <!-- Enable permission icon -->
     <div class="dropdown" data-bs-auto-close="outside">
-      <i class="fa-solid fa-sliders notify-perm dropdown-toggle" title="allow permissions" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <i class="fa-solid fa-sliders notify-perm dropdown-toggle text-muted opacity-50" disabled  title="allow permissions" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
       <ul class="dropdown-menu permssion-dropdown" aria-labelledby="notificationDropdown">
-        <li>
-          <label class="dropdown-item" for="notificationToggle">
+        <li class="text-muted">
+          <label class="dropdown-item" for="notificationToggle" >
             Enable Notification
-            <input type="checkbox" class="form-check-input cutsom-check" id="notificationToggle">
+            <input type="checkbox" disabled class="form-check-input cutsom-check" id="notificationToggle">
           </label>
         </li>
-        <li>
-          <label class="dropdown-item" for="locationToggle">
+        <li class="text-muted">
+          <label class="dropdown-item" for="locationToggle" >
             Enable Location
-            <input type="checkbox" class="form-check-input cutsom-check" id="locationToggle">
+            <input type="checkbox" disabled class="form-check-input cutsom-check" id="locationToggle">
           </label>
         </li>
       </ul>
@@ -60,9 +61,10 @@
         {% block innerlinks %}
         {% endblock %}
         {% if isLogged == True %}
+        <a href="{{ url_for('library.library_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/library' %}active{% endif %}">Files Library</a>
           <a href="{{ url_for('ydownload.downloadpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/download' %}active{% endif %}">YDownload</a>
           <a href="{{ url_for('search.searchpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/search' %}active{% endif %}">Magic Search</a>
-          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Files</a>
+          <a href="{{ url_for('upload.upload_page') }}" class="heading-nav {% if url_for(request.endpoint) == '/upload' %}active{% endif %}">Upload Files</a>
           <a href="{{ url_for('notes.notespage') }}" class="heading-nav {% if url_for(request.endpoint) == '/notes' %}active{% endif %}">Notes</a>
           <a href="{{ url_for('cvmaker.cvmakerpage') }}" class="heading-nav {% if url_for(request.endpoint) == '/cvmaker' %}active{% endif %}">Cv Maker</a>
           <a href="#" class="heading-nav calc" aria-label="calc" data-bs-toggle="modal" data-bs-target="#calcModal">Calc</a>
